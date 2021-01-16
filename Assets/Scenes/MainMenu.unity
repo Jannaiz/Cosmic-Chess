@@ -2311,8 +2311,8 @@ MonoBehaviour:
   username: {fileID: 1679601185}
   errorText: {fileID: 917065978}
   localScene: 0
-  hostScene: 0
-  joinScene: 0
+  hostScene: 1
+  joinScene: 2
 --- !u!1 &1739613515
 GameObject:
   m_ObjectHideFlags: 0
