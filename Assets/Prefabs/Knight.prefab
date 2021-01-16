@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: 3eb5e4b2ab201c34c9dbaac7ec6d813b, type: 3}
+  - {fileID: 2100000, guid: f3fac794f134da340862d4290b97bb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,8 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5154062239412073747}
-  - component: {fileID: 5534142052785811371}
   - component: {fileID: 5534142052785811368}
+  - component: {fileID: 3835367651209467948}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -104,27 +104,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5534142052785811369}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 6}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 5762035207341605963}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5534142052785811371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5534142052785811369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b17891006c6fd4b99a6e2cd70ec06f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  white: 1
 --- !u!65 &5534142052785811368
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,3 +125,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 5, z: 3}
   m_Center: {x: 0, y: 2.5, z: 0}
+--- !u!114 &3835367651209467948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5534142052785811369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac46f7722ff90a43b7c2efd0a5812e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  white: 1
