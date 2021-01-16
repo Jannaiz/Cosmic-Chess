@@ -6,6 +6,8 @@ public class PieceMovement : MonoBehaviour
 {
     private Camera cam;
 
+    [SerializeField] private bool whiteTurn = true;
+
     private Piece currentPiece;
 
     private void Start()
@@ -24,7 +26,13 @@ public class PieceMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<Piece>())
                 {
-                    currentPiece = hit.transform.gameObject.GetComponent<Piece>();
+                    Debug.Log(hit.transform.gameObject.GetComponent<Piece>().white);
+                    Debug.Log(whiteTurn);
+
+                    if (hit.transform.gameObject.GetComponent<Piece>().white == whiteTurn)
+                    {
+                        currentPiece = hit.transform.gameObject.GetComponent<Piece>();
+                    }
                 }
             }
         } else if(Input.GetMouseButtonUp(0))
@@ -40,11 +48,19 @@ public class PieceMovement : MonoBehaviour
                     {
                         currentPiece.transform.position = new Vector3(hit.transform.position.x, currentPiece.transform.position.y, hit.transform.position.z);
                         currentPiece = null;
-                    } else
+                        whiteTurn = !whiteTurn;
+                    }
+                    else
                     {
-                        // IF ENEMY PIECE
-                            // KILL PIECE
-                        
+                        Debug.Log(hit.transform.gameObject.GetComponent<Piece>().white);
+                        Debug.Log(whiteTurn);
+                        if (hit.transform.gameObject.GetComponent<Piece>().white != whiteTurn)
+                        {
+                            currentPiece.transform.position = new Vector3(hit.transform.position.x, currentPiece.transform.position.y, hit.transform.position.z);
+                            currentPiece = null;
+                            Destroy(hit.transform.gameObject);
+                            whiteTurn = !whiteTurn;
+                        }
                     }
                 }
             }
