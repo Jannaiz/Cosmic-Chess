@@ -14,9 +14,12 @@ public class CameraMovement : MonoBehaviour
 
     private bool rotating = false;
 
+    private Vector3 previousRotation;
+
     private void Start()
     {
         cam = GetComponent<Camera>();
+        previousRotation = transform.eulerAngles;
     }
 
     private void Update()
@@ -33,6 +36,10 @@ public class CameraMovement : MonoBehaviour
             {
                 if(!hit.transform.gameObject.GetComponent<Piece>())
                 {
+                    if ((transform.eulerAngles - previousRotation).magnitude > 1)
+                    {
+                        GetComponent<PieceMovement>().Deselect();
+                    }
                     rotating = true;
                 }
             }
@@ -40,6 +47,7 @@ public class CameraMovement : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             rotating = false;
+            previousRotation = transform.eulerAngles;
         }
         if (transform.localPosition.z + Input.mouseScrollDelta.y * zoomSpeed * zoomSpeed <= maxZoom)
         {
@@ -62,5 +70,9 @@ public class CameraMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if((transform.eulerAngles - previousRotation).magnitude > 1)
+        {
+            GetComponent<PieceMovement>().Cancel();
+        }
     }
 }

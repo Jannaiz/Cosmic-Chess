@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 831090272257205112}
   - component: {fileID: 865281903229469845}
-  - component: {fileID: 865281903229469846}
+  - component: {fileID: 6296989616222591154}
   m_Layer: 0
   m_Name: King
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55011451288172994}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
@@ -46,7 +46,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 5, z: 2}
   m_Center: {x: 0, y: 2.5, z: 0}
---- !u!114 &865281903229469846
+--- !u!114 &6296989616222591154
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 55011451288172994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73b17891006c6fd4b99a6e2cd70ec06f, type: 3}
+  m_Script: {fileID: 11500000, guid: 49a1baa713aa5e849955fc112b213050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   white: 0
@@ -117,7 +117,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7741625113677808684, guid: d5276514d909d9a4b91d5b1ecab5ce26, type: 3}
+  - {fileID: 2100000, guid: f3fac794f134da340862d4290b97bb36, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
