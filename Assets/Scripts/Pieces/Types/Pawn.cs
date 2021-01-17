@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
-    
+    private void Awake()
+    {
+        setPos();
+        pieceType = Board.PieceType.Pawn;
+    }
 }

@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Knight : Piece
 {
-
+    
+    private void Awake()
+    {
+        setPos();
+        pieceType = Board.PieceType.Knight;
+    }
 }

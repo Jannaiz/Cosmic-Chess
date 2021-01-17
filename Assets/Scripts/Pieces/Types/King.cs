@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class King : Piece
 {
-    
+    private void Awake()
+    {
+        setPos();
+        pieceType = Board.PieceType.Knight;
+    }
 }
