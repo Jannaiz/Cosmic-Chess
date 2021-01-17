@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   white: 1
+  pieceType: 0
+  mathPos: 0000000000000000
 --- !u!65 &7913322979580283523
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -4,5 +4,15 @@ using UnityEngine;
 
 public class Bishop : Piece
 {
-    
+
+
+    private void Awake()
+    {
+        setPos();
+        pieceType = Board.PieceType.Bishop;
+    }
+    private void Start()
+    {
+        
+    }
 }
