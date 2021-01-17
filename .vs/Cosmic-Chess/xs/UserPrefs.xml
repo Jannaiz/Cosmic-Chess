@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{8E9B1F0B-B192-935A-5E6D-F978EA040A33}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Board.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Pieces/Movement/PieceMovement.cs" Line="82" Column="138" />
+      <File FileName="Assets/Scripts/Pieces/Types/Piece.cs" />
+      <File FileName="Assets/Scripts/Board.cs" Line="115" Column="1" />
+      <File FileName="Assets/Scripts/Interfaces/IBehaviour.cs" />
+      <File FileName="Assets/Scripts/Pieces/Types/Bishop.cs" />
+      <File FileName="Assets/Scripts/Pieces/Types/King.cs" />
+      <File FileName="Assets/Scripts/Pieces/Types/Knight.cs" />
+      <File FileName="Assets/Scripts/Pieces/Types/Pawn.cs" />
+      <File FileName="Assets/Scripts/Pieces/Types/Queen.cs" />
+      <File FileName="Assets/Scripts/Pieces/Types/Rook.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Cosmic-Chess" expanded="True">
+            <Node name="Assets" expanded="True" selected="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Interfaces" expanded="True" />
+                <Node name="Pieces" expanded="True">
+                  <Node name="Movement" expanded="True" />
+                  <Node name="Types" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b63721ba-35b7-4b06-924c-e1b9267fb99d" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

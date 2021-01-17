@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1666186674, guid: 68c7e4565cde54155bb78d8e935f1ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheType: 2
+  lastUpdatedAtString: 2021-01-16T12:25:00.867+01:00
+  initializedAtString: 2021-01-16T12:25:00.712+01:00
+  localBranches:
+  - name: Validating-moves
+    tracking: origin/Validating-moves
+  - name: main
+    tracking: origin/main
+  - name: master
+    tracking: origin/master
+  remoteBranches:
+  - name: origin/2teams
+    tracking: '[None]'
+  - name: origin/HEAD
+    tracking: '[None]'
+  - name: origin/Validating-moves
+    tracking: '[None]'
+  - name: origin/master
+    tracking: '[None]'
+  - name: origin/piecemovement
+    tracking: '[None]'
+  remotes:
+  - name: origin
+    url: https://github.com/Jannaiz/Cosmic-Chess.git
+    login: 
+    user: 
+    host: 
+    function: 0
+    token: 
+  localConfigBranches:
+    keys:
+    - Validating-moves
+    - main
+    - master
+    values:
+    - name: Validating-moves
+      remote:
+        name: origin
+        url: https://github.com/Jannaiz/Cosmic-Chess.git
+      trackingBranch: Validating-moves
+    - name: main
+      remote:
+        name: origin
+        url: https://github.com/Jannaiz/Cosmic-Chess.git
+      trackingBranch: main
+    - name: master
+      remote:
+        name: origin
+        url: https://github.com/Jannaiz/Cosmic-Chess.git
+      trackingBranch: master
+  remoteConfigBranches:
+    keys:
+    - origin
+    subKeys:
+    - Values:
+      - 2teams
+      - HEAD
+      - Validating-moves
+      - master
+      - piecemovement
+    subKeyValues:
+    - Values:
+      - name: 2teams
+        remote:
+          name: origin
+          url: https://github.com/Jannaiz/Cosmic-Chess.git
+        trackingBranch: 
+      - name: HEAD
+        remote:
+          name: origin
+          url: https://github.com/Jannaiz/Cosmic-Chess.git
+        trackingBranch: 
+      - name: Validating-moves
+        remote:
+          name: origin
+          url: https://github.com/Jannaiz/Cosmic-Chess.git
+        trackingBranch: 
+      - name: master
+        remote:
+          name: origin
+          url: https://github.com/Jannaiz/Cosmic-Chess.git
+        trackingBranch: 
+      - name: piecemovement
+        remote:
+          name: origin
+          url: https://github.com/Jannaiz/Cosmic-Chess.git
+        trackingBranch: 
+  configRemotes:
+    keys:
+    - origin
+    values:
+    - name: origin
+      url: https://github.com/Jannaiz/Cosmic-Chess.git

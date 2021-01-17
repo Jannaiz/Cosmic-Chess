@@ -1,0 +1,1412 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -530159753, guid: 68c7e4565cde54155bb78d8e935f1ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cacheType: 3
+  lastUpdatedAtString: 2021-01-16T12:24:57.616+01:00
+  initializedAtString: 2021-01-16T12:24:57.616+01:00
+  log:
+  - commitID: e8082654fa88d6c8291f6696e34d536f0f3f8271
+    mergeA: 5804363bec41d3532f45bf3729b91dffbf561f1d
+    mergeB: 1962c24d669932957c352aff8b2b44a8abf11d29
+    authorName: Jannaiz
+    authorEmail: jannesvanquaillie@gmail.com
+    commitEmail: jannesvanquaillie@gmail.com
+    commitName: Jannaiz
+    summary: Merge branch 'Validating-moves' of https://github.com/Jannaiz/Cosmic-Chess
+      into Validating-moves
+    description: 
+    timeString: 2021-01-16T12:23:28.000+01:00
+    commitTimeString: 2021-01-16T12:23:28.000+01:00
+    changes: []
+  - commitID: 5804363bec41d3532f45bf3729b91dffbf561f1d
+    mergeA: 
+    mergeB: 
+    authorName: Jannaiz
+    authorEmail: jannesvanquaillie@gmail.com
+    commitEmail: jannesvanquaillie@gmail.com
+    commitName: Jannaiz
+    summary: some changes
+    description: 
+    timeString: 2021-01-16T12:23:24.000+01:00
+    commitTimeString: 2021-01-16T12:23:24.000+01:00
+    changes:
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+  - commitID: 1962c24d669932957c352aff8b2b44a8abf11d29
+    mergeA: 8dfed70e337d1d50ced76c39a52cd057fb8a419a
+    mergeB: 93882c7a72a5a214a1e5a8b35224a227141238f7
+    authorName: Jannes Vanquaillie
+    authorEmail: 36005485+Jannaiz@users.noreply.github.com
+    commitEmail: noreply@github.com
+    commitName: GitHub
+    summary: Merge pull request #9 from Jannaiz/master
+    description: Master
+    timeString: 2021-01-16T12:20:53.000+01:00
+    commitTimeString: 2021-01-16T12:20:53.000+01:00
+    changes: []
+  - commitID: 93882c7a72a5a214a1e5a8b35224a227141238f7
+    mergeA: 8dfed70e337d1d50ced76c39a52cd057fb8a419a
+    mergeB: 25f6236e5d1d7a6e17efa1208b309421f5ee5308
+    authorName: AtlantiaKing
+    authorEmail: 35343159+AtlantiaKing@users.noreply.github.com
+    commitEmail: noreply@github.com
+    commitName: GitHub
+    summary: Merge pull request #5 from Jannaiz/2teams
+    description: Small changes
+    timeString: 2021-01-16T12:00:01.000+01:00
+    commitTimeString: 2021-01-16T12:00:01.000+01:00
+    changes: []
+  - commitID: 25f6236e5d1d7a6e17efa1208b309421f5ee5308
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: Small changes
+    description: Material changes, surroundings, bug fixes and selection indicator
+    timeString: 2021-01-16T11:56:12.000+01:00
+    commitTimeString: 2021-01-16T11:56:12.000+01:00
+    changes:
+    - path: Assets/Materials/Black.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black.mat
+      projectPath: Assets/Materials/Black.mat
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Materials/Black.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black.mat.meta
+      projectPath: Assets/Materials/Black.mat.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Materials/Black01.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black01.mat
+      projectPath: Assets/Materials/Black01.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Black01.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black01.mat.meta
+      projectPath: Assets/Materials/Black01.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Black02.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black02.mat
+      projectPath: Assets/Materials/Black02.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Black02.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black02.mat.meta
+      projectPath: Assets/Materials/Black02.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Selected.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Selected.mat
+      projectPath: Assets/Materials/Selected.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Selected.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Selected.mat.meta
+      projectPath: Assets/Materials/Selected.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/White.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White.mat
+      projectPath: Assets/Materials/White.mat
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Materials/White.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White.mat.meta
+      projectPath: Assets/Materials/White.mat.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Materials/White01.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White01.mat
+      projectPath: Assets/Materials/White01.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/White01.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White01.mat.meta
+      projectPath: Assets/Materials/White01.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/White02.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White02.mat
+      projectPath: Assets/Materials/White02.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/White02.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White02.mat.meta
+      projectPath: Assets/Materials/White02.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Wood.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Wood.mat
+      projectPath: Assets/Materials/Wood.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Wood.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Wood.mat.meta
+      projectPath: Assets/Materials/Wood.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Bishop.mtl
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Bishop.mtl
+      projectPath: Assets/Models/Bishop.mtl
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Models/Bishop.mtl.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Bishop.mtl.meta
+      projectPath: Assets/Models/Bishop.mtl.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Models/King.mtl
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/King.mtl
+      projectPath: Assets/Models/King.mtl
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Models/King.mtl.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/King.mtl.meta
+      projectPath: Assets/Models/King.mtl.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Bishop.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Bishop.prefab
+      projectPath: Assets/Prefabs/Bishop.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Prefabs/King.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/King.prefab
+      projectPath: Assets/Prefabs/King.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Knight.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Knight.prefab
+      projectPath: Assets/Prefabs/Knight.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Pawn.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Pawn.prefab
+      projectPath: Assets/Prefabs/Pawn.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Queen_White.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Queen_White.prefab
+      projectPath: Assets/Prefabs/Queen_White.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Rook.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Rook.prefab
+      projectPath: Assets/Prefabs/Rook.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Scripts/Camera.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Camera.meta
+      projectPath: Assets/Scripts/Camera.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Camera/CameraMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Camera/CameraMovement.cs
+      projectPath: Assets/Scripts/Camera/CameraMovement.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Camera/CameraMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Camera/CameraMovement.cs.meta
+      projectPath: Assets/Scripts/Camera/CameraMovement.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/CameraMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/CameraMovement.cs
+      projectPath: Assets/Scripts/CameraMovement.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/CameraMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/CameraMovement.cs.meta
+      projectPath: Assets/Scripts/CameraMovement.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Movement.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Movement.meta
+      projectPath: Assets/Scripts/Pieces/Movement.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Movement/PieceMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Movement/PieceMovement.cs
+      projectPath: Assets/Scripts/Pieces/Movement/PieceMovement.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Movement/PieceMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Movement/PieceMovement.cs.meta
+      projectPath: Assets/Scripts/Pieces/Movement/PieceMovement.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Pawn.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Pawn.cs
+      projectPath: Assets/Scripts/Pieces/Pawn.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Pawn.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Pawn.cs.meta
+      projectPath: Assets/Scripts/Pieces/Pawn.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Piece.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Piece.cs
+      projectPath: Assets/Scripts/Pieces/Piece.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Piece.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Piece.cs.meta
+      projectPath: Assets/Scripts/Pieces/Piece.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/PieceMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/PieceMovement.cs
+      projectPath: Assets/Scripts/Pieces/PieceMovement.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/PieceMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/PieceMovement.cs.meta
+      projectPath: Assets/Scripts/Pieces/PieceMovement.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Rook.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Rook.cs
+      projectPath: Assets/Scripts/Pieces/Rook.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Rook.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Rook.cs.meta
+      projectPath: Assets/Scripts/Pieces/Rook.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types.meta
+      projectPath: Assets/Scripts/Pieces/Types.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Bishop.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Bishop.cs
+      projectPath: Assets/Scripts/Pieces/Types/Bishop.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Bishop.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Bishop.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/Bishop.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/King.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/King.cs
+      projectPath: Assets/Scripts/Pieces/Types/King.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/King.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/King.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/King.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Knight.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Knight.cs
+      projectPath: Assets/Scripts/Pieces/Types/Knight.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Knight.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Knight.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/Knight.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Pawn.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Pawn.cs
+      projectPath: Assets/Scripts/Pieces/Types/Pawn.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Pawn.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Pawn.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/Pawn.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Piece.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Piece.cs
+      projectPath: Assets/Scripts/Pieces/Types/Piece.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Piece.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Piece.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/Piece.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Queen.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Queen.cs
+      projectPath: Assets/Scripts/Pieces/Types/Queen.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Queen.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Queen.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/Queen.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Rook.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Rook.cs
+      projectPath: Assets/Scripts/Pieces/Types/Rook.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Types/Rook.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Types/Rook.cs.meta
+      projectPath: Assets/Scripts/Pieces/Types/Rook.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+  - commitID: 8dfed70e337d1d50ced76c39a52cd057fb8a419a
+    mergeA: 855fdc7f7e0eb4a617b56ca1b21e1d0fde12aa08
+    mergeB: 1fd87665e19072c848cae8f22a654c73234608b8
+    authorName: Jannes Vanquaillie
+    authorEmail: 36005485+Jannaiz@users.noreply.github.com
+    commitEmail: noreply@github.com
+    commitName: GitHub
+    summary: Merge pull request #4 from Jannaiz/2teams
+    description: 2 teams
+    timeString: 2021-01-16T01:52:52.000+01:00
+    commitTimeString: 2021-01-16T01:52:52.000+01:00
+    changes: []
+  - commitID: 1fd87665e19072c848cae8f22a654c73234608b8
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: 2 teams
+    description: 2 teams, ability to attack, turns
+    timeString: 2021-01-16T01:49:06.000+01:00
+    commitTimeString: 2021-01-16T01:49:06.000+01:00
+    changes:
+    - path: Assets/CameraMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/CameraMovement.cs
+      projectPath: Assets/CameraMovement.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/CameraMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/CameraMovement.cs.meta
+      projectPath: Assets/CameraMovement.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Materials/Black.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black.mat
+      projectPath: Assets/Materials/Black.mat
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Models/King.mtl
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/King.mtl
+      projectPath: Assets/Models/King.mtl
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/King.mtl.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/King.mtl.meta
+      projectPath: Assets/Models/King.mtl.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/King.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/King.obj
+      projectPath: Assets/Models/King.obj
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/King.obj.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/King.obj.meta
+      projectPath: Assets/Models/King.obj.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Knight.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Knight.obj
+      projectPath: Assets/Models/Knight.obj
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Models/Queen.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Queen.obj
+      projectPath: Assets/Models/Queen.obj
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Queen.obj.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Queen.obj.meta
+      projectPath: Assets/Models/Queen.obj.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/PieceMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/PieceMovement.cs
+      projectPath: Assets/PieceMovement.cs
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/PieceMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/PieceMovement.cs.meta
+      projectPath: Assets/PieceMovement.cs.meta
+      originalPath: 
+      indexStatus: 5
+      workTreeStatus: 0
+    - path: Assets/Prefabs/King.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/King.prefab
+      projectPath: Assets/Prefabs/King.prefab
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/King.prefab.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/King.prefab.meta
+      projectPath: Assets/Prefabs/King.prefab.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Knight.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Knight.prefab
+      projectPath: Assets/Prefabs/Knight.prefab
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Knight.prefab.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Knight.prefab.meta
+      projectPath: Assets/Prefabs/Knight.prefab.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Queen_White.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Queen_White.prefab
+      projectPath: Assets/Prefabs/Queen_White.prefab
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Queen_White.prefab.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Queen_White.prefab.meta
+      projectPath: Assets/Prefabs/Queen_White.prefab.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Scripts/CameraMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/CameraMovement.cs
+      projectPath: Assets/Scripts/CameraMovement.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/CameraMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/CameraMovement.cs.meta
+      projectPath: Assets/Scripts/CameraMovement.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Piece.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Piece.cs
+      projectPath: Assets/Scripts/Pieces/Piece.cs
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/PieceMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/PieceMovement.cs
+      projectPath: Assets/Scripts/Pieces/PieceMovement.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/PieceMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/PieceMovement.cs.meta
+      projectPath: Assets/Scripts/Pieces/PieceMovement.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+  - commitID: 855fdc7f7e0eb4a617b56ca1b21e1d0fde12aa08
+    mergeA: 9c46a72693e394b033b86ef7173c5dc72edee4ae
+    mergeB: ed90c14bdfe0b72c07c3d2292a97f03a37b16b04
+    authorName: Jannes Vanquaillie
+    authorEmail: 36005485+Jannaiz@users.noreply.github.com
+    commitEmail: noreply@github.com
+    commitName: GitHub
+    summary: Merge pull request #3 from Jannaiz/piecemovement
+    description: Random piece movement. Looks Good just some file organisation and
+      comments ;).
+    timeString: 2021-01-15T22:37:16.000+01:00
+    commitTimeString: 2021-01-15T22:37:16.000+01:00
+    changes: []
+  - commitID: ed90c14bdfe0b72c07c3d2292a97f03a37b16b04
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: Random piece movement
+    description: Pieces can move to random positions
+    timeString: 2021-01-15T22:21:35.000+01:00
+    commitTimeString: 2021-01-15T22:21:35.000+01:00
+    changes:
+    - path: Assets/Models/Bishop.mtl
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Bishop.mtl
+      projectPath: Assets/Models/Bishop.mtl
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Bishop.mtl.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Bishop.mtl.meta
+      projectPath: Assets/Models/Bishop.mtl.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Bishop.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Bishop.obj
+      projectPath: Assets/Models/Bishop.obj
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Bishop.obj.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Bishop.obj.meta
+      projectPath: Assets/Models/Bishop.obj.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Knight.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Knight.obj
+      projectPath: Assets/Models/Knight.obj
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Knight.obj.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Knight.obj.meta
+      projectPath: Assets/Models/Knight.obj.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/PieceMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/PieceMovement.cs
+      projectPath: Assets/PieceMovement.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/PieceMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/PieceMovement.cs.meta
+      projectPath: Assets/PieceMovement.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Bishop.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Bishop.prefab
+      projectPath: Assets/Prefabs/Bishop.prefab
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Bishop.prefab.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Bishop.prefab.meta
+      projectPath: Assets/Prefabs/Bishop.prefab.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Pawn.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Pawn.prefab
+      projectPath: Assets/Prefabs/Pawn.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Rook.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Rook.prefab
+      projectPath: Assets/Prefabs/Rook.prefab
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+  - commitID: 9c46a72693e394b033b86ef7173c5dc72edee4ae
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: '15/01/2020 Sander : Camera Movement'
+    description: First models and camera movement
+    timeString: 2021-01-15T18:13:57.000+01:00
+    commitTimeString: 2021-01-15T18:13:57.000+01:00
+    changes:
+    - path: Assets/CameraMovement.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/CameraMovement.cs
+      projectPath: Assets/CameraMovement.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/CameraMovement.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/CameraMovement.cs.meta
+      projectPath: Assets/CameraMovement.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials.meta
+      projectPath: Assets/Materials.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Black.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black.mat
+      projectPath: Assets/Materials/Black.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/Black.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/Black.mat.meta
+      projectPath: Assets/Materials/Black.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/White.mat
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White.mat
+      projectPath: Assets/Materials/White.mat
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Materials/White.mat.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Materials/White.mat.meta
+      projectPath: Assets/Materials/White.mat.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models.meta
+      projectPath: Assets/Models.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Pawn.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Pawn.obj
+      projectPath: Assets/Models/Pawn.obj
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Pawn.obj.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Pawn.obj.meta
+      projectPath: Assets/Models/Pawn.obj.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Rook.obj
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Rook.obj
+      projectPath: Assets/Models/Rook.obj
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Models/Rook.obj.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Models/Rook.obj.meta
+      projectPath: Assets/Models/Rook.obj.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs.meta
+      projectPath: Assets/Prefabs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Pawn.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Pawn.prefab
+      projectPath: Assets/Prefabs/Pawn.prefab
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Pawn.prefab.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Pawn.prefab.meta
+      projectPath: Assets/Prefabs/Pawn.prefab.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Rook.prefab
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Rook.prefab
+      projectPath: Assets/Prefabs/Rook.prefab
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Prefabs/Rook.prefab.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Prefabs/Rook.prefab.meta
+      projectPath: Assets/Prefabs/Rook.prefab.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+    - path: Assets/Scripts.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts.meta
+      projectPath: Assets/Scripts.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces.meta
+      projectPath: Assets/Scripts/Pieces.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Pawn.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Pawn.cs
+      projectPath: Assets/Scripts/Pieces/Pawn.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Pawn.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Pawn.cs.meta
+      projectPath: Assets/Scripts/Pieces/Pawn.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Piece.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Piece.cs
+      projectPath: Assets/Scripts/Pieces/Piece.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Piece.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Piece.cs.meta
+      projectPath: Assets/Scripts/Pieces/Piece.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Rook.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Rook.cs
+      projectPath: Assets/Scripts/Pieces/Rook.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scripts/Pieces/Rook.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scripts/Pieces/Rook.cs.meta
+      projectPath: Assets/Scripts/Pieces/Rook.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+  - commitID: ede0124db2e01c2750823e37cab581334abdf24b
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: Another commit to test connection
+    description: Connection testing
+    timeString: 2021-01-14T22:10:56.000+01:00
+    commitTimeString: 2021-01-14T22:10:56.000+01:00
+    changes:
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+  - commitID: 36f75dd642bf9a6a030a7f96855fa33c2ee13d43
+    mergeA: 
+    mergeB: 
+    authorName: Jannaiz
+    authorEmail: jannesvanquaillie@gmail.com
+    commitEmail: jannesvanquaillie@gmail.com
+    commitName: Jannaiz
+    summary: A cube
+    description: A cube to test the conection.
+    timeString: 2021-01-14T22:09:21.000+01:00
+    commitTimeString: 2021-01-14T22:09:21.000+01:00
+    changes:
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 3
+      workTreeStatus: 0
+  - commitID: 55c68d6de06e96e33b5cba35d5050765ee679354
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: Init2
+    description: Initialize
+    timeString: 2021-01-14T21:58:19.000+01:00
+    commitTimeString: 2021-01-14T21:58:19.000+01:00
+    changes:
+    - path: Packages/manifest.json
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Packages/manifest.json
+      projectPath: Packages/manifest.json
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Packages/packages-lock.json
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Packages/packages-lock.json
+      projectPath: Packages/packages-lock.json
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/AudioManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/AudioManager.asset
+      projectPath: ProjectSettings/AudioManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/ClusterInputManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/ClusterInputManager.asset
+      projectPath: ProjectSettings/ClusterInputManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/DynamicsManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/DynamicsManager.asset
+      projectPath: ProjectSettings/DynamicsManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/EditorBuildSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/EditorBuildSettings.asset
+      projectPath: ProjectSettings/EditorBuildSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/EditorSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/EditorSettings.asset
+      projectPath: ProjectSettings/EditorSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/GraphicsSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/GraphicsSettings.asset
+      projectPath: ProjectSettings/GraphicsSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/InputManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/InputManager.asset
+      projectPath: ProjectSettings/InputManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/NavMeshAreas.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/NavMeshAreas.asset
+      projectPath: ProjectSettings/NavMeshAreas.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/PackageManagerSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/PackageManagerSettings.asset
+      projectPath: ProjectSettings/PackageManagerSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/Physics2DSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/Physics2DSettings.asset
+      projectPath: ProjectSettings/Physics2DSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/PresetManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/PresetManager.asset
+      projectPath: ProjectSettings/PresetManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/ProjectSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/ProjectSettings.asset
+      projectPath: ProjectSettings/ProjectSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/ProjectVersion.txt
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/ProjectVersion.txt
+      projectPath: ProjectSettings/ProjectVersion.txt
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/QualitySettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/QualitySettings.asset
+      projectPath: ProjectSettings/QualitySettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/TagManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/TagManager.asset
+      projectPath: ProjectSettings/TagManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/TimeManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/TimeManager.asset
+      projectPath: ProjectSettings/TimeManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/UnityConnectSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/UnityConnectSettings.asset
+      projectPath: ProjectSettings/UnityConnectSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/VFXManager.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/VFXManager.asset
+      projectPath: ProjectSettings/VFXManager.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: ProjectSettings/XRSettings.asset
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/ProjectSettings/XRSettings.asset
+      projectPath: ProjectSettings/XRSettings.asset
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+  - commitID: 9e66aefe7c5a004c03363c797d55750ef97747e9
+    mergeA: 
+    mergeB: 
+    authorName: AtlantiaKing
+    authorEmail: dekeukelaeresander@gmail.com
+    commitEmail: dekeukelaeresander@gmail.com
+    commitName: AtlantiaKing
+    summary: Init
+    description: Initialize
+    timeString: 2021-01-14T21:58:09.000+01:00
+    commitTimeString: 2021-01-14T21:58:09.000+01:00
+    changes:
+    - path: Assets/Plugins.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins.meta
+      projectPath: Assets/Plugins.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub.meta
+      projectPath: Assets/Plugins/GitHub.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor.meta
+      projectPath: Assets/Plugins/GitHub/Editor.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll
+      projectPath: Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/AsyncBridge.Net35.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/ExtensionLoader.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/ExtensionLoader.cs
+      projectPath: Assets/Plugins/GitHub/Editor/ExtensionLoader.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/ExtensionLoader.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/ExtensionLoader.cs.meta
+      projectPath: Assets/Plugins/GitHub/Editor/ExtensionLoader.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Api.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Api.dll
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Api.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Api.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Api.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Api.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Logging.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Logging.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Logging.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Logging.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Unity.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Unity.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.Unity.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.Unity.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.Unity.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/Mono.Posix.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/Mono.Posix.dll
+      projectPath: Assets/Plugins/GitHub/Editor/Mono.Posix.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/Mono.Posix.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/Mono.Posix.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/Mono.Posix.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/QuickGuide.pdf
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/QuickGuide.pdf
+      projectPath: Assets/Plugins/GitHub/Editor/QuickGuide.pdf
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/QuickGuide.pdf.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/QuickGuide.pdf.meta
+      projectPath: Assets/Plugins/GitHub/Editor/QuickGuide.pdf.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll
+      projectPath: Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/ReadOnlyCollectionsInterfaces.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/System.Threading.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/System.Threading.dll
+      projectPath: Assets/Plugins/GitHub/Editor/System.Threading.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/System.Threading.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/System.Threading.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/System.Threading.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/UnityAPIWrapper.cs
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/UnityAPIWrapper.cs
+      projectPath: Assets/Plugins/GitHub/Editor/UnityAPIWrapper.cs
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/UnityAPIWrapper.cs.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/UnityAPIWrapper.cs.meta
+      projectPath: Assets/Plugins/GitHub/Editor/UnityAPIWrapper.cs.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/big-logo@2x.png
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/big-logo@2x.png
+      projectPath: Assets/Plugins/GitHub/Editor/big-logo@2x.png
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/big-logo@2x.png.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/big-logo@2x.png.meta
+      projectPath: Assets/Plugins/GitHub/Editor/big-logo@2x.png.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/credits.txt
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/credits.txt
+      projectPath: Assets/Plugins/GitHub/Editor/credits.txt
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/credits.txt.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/credits.txt.meta
+      projectPath: Assets/Plugins/GitHub/Editor/credits.txt.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/eula.txt
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/eula.txt
+      projectPath: Assets/Plugins/GitHub/Editor/eula.txt
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/eula.txt.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/eula.txt.meta
+      projectPath: Assets/Plugins/GitHub/Editor/eula.txt.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/libsfw.bundle
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/libsfw.bundle
+      projectPath: Assets/Plugins/GitHub/Editor/libsfw.bundle
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/libsfw.bundle.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/libsfw.bundle.meta
+      projectPath: Assets/Plugins/GitHub/Editor/libsfw.bundle.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/libsfw.so
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/libsfw.so
+      projectPath: Assets/Plugins/GitHub/Editor/libsfw.so
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/libsfw.so.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/libsfw.so.meta
+      projectPath: Assets/Plugins/GitHub/Editor/libsfw.so.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/sfw.net.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/sfw.net.dll
+      projectPath: Assets/Plugins/GitHub/Editor/sfw.net.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/sfw.net.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/sfw.net.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/sfw.net.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x64.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x64.meta
+      projectPath: Assets/Plugins/GitHub/Editor/x64.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x64/pthreadVC2.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x64/pthreadVC2.dll
+      projectPath: Assets/Plugins/GitHub/Editor/x64/pthreadVC2.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x64/pthreadVC2.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x64/pthreadVC2.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/x64/pthreadVC2.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll
+      projectPath: Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/x64/sfw_x64.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x86.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x86.meta
+      projectPath: Assets/Plugins/GitHub/Editor/x86.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x86/pthreadVC2.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x86/pthreadVC2.dll
+      projectPath: Assets/Plugins/GitHub/Editor/x86/pthreadVC2.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x86/pthreadVC2.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x86/pthreadVC2.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/x86/pthreadVC2.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll
+      projectPath: Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll.meta
+      projectPath: Assets/Plugins/GitHub/Editor/x86/sfw_x86.dll.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scenes.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes.meta
+      projectPath: Assets/Scenes.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scenes/SampleScene.unity
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity
+      projectPath: Assets/Scenes/SampleScene.unity
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/Scenes/SampleScene.unity.meta
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/Scenes/SampleScene.unity.meta
+      projectPath: Assets/Scenes/SampleScene.unity.meta
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+  - commitID: 8e72657d361926afcb0784ab92cde6e04392c23b
+    mergeA: 
+    mergeB: 
+    authorName: BuildTools
+    authorEmail: unconfigured@null.spigotmc.org
+    commitEmail: unconfigured@null.spigotmc.org
+    commitName: BuildTools
+    summary: Initial commit
+    description: 
+    timeString: 2021-01-14T21:56:39.000+01:00
+    commitTimeString: 2021-01-14T21:56:39.000+01:00
+    changes:
+    - path: .gitattributes
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/.gitattributes
+      projectPath: .gitattributes
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: .gitignore
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/.gitignore
+      projectPath: .gitignore
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
+    - path: Assets/.gitignore
+      fullPath: /Users/jannes/Documents/programeren/GitHub/Cosmic-Chess/Assets/.gitignore
+      projectPath: Assets/.gitignore
+      originalPath: 
+      indexStatus: 4
+      workTreeStatus: 0
