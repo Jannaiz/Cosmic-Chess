@@ -79,7 +79,7 @@ public class PieceMovement : MonoBehaviour
 
                         int[] startMathPos = Board.GetComponent<Board>().getPieceMathPos(currentPiece);
                            
-                        int[] endMathPos = { (int)(Mathf.Floor(hit.transform.localPosition.x)), (int)(Mathf.Floor(hit.transform.localPosition.z)),1 };
+                        int[] endMathPos = { (int)(Mathf.Floor(hit.transform.localPosition.x)), (int)(Mathf.Floor(hit.transform.localPosition.z)),0 };
 
                         if (move(startMathPos, endMathPos))
                         {

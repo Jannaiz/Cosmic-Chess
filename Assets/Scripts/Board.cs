@@ -16,7 +16,7 @@ public class Board : MonoBehaviour
     }
 
     public static int dimentions = 3;
-    public static int[] size = { 8, 8,2 };
+    public static int[] size = { 8, 8, 2 };
 
     public Plane[,,] planes = new Plane[1, 1, 2];
     private Piece[,,] MathBoard = new Piece[size[0], size[1], size[2]];
@@ -27,10 +27,7 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.LogError("iets");
         makeBoard();
-
-
     }
 
     public void makeBoard()
@@ -39,7 +36,7 @@ public class Board : MonoBehaviour
 
         foreach (Plane plane in FindObjectsOfType<Plane>())
         {
-            
+
             setPlaneFromBoard(plane.originMathPos, plane);
 
         }
@@ -72,9 +69,9 @@ public class Board : MonoBehaviour
                 Debug.Log(mathBoard[z, x] + " " + z + "," + x);
             }
         }*/
-        
 
-        
+
+
     }
 
     // Update is called once per frame
@@ -87,7 +84,7 @@ public class Board : MonoBehaviour
     public bool move(int[] startPos, int[] endPos)
     {
 
-        
+
         // Get the piece that we want to move
         Piece movingPiece = getPieceFromBoard(startPos);
 
@@ -103,7 +100,7 @@ public class Board : MonoBehaviour
 
         if (targetPiece != null)
         {
-            if(targetPiece.white == movingPiece.white)
+            if (targetPiece.white == movingPiece.white)
             {
                 return false;
             }
@@ -111,7 +108,7 @@ public class Board : MonoBehaviour
             Destroy(targetPiece.gameObject);
             setPieceOnBoard(endPos, null);  // Meaby unesesery
         }
-        
+
 
         //Plane plane = getPlaneFromBoard(endPos);
         //movingPiece.gameObject.transform.SetParent(getPlaneFromBoard(endPos).gameObject.transform);
@@ -163,13 +160,13 @@ public class Board : MonoBehaviour
 
     public int[] removeHigherDimention(int[] FullMathPos)
     {
-        int[] LowerMathPos = { FullMathPos[0], FullMathPos[0]};
+        int[] LowerMathPos = { FullMathPos[0], FullMathPos[0] };
         return LowerMathPos;
     }
 
     public int[] removeLowerDimention(int[] FullMathPos)
     {
-        int[] HighMathPos = { FullMathPos[2]};
+        int[] HighMathPos = { FullMathPos[2] };
         return HighMathPos;
     }
 
@@ -186,7 +183,7 @@ public class Board : MonoBehaviour
 
     public Plane getPlaneFromBoard(int[] mathPos)
     {
-        return planes[0,0, mathPos[2]];
+        return planes[0, 0, mathPos[2]];
     }
     public void setPlaneFromBoard(int[] mathPos, Plane plane)
     {
@@ -198,7 +195,7 @@ public class Board : MonoBehaviour
         int[] mathPos = CombineDimention(piece.mathPos, removeLowerDimention(piece.getPlane().originMathPos));
         return mathPos;
 
-       
+
     }
 
     public Vector3 mathPosToUnityPos(int[] mathPos)
