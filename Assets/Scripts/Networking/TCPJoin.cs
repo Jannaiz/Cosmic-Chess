@@ -24,7 +24,7 @@ public class TCPJoin : MonoBehaviour
         //tcpThread.IsBackground = true;
         //tcpThread.Start();
 
-        ws = new WebSocket("ws://" + serverIp + ":" + port);
+        ws = new WebSocket("ws://" + serverIp);
         Debug.Log("Connecting to server - " + serverIp + ":" + port);
         ws.Connect();
         Debug.Log("Connected to server - " + serverIp + ":" + port);

@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   port: 3000
-  serverIp: localhost
+  serverIp: cosmic-chess.herokuapp.com
 --- !u!4 &273376799
 Transform:
   m_ObjectHideFlags: 0
