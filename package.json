@@ -1,0 +1,17 @@
+{
+  "name": "cosmic-chess-nodeserver",
+  "version": "0.0.1",
+  "description": "The server that will handle communcation between users",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Jannes Vanquaillie",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^8.3.2",
+    "uuidv4": "^6.2.6",
+    "ws": "^7.4.2"
+  }
+}
