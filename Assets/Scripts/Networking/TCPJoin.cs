@@ -37,6 +37,14 @@ public class TCPJoin : MonoBehaviour
         Debug.Log("Received : " + Encoding.ASCII.GetString(e.RawData));
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ws.Send(Encoding.ASCII.GetBytes("Hello!"));
+        }
+    }
+
     //private void Connect()
     //{
     //    try
