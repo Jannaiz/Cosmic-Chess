@@ -1,73 +1,24 @@
-const http = require('http');
-const url = require('url');
-const WebSocket = require('ws');
-const { v4: uuidv4 } = require('uuid');
+const express = require('express');
+const { Server } = require('ws');
 
-const server = http.createServer();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
 
-const wss = new WebSocket.Server({ noServer: true, clientTracking: true});
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+const wss = new Server({ server });
 
+wss.on('connection', (ws) => {
+  console.log('Client connected');
+  ws.on('close', () => console.log('Client disconnected'));
+});
 
-wss.on('connection', function connection(ws, request) {
-  console.log(new Date() + ' | A new client connected.');
-
-  var uuidPlayer = uuidv4();
-
-  let sessionMsg = {};
-  sessionMsg.type = "register";
-  sessionMsg.method = "register";
-
-  //let playerKey = request.header['sec-websocket-key'];
-  //sessionMsg.sessionId = playerKey;
-  sessionMsg.uuidPlayer = uuidPlayer;
-
-  ws.send(JSON.stringify(sessionMsg));
-
-
-  ws.on('message', function(msgString) {
-    console.log('Message: '+msgString);
-
-    //ws.send(msgString);
-
-    wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(data);
-      }
-    });
-
-
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    client.send(new Date().toTimeString());
   });
-
-  ws.on('close', function(connection){
-      console.log(new Date()+ ' | Colosing connection for a client.');
-  });
+}, 1000);
 
 
-
-
-});
-
-
-server.on('upgrade', function upgrade(request, socket, head) {
-  console.log(new Date() + ' | Upgrading http connection to wss: url = '+request.url);
-  // Parsing url from the request.
-  var parsedUrl = url.parse(request.url, true, true);
-  const pathname = parsedUrl.pathname
-  console.log(new Date() + ' | Pathname = '+pathname);
-  // If path is valid connect to the websocket.
-  if (pathname === '/') {
-    wss.handleUpgrade(request, socket, head, function done(ws) {
-      wss.emit('connection', ws, request);
-    });
-  } else {
-    socket.destroy();
-  }
-});
-
-// On establishing port listener.
-server.listen(port, function() {
-  console.log(new Date() + ' | Server is listening on port ' + port);
-  // Server is running.
-});
