@@ -31,7 +31,7 @@ wss.on('connection', function connection(ws, request) {
     //console.log('Message: '+data);
 
     
-    var buf = new Uint8Array(message).buffer;
+    var buf = new Uint8Array(data).buffer;
 //var dv = new DataView(buf);
     
     
