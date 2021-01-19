@@ -566,18 +566,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 344487983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1721877566}
-        m_MethodName: PlayOnline
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &344487983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,7 +1511,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play online
+  m_Text: 'Play online
+
+    (coming soon)'
 --- !u!222 &1464709724
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2310,7 +2301,7 @@ MonoBehaviour:
   playOnline: {fileID: 1613189492}
   username: {fileID: 1679601185}
   errorText: {fileID: 917065978}
-  localScene: 0
+  localScene: 3
   hostScene: 1
   joinScene: 2
 --- !u!1 &1739613515
@@ -2394,18 +2385,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1739613518}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1721877566}
-        m_MethodName: Settings
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1739613518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2512,7 +2492,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Settings
+  m_Text: 'Settings
+
+    (coming soon)'
 --- !u!222 &1794952707
 CanvasRenderer:
   m_ObjectHideFlags: 0

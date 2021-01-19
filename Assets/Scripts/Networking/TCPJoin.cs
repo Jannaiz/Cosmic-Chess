@@ -24,17 +24,35 @@ public class TCPJoin : MonoBehaviour
         //tcpThread.IsBackground = true;
         //tcpThread.Start();
 
-        ws = new WebSocket("ws://" + serverIp + ":" + port);
+        ws = new WebSocket("ws://" + serverIp);
         Debug.Log("Connecting to server - " + serverIp + ":" + port);
         ws.Connect();
         Debug.Log("Connected to server - " + serverIp + ":" + port);
 
         ws.OnMessage += (sender, e) => Receive(sender, e);
+        ws.OnClose += (sender, e) => OnDisconnect(sender, e);
     }
 
     private void Receive(object sender, MessageEventArgs e)
     {
         Debug.Log("Received : " + Encoding.ASCII.GetString(e.RawData));
+    }
+
+    private void OnDisconnect(object sender, CloseEventArgs e)
+    {
+        Debug.Log("Disconnected from server; Status: " + e.Code + "; Reason: " + e.Reason + "; WasClean: " + e.WasClean);
+    }
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ws.Send(Encoding.ASCII.GetBytes("Hello!"));
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        ws.Close();
     }
 
     //private void Connect()
