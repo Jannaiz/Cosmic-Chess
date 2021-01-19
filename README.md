@@ -21,7 +21,7 @@ The motivation for this project is from 4D chess. We wanted a good chess game in
 - Our BRAIN v.gen z
 
 ## Platform
-As we aim to play chess in higher dimension width friends, we will try to just make it on every platform that our friends use.
+As we aim to play chess in higher dimension with friends, we will try to just make it on every platform that our friends use.
 - PC windows
 - MAC books
 - Phones on Android and apple
