@@ -31,7 +31,7 @@ wss.on('connection', function connection(ws, request) {
     //console.log('Message: '+data);
 
     //ws.send(msgString);
-    const buf = Buffer.from(data);
+    const buf = Buffer.from(data.data);
     console.log(buf.readInt32BE(0));
     console.log(buf.readInt32BE(4));
 
