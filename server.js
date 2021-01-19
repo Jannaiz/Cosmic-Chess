@@ -5,11 +5,9 @@ const { v4: uuidv4 } = require('uuid');
 const Buffer = require('buffer').Buffer;
 
 const server = http.createServer();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const wss = new WebSocket.Server({ noServer: true, clientTracking: true});
-
-
 
 
 
@@ -28,18 +26,17 @@ wss.on('connection', function connection(ws, request) {
 
   ws.send(JSON.stringify(sessionMsg));
 
-[]
+
   ws.on('message', function(data) {
     console.log('Message: '+data);
 
+    //ws.send(msgString);
     const buf = Buffer.from(data);
     console.log(data.readInt32BE(0));
     console.log(data.readInt32BE(4));
-    //ws.send(msgString);
 
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-
         client.send(data);
       }
     });
