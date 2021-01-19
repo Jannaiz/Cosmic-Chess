@@ -27,19 +27,30 @@ wss.on('connection', function connection(ws, request) {
   ws.send(JSON.stringify(sessionMsg));
 
 
-  ws.on('message', function(data) {
+  ws.on('message', function(dataString) {
     //console.log('Message: '+data);
 
     
-    var buf = new Uint8Array(data).buffer;
+    //var buf = new Uint8Array(data).buffer;
 //var dv = new DataView(buf);
+    var data = JSON.parse(dataString);
+    var code = data.packetType;
+    
+    
+    if( Number(code) == 0){
+      var startPos = data.startPos;
+      var endPos = data.endPos;
+      consol.log("start pos:"+startPos.x+" "+startPos.y);
+      consol.log("end pos:"+endPos.x+" "+endPos.y);
+    }
+    
     
     
     
     //ws.send(msgString);
     //const buf = Buffer.from(data.data);
-    console.log(buf.readInt32BE(0));
-    console.log(buf.readInt32BE(4));
+    //console.log(buf.readInt32BE(0));
+    //console.log(buf.readInt32BE(4));
 
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
