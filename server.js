@@ -33,7 +33,7 @@ wss.on('connection', function connection(ws, request) {
     //ws.send(msgString);
     const buf = Buffer.from(data);
     console.log(data.readInt32BE(0));
-    console.log(data.readInt32BE(4));
+    console.log(data.readInt32BE(0));
 
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
