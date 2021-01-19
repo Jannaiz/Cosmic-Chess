@@ -2,11 +2,14 @@
 This is a chess game in higher dimensions and with multiplayer.
 The motivation for this project is from 4D chess. We wanted a good chess game in higher dimensions, so we made one. This is a truly cosmic version of chess.
 
+![Basic chess board](./images/baicboard.png)
+
 
 ## Table of contents
 * [Technologies](#Technologies)
 * [Platform](#Platform)
 * [Server](#Server)
+* [Functionalities](#Functionalities)
 
 
 ## Technologies
@@ -35,6 +38,7 @@ node server.js
 ### For now
 - play chess in 2D free movement
 - save the coordinates in a mathematical system (later higher dimension)
+![Free movment](./images/boardInAction.png)
 
 ### Later
 - Two or more players
