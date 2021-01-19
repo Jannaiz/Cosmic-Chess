@@ -40,8 +40,8 @@ wss.on('connection', function connection(ws, request) {
     if( Number(code) == 0){
       var startPos = data.startPos;
       var endPos = data.endPos;
-      consol.log("start pos:"+startPos.x+" "+startPos.y);
-      consol.log("end pos:"+endPos.x+" "+endPos.y);
+      console.log("start pos:"+startPos.x+" "+startPos.y);
+      console.log("end pos:"+endPos.x+" "+endPos.y);
     }
     
     
