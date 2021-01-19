@@ -10,6 +10,7 @@ public enum GameServerPackets
 
 public enum GameClientPackets
 {
+    Movement = 1
 }
 
 public class Packets : IDisposable
@@ -17,6 +18,12 @@ public class Packets : IDisposable
     private List<byte> buffer;
     private byte[] readableBuffer;
     private int readPos;
+
+    public Packets()
+    {
+        buffer = new List<byte>();
+        readPos = 0;
+    }
 
     /// <summary>Creates a new packet with a given ID. Used for sending.</summary>
     /// <param name="_id">The packet ID.</param>
@@ -133,7 +140,7 @@ public class Packets : IDisposable
     /// <param name="_value">The string to add.</param>
     public void Write(string _value)
     {
-        Write(_value.Length); // Add the length of the string to the packet
+        //Write(_value.Length); // Add the length of the string to the packet
         buffer.AddRange(Encoding.ASCII.GetBytes(_value)); // Add the string itself
     }
     #endregion
@@ -293,7 +300,8 @@ public class Packets : IDisposable
     {
         try
         {
-            int _length = ReadInt(); // Get the length of the string
+            //int _length = ReadInt(); // Get the length of the string
+            int _length = readableBuffer.Length - readPos;
             string _value = Encoding.ASCII.GetString(readableBuffer, readPos, _length); // Convert the bytes to a string
             if (_moveReadPos && _value.Length > 0)
             {

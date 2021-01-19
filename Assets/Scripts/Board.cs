@@ -90,7 +90,7 @@ public class Board : MonoBehaviour
 
         if (movingPiece == null)
         {
-            //Debug.LogError("Moving piece on  " + startPos + " failed. There is no piece there.");
+            Debug.LogError("Moving piece on  " + startPos + " failed. There is no piece there.");
             return false;
         }
 
@@ -112,13 +112,13 @@ public class Board : MonoBehaviour
 
         //Plane plane = getPlaneFromBoard(endPos);
         //movingPiece.gameObject.transform.SetParent(getPlaneFromBoard(endPos).gameObject.transform);
-        movingPiece.gameObject.transform.parent = getPlaneFromBoard(endPos).gameObject.transform;
+        movingPiece.transform.parent = getPlaneFromBoard(endPos).transform;
         movingPiece.mathPos = endPos;
         movingPiece.move(mathPosToUnityPos(endPos));
         setPieceOnBoard(endPos, movingPiece);
         setPieceOnBoard(startPos, null);
 
-
+        Debug.Log("done");
         /*
 
 
