@@ -28,12 +28,12 @@ wss.on('connection', function connection(ws, request) {
 
 
   ws.on('message', function(data) {
-    console.log('Message: '+data);
+    //console.log('Message: '+data);
 
     //ws.send(msgString);
     const buf = Buffer.from(data);
-    console.log(data.readInt32BE(0));
-    console.log(data.readInt32BE(0));
+    console.log(buf.readInt32BE(0));
+    console.log(buf.readInt32BE(4));
 
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
