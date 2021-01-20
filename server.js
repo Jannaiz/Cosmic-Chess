@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const WebSocket = require('ws');
 const { v4: uuidv4 } = require('uuid');
+const Buffer = require('buffer').Buffer;
 
 const server = http.createServer();
 const port = process.env.PORT || 3000;
@@ -26,14 +27,34 @@ wss.on('connection', function connection(ws, request) {
   ws.send(JSON.stringify(sessionMsg));
 
 
-  ws.on('message', function(msgString) {
-    console.log('Message: '+msgString);
+  ws.on('message', function(dataString) {
+    //console.log('Message: '+data);
 
+    
+    //var buf = new Uint8Array(data).buffer;
+//var dv = new DataView(buf);
+    var data = JSON.parse(dataString);
+    var code = data.packetType;
+    
+    
+    if( Number(code) == 0){
+      var startPos = data.startPos;
+      var endPos = data.endPos;
+      console.log("start pos:"+startPos.x+" "+startPos.y);
+      console.log("end pos:"+endPos.x+" "+endPos.y);
+    }
+    
+    
+    
+    
     //ws.send(msgString);
+    //const buf = Buffer.from(data.data);
+    //console.log(buf.readInt32BE(0));
+    //console.log(buf.readInt32BE(4));
 
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(msgString);
+        client.send(dataString);
       }
     });
 
