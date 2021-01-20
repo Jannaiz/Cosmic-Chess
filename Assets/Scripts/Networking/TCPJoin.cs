@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using WebSocketSharp;
 
 public class TCPJoin : MonoBehaviour
@@ -22,11 +23,11 @@ public class TCPJoin : MonoBehaviour
 
     private List<Action> actionsToRun = new List<Action>();
 
+    private PlayerInformation info;
+
     private void Start()
     {
-        //tcpThread = new Thread(new ThreadStart(Connect));
-        //tcpThread.IsBackground = true;
-        //tcpThread.Start();
+        info = FindObjectOfType<PlayerInformation>();
 
         movement = FindObjectOfType<PieceMovement>();
 
@@ -37,6 +38,12 @@ public class TCPJoin : MonoBehaviour
 
         ws.OnMessage += (sender, e) => Receive(sender, e);
         ws.OnClose += (sender, e) => OnDisconnect(sender, e);
+
+        ClientHandshake handshake = new ClientHandshake();
+        handshake.packetType = (int)GameClientPackets.Handshake;
+        handshake.username = info.username;
+        string json = JsonUtility.ToJson(handshake);
+        ws.Send(json);
     }
 
     private void Receive(object sender, MessageEventArgs e)
@@ -45,17 +52,32 @@ public class TCPJoin : MonoBehaviour
 
         PacketChecker packet = JsonUtility.FromJson<PacketChecker>(e.Data);
 
-        if(packet == null)
+        if (packet == null)
         {
             return;
         }
 
-        if(packet.packetType == null)
+        if (packet.packetType == null)
         {
             return;
         }
 
-        if(packet.packetType == 1)
+        if (packet.packetType == (int)GameServerPackets.Handshake)
+        {
+            ServerHandshake shake = new ServerHandshake();
+            Debug.Log(shake.welcomeMessage);
+
+            JoinRequest request = new JoinRequest();
+            request.packetType = (int)GameClientPackets.JoinRequest;
+            request.username = info.username;
+            request.lobbyCode = info.currentGame;
+            Send(request);
+        }
+        else if(packet.packetType == (int)GameServerPackets.ServerInfo)
+        {
+
+        }
+        else if (packet.packetType == (int)GameServerPackets.Movement)
         {
             Location loc = JsonUtility.FromJson<Location>(e.Data);
             int[] startMathPos = { loc.startPos.x, loc.startPos.y, 0 };
@@ -83,14 +105,24 @@ public class TCPJoin : MonoBehaviour
     public void SendMove(int[] startPos, int[] endPos)
     {
         Location loc = new Location { packetType = (int)GameClientPackets.Movement, startPos = new Position { x = startPos[0], y = startPos[1] }, endPos = new Position { x = endPos[0], y = endPos[1] } };
-        string json = JsonUtility.ToJson(loc);
-        Debug.Log(json);
-        ws.Send(json);
+        Send(loc);
     }
 
     private void OnApplicationQuit()
     {
+        Disconnect();
+    }
+
+    public void Disconnect()
+    {
         ws.Close();
+        SceneManager.LoadScene(0);
+    }
+
+    private void Send(object data)
+    {
+        string json = JsonUtility.ToJson(data);
+        ws.Send(json);
     }
 
     //private void Connect()

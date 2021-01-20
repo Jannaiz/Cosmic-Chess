@@ -10,11 +10,20 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject playOnline;
 
     [SerializeField] private Text username;
+    [SerializeField] private Text code;
     [SerializeField] private Text errorText;
 
     [SerializeField] private int localScene;
     [SerializeField] private int hostScene;
+    [SerializeField] private int lobbyScene;
     [SerializeField] private int joinScene;
+
+    private PlayerInformation info;
+
+    private void Start()
+    {
+        info = FindObjectOfType<PlayerInformation>();
+    }
 
     public void LocalMultiplayer()
     {
@@ -30,7 +39,17 @@ public class MainMenu : MonoBehaviour
     {
         if (CheckUsername())
         {
+            info.username = username.text;
             SceneManager.LoadScene(hostScene);
+        }
+    }
+
+    public void ShowLobbys()
+    {
+        if (CheckUsername())
+        {
+            info.username = username.text;
+            SceneManager.LoadScene(lobbyScene);
         }
     }
 
@@ -38,7 +57,12 @@ public class MainMenu : MonoBehaviour
     {
         if (CheckUsername())
         {
-            SceneManager.LoadScene(joinScene);
+            if (CheckCode())
+            {
+                info.username = username.text;
+                info.currentGame = code.text;
+                SceneManager.LoadScene(joinScene);
+            }
         }
     }
 
@@ -65,6 +89,19 @@ public class MainMenu : MonoBehaviour
             errorText.text = "Invalid username";
             return false;
         } else
+        {
+            return true;
+        }
+    }
+
+    private bool CheckCode()
+    {
+        if (code.text.Equals(""))
+        {
+            errorText.text = "Invalid code";
+            return false;
+        }
+        else
         {
             return true;
         }
