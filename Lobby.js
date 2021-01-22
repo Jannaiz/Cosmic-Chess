@@ -36,6 +36,10 @@ var LobbyObj = class Lobby{
       return  this.lobbyCode;
   }
 
+  getAllUsers(){
+    return this.users.getAllData();
+  }
+
   addUser(username, user){
     this.users.addData(username, user);
 
@@ -43,7 +47,8 @@ var LobbyObj = class Lobby{
   }
 
   setReady(username, ready){
-    this.user.readyState = true;
+    //this.user.readyState = true;
+    this.users.getData(username).readyState = true;
   }
 
   checkAllReady(){

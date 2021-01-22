@@ -8,7 +8,7 @@ exports.meakUser = function maekUser(username, color, lobbyCode, sessionId, ws){
       lobbyCode:lobbyCode,
       sessionId:sessionId,
       readyState:false,
-      ws:null
+      ws:ws
 
   };
 
