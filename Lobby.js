@@ -53,10 +53,10 @@ var LobbyObj = class Lobby{
 
   checkAllReady(){
 
-    var usersAsArray = this.users.getData();
+    var usersAsArray = this.users.getAllData();
 
     var i;
-    for (i = 0; i < usersAsArray.lenght; i++){
+    for (i = 0; i < usersAsArray.length; i++){
         if(!usersAsArray[i].readyState){
           return false;
         }
