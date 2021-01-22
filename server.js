@@ -249,6 +249,6 @@ server.listen(port, function() {
 
 function makePacket(pakketType) {
   return pakket = {
-    pakketType:pakketType
+    packetType:pakketType
   };
 }
