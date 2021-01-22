@@ -57,7 +57,7 @@ var LobbyObj = class Lobby{
 
     var i;
     for (i = 0; i < usersAsArray.length; i++){
-        if(!usersAsArray[i].readyState){
+        if(!usersAsArray[i][0][1].readyState){
           return false;
         }
     }

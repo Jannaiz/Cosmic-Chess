@@ -145,7 +145,7 @@ wss.on('connection', function connection(ws, request) {
         var pakket = null;
         var username = data.username;
 
-        var clients = lobbys.getData(users.getData(username)).getAllUsers();
+        var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
 
         clients.forEach(function each(client) {
           if (client.ws !== ws && client.ws.readyState === WebSocket.OPEN) {
