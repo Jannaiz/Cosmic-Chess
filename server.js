@@ -141,10 +141,13 @@ wss.on('connection', function connection(ws, request) {
       case 5:
       // recive: Movment	5:	startPos, endPos
       // send: 5 startPos, endPos
-
+        console.log("recives packet type 5");
         var pakket = null;
         var username = data.username;
-        console.log(users.getData(username).lobbyCode);
+        console.log("user:"+username+"object: "+users.getData(username));
+        
+        console.log("lobbyCode: " + users.getData(username).lobbyCode);
+        console.log("lobby " + lobbys.getData(users.getData(username).lobbyCode));
         var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
 
         clients.forEach(function each(client) {
