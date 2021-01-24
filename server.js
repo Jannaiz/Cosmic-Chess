@@ -144,7 +144,7 @@ wss.on('connection', function connection(ws, request) {
 
         var pakket = null;
         var username = data.username;
-
+        console.log(users.getData(username).lobbyCode);
         var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
 
         clients.forEach(function each(client) {
