@@ -156,7 +156,7 @@ wss.on('connection', function connection(ws, request) {
         for (var i = 0; i < clients.length; i++) {
             var clientWs = clients[i][0][1].ws;
             if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
-              clientWs.send(data);
+              clientWs.send(dataString);
             }
         }
         
