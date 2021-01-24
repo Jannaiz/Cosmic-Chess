@@ -98,7 +98,8 @@ wss.on('connection', function connection(ws, request) {
         var lobbyCode = data.lobbyCode;
 
         lobbys.getData(lobbyCode).addUser(username,users.getData(username));
-
+        users.getData(username).lobbyCode = code;
+        
         pakket.succes = 1;
 
         //console.log(users.getData(username));
