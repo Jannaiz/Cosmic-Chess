@@ -19,7 +19,7 @@ public class PieceMovement : MonoBehaviour
     private Board Board;
     private TCPJoin network;
 
-    [SerializeField] private bool white = true;
+    [SerializeField] public bool white = false;
 
     private void Start()
     {

@@ -1,16 +1,20 @@
 ﻿public enum GameServerPackets
 {
-    Movement = 1,
-    ServerInfo = 2,
-    Handshake = 3,
-    StartServer = 4
+    ErrorMessage = -1,
+    Handshake = 1,
+    ReceivePublicLobbys = 2,
+    ServerInfo = 3,
+    StartGame = 4,
+    Movement = 5,
+    GetLobbyCode = 6
 }
 
 public enum GameClientPackets
 {
-    Movement = 1,
-    LobbyRequest = 2,
+    Handshake = 1,
+    GetPublicLobbys = 2,
     JoinRequest = 3,
-    Handshake = 4,
-    ReadyUp = 5
+    ReadyUp = 4,
+    Movement = 5,
+    CreateLobby = 6
 }

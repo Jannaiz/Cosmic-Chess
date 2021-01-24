@@ -15,10 +15,12 @@ public class TCPJoin : MonoBehaviour
     [SerializeField] private int port = 1591;
     [SerializeField] private string serverIp = "127.0.0.1";
 
+    [SerializeField] private GameObject readyButton;
+
     //private TcpClient socket;
     //private Thread tcpThread;
 
-    WebSocket ws;
+    private WebSocket ws;
     private PieceMovement movement;
 
     private List<Action> actionsToRun = new List<Action>();
@@ -31,25 +33,19 @@ public class TCPJoin : MonoBehaviour
 
         movement = FindObjectOfType<PieceMovement>();
 
-        ws = new WebSocket("ws://" + serverIp);
-        Debug.Log("Connecting to server - " + serverIp + ":" + port);
-        ws.Connect();
-        Debug.Log("Connected to server - " + serverIp + ":" + port);
+        ws = FindObjectOfType<Network>().GetWebSocket();
 
         ws.OnMessage += (sender, e) => Receive(sender, e);
-        ws.OnClose += (sender, e) => OnDisconnect(sender, e);
 
-        ClientHandshake handshake = new ClientHandshake();
-        handshake.packetType = (int)GameClientPackets.Handshake;
-        handshake.username = info.username;
-        string json = JsonUtility.ToJson(handshake);
-        ws.Send(json);
+        JoinRequest request = new JoinRequest();
+        request.packetType = (int)GameClientPackets.JoinRequest;
+        request.username = info.username;
+        request.lobbyCode = info.currentGame;
+        Send(request);
     }
 
     private void Receive(object sender, MessageEventArgs e)
     {
-        Debug.Log("Received : " + e.Data);
-
         PacketChecker packet = JsonUtility.FromJson<PacketChecker>(e.Data);
 
         if (packet == null)
@@ -62,34 +58,52 @@ public class TCPJoin : MonoBehaviour
             return;
         }
 
-        if (packet.packetType == (int)GameServerPackets.Handshake)
+        switch(packet.packetType)
         {
-            ServerHandshake shake = new ServerHandshake();
-            Debug.Log(shake.welcomeMessage);
-
-            JoinRequest request = new JoinRequest();
-            request.packetType = (int)GameClientPackets.JoinRequest;
-            request.username = info.username;
-            request.lobbyCode = info.currentGame;
-            Send(request);
-        }
-        else if(packet.packetType == (int)GameServerPackets.ServerInfo)
-        {
-
-        }
-        else if (packet.packetType == (int)GameServerPackets.Movement)
-        {
-            Location loc = JsonUtility.FromJson<Location>(e.Data);
-            int[] startMathPos = { loc.startPos.x, loc.startPos.y, 0 };
-            int[] endMathPos = { loc.endPos.x, loc.endPos.y, 0 };
-
-            actionsToRun.Add(() => movement.requestedMove(startMathPos, endMathPos));
+            case (int)GameServerPackets.ServerInfo:
+                ServerData serverData = JsonUtility.FromJson<ServerData>(e.Data);
+                OnConnect(serverData);
+                break;
+            case (int)GameServerPackets.StartGame:
+                StartGame startData = JsonUtility.FromJson<StartGame>(e.Data);
+                StartGame(startData);
+                break;
+            case (int)GameServerPackets.Movement:
+                Location loc = JsonUtility.FromJson<Location>(e.Data);
+                Move(loc);
+                break;
         }
     }
 
-    private void OnDisconnect(object sender, CloseEventArgs e)
+    private void Move(Location loc)
     {
-        Debug.Log("Disconnected from server; Status: " + e.Code + "; Reason: " + e.Reason + "; WasClean: " + e.WasClean);
+        int[] startMathPos = { loc.startPos.x, loc.startPos.y, 0 };
+        int[] endMathPos = { loc.endPos.x, loc.endPos.y, 0 };
+
+        actionsToRun.Add(() => movement.requestedMove(startMathPos, endMathPos));
+    }
+
+    private void StartGame(StartGame data)
+    {
+        if(data.color == 0)
+        {
+            movement.white = true;
+        } else
+        {
+            movement.white = false;
+        }
+    }
+
+    private void OnConnect(ServerData data)
+    {
+        if (data.succes == 1)
+        {
+
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void FixedUpdate()
@@ -104,19 +118,24 @@ public class TCPJoin : MonoBehaviour
 
     public void SendMove(int[] startPos, int[] endPos)
     {
-        Location loc = new Location { packetType = (int)GameClientPackets.Movement, startPos = new Position { x = startPos[0], y = startPos[1] }, endPos = new Position { x = endPos[0], y = endPos[1] } };
+        Location loc = new Location { packetType = (int)GameClientPackets.Movement, username = info.username, startPos = new Position { x = startPos[0], y = startPos[1] }, endPos = new Position { x = endPos[0], y = endPos[1] } };
         Send(loc);
     }
 
-    private void OnApplicationQuit()
+    public void ReadyUp()
     {
-        Disconnect();
+        readyButton.SetActive(false);
+        ReadyUp request = new ReadyUp();
+        request.packetType = (int)GameClientPackets.ReadyUp;
+        request.username = info.username;
+        request.lobbyCode = info.currentGame;
+        string json = JsonUtility.ToJson(request);
+        ws.Send(json);
     }
 
     public void Disconnect()
     {
-        ws.Close();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     private void Send(object data)
@@ -124,26 +143,4 @@ public class TCPJoin : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         ws.Send(json);
     }
-
-    //private void Connect()
-    //{
-    //    try
-    //    {
-    //        socket = new TcpClient(serverIp, port);
-    //        Debug.Log("Connected to server - " + serverIp + ":" + port);
-    //        while (true)
-    //        {
-    //            NetworkStream stream = socket.GetStream();
-
-    //            byte[] bytesToRead = new byte[socket.ReceiveBufferSize];
-    //            int bytesRead = stream.Read(bytesToRead, 0, socket.ReceiveBufferSize);
-    //            Console.WriteLine("Received : " + Encoding.ASCII.GetString(bytesToRead, 0, bytesRead));
-    //            Console.ReadLine();
-    //        }
-    //    }
-    //    catch (SocketException socketException)
-    //    {
-    //        Debug.Log("Socket exception: " + socketException);
-    //    }
-    //}
 }

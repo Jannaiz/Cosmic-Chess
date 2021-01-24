@@ -23,6 +23,20 @@ public class PacketChecker
 }
 
 [Serializable]
+public class GetPublicLobbys
+{
+    public int packetType;
+    public string username;
+}
+
+[Serializable]
+public class LobbyAnswer
+{
+    public int packetType;
+    public string[] lobbyCodes;
+}
+
+[Serializable]
 public class LobbyRequest
 {
     public int packetType;
@@ -49,7 +63,7 @@ public class ClientHandshake
 public class ServerHandshake
 {
     public int packetType;
-    public int id;
+    public int sessionId;
     public string welcomeMessage;
 }
 
@@ -66,4 +80,18 @@ public class StartGame
 {
     public int packetType;
     public int color;
+}
+
+[Serializable]
+public class ServerData
+{
+    public int packetType;
+    public int succes;
+}
+
+[Serializable]
+public class CreateLobby
+{
+    public int packetType;
+    public string lobbyCode;
 }

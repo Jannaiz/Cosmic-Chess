@@ -9,7 +9,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settings;
     [SerializeField] private GameObject playOnline;
 
-    [SerializeField] private Text username;
     [SerializeField] private Text code;
     [SerializeField] private Text errorText;
 
@@ -18,10 +17,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private int lobbyScene;
     [SerializeField] private int joinScene;
 
+    [SerializeField] private Toggle isPublicToggle;
+
     private PlayerInformation info;
+    private Network network;
 
     private void Start()
     {
+        network = FindObjectOfType<Network>();
         info = FindObjectOfType<PlayerInformation>();
     }
 
@@ -37,32 +40,20 @@ public class MainMenu : MonoBehaviour
 
     public void Host()
     {
-        if (CheckUsername())
-        {
-            info.username = username.text;
-            SceneManager.LoadScene(hostScene);
-        }
+        network.HostGame(isPublicToggle.isOn);
     }
 
     public void ShowLobbys()
     {
-        if (CheckUsername())
-        {
-            info.username = username.text;
-            SceneManager.LoadScene(lobbyScene);
-        }
+        SceneManager.LoadScene(lobbyScene);
     }
 
     public void Join()
     {
-        if (CheckUsername())
+        if (CheckCode())
         {
-            if (CheckCode())
-            {
-                info.username = username.text;
-                info.currentGame = code.text;
-                SceneManager.LoadScene(joinScene);
-            }
+            info.currentGame = code.text;
+            SceneManager.LoadScene(joinScene);
         }
     }
 
@@ -80,18 +71,6 @@ public class MainMenu : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-    }
-
-    private bool CheckUsername()
-    {
-        if(username.text.Equals(""))
-        {
-            errorText.text = "Invalid username";
-            return false;
-        } else
-        {
-            return true;
-        }
     }
 
     private bool CheckCode()
