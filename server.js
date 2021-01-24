@@ -119,7 +119,7 @@ wss.on('connection', function connection(ws, request) {
         users.getData(username).readyState = true;
         lobbys.getData(users.getData(username).lobbyCode).setReady(username,true);
 
-        if(lobbys.getData(users.getData(username).lobbyCode).checkAllReady){
+        if(lobbys.getData(users.getData(username).lobbyCode).checkAllReady()){
 
           console.log("All users are ready for the game of "+users.getData(username).lobbyCode);
 
