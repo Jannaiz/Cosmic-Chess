@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,12 +16,16 @@ public class PieceMovement : MonoBehaviour
 
     [SerializeField] private Material selectedMaterial;
 
-    private GameObject Board;
+    private Board Board;
+    private TCPJoin network;
+
+    [SerializeField] public bool white = false;
 
     private void Start()
     {
+        network = FindObjectOfType<TCPJoin>();
         cam = GetComponent<Camera>();
-        Board = FindObjectOfType<Board>().gameObject;
+        Board = FindObjectOfType<Board>();
     }
     
 
@@ -35,13 +40,16 @@ public class PieceMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<Piece>())
                 {
-                    if (hit.transform.gameObject.GetComponent<Piece>().white == whiteTurn)
+                    if (whiteTurn == white)
                     {
-                        Deselect();
-                        currentPiece = hit.transform.gameObject.GetComponent<Piece>();
-                        currentMaterial = currentPiece.GetComponentInChildren<MeshRenderer>().material;
-                        currentPiece.GetComponentInChildren<MeshRenderer>().material = selectedMaterial;
-                        
+                        if (hit.transform.gameObject.GetComponent<Piece>().white == whiteTurn)
+                        {
+                            Deselect();
+                            currentPiece = hit.transform.gameObject.GetComponent<Piece>();
+                            currentMaterial = currentPiece.GetComponentInChildren<MeshRenderer>().material;
+                            currentPiece.GetComponentInChildren<MeshRenderer>().material = selectedMaterial;
+
+                        }
                     }
                 }
             }
@@ -77,12 +85,13 @@ public class PieceMovement : MonoBehaviour
                         }*/
 
 
-                        int[] startMathPos = Board.GetComponent<Board>().getPieceMathPos(currentPiece);
+                        int[] startMathPos = Board.getPieceMathPos(currentPiece);
                            
                         int[] endMathPos = { (int)(Mathf.Floor(hit.transform.localPosition.x)), (int)(Mathf.Floor(hit.transform.localPosition.z)),0 };
 
                         if (move(startMathPos, endMathPos))
                         {
+                            network.SendMove(startMathPos, endMathPos);
                             Deselect();
                             whiteTurn = !whiteTurn;
                         }
@@ -105,13 +114,20 @@ public class PieceMovement : MonoBehaviour
 
     public bool move(int[] startPos, int[] endPos)
     {
-        return Board.GetComponent<Board>().move(startPos, endPos);
-
+        return Board.move(startPos, endPos);
     }
     public void requestedMove(int[] startPos, int[] endPos)
     {
-
-
+        try
+        {
+            Board.move(startPos, endPos);
+            whiteTurn = !whiteTurn;
+        }
+        catch (Exception er)
+        {
+            Debug.Log(er);
+            throw;
+        }
     }
 
 

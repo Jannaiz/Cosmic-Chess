@@ -9,12 +9,24 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settings;
     [SerializeField] private GameObject playOnline;
 
-    [SerializeField] private Text username;
+    [SerializeField] private Text code;
     [SerializeField] private Text errorText;
 
     [SerializeField] private int localScene;
     [SerializeField] private int hostScene;
+    [SerializeField] private int lobbyScene;
     [SerializeField] private int joinScene;
+
+    [SerializeField] private Toggle isPublicToggle;
+
+    private PlayerInformation info;
+    private Network network;
+
+    private void Start()
+    {
+        network = FindObjectOfType<Network>();
+        info = FindObjectOfType<PlayerInformation>();
+    }
 
     public void LocalMultiplayer()
     {
@@ -28,16 +40,19 @@ public class MainMenu : MonoBehaviour
 
     public void Host()
     {
-        if (CheckUsername())
-        {
-            SceneManager.LoadScene(hostScene);
-        }
+        network.HostGame(isPublicToggle.isOn);
+    }
+
+    public void ShowLobbys()
+    {
+        SceneManager.LoadScene(lobbyScene);
     }
 
     public void Join()
     {
-        if (CheckUsername())
+        if (CheckCode())
         {
+            info.currentGame = code.text;
             SceneManager.LoadScene(joinScene);
         }
     }
@@ -58,13 +73,14 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    private bool CheckUsername()
+    private bool CheckCode()
     {
-        if(username.text.Equals(""))
+        if (code.text.Equals(""))
         {
-            errorText.text = "Invalid username";
+            errorText.text = "Invalid code";
             return false;
-        } else
+        }
+        else
         {
             return true;
         }
