@@ -10,6 +10,7 @@
   "author": "Jannes Vanquaillie",
   "license": "ISC",
   "dependencies": {
+    "custom-id": "^1.2.0",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.6",
     "ws": "^7.4.2"
