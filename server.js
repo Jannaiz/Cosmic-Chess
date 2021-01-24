@@ -150,12 +150,21 @@ wss.on('connection', function connection(ws, request) {
         console.log("lobbyCode: " + users.getData(username).lobbyCode);
         console.log("lobby " + lobbys.getData(users.getData(username).lobbyCode));
         var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
-
-        clients.forEach(function each(client) {
+        
+        
+        
+        for (var i = 0; i < clients.length; i++) {
+            var clientWs = clients[i][0][1].ws;
+            if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
+              clientWs.send(data);
+            }
+        }
+        
+        /*clients.forEach(function each(client) {
           if (client.ws !== ws && client.ws.readyState === WebSocket.OPEN) {
             client.ws.send(data);
           }
-        });
+        });*/
 
 
 
