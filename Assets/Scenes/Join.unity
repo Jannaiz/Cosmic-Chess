@@ -4154,6 +4154,7 @@ MonoBehaviour:
   whiteTurn: 1
   selectedMaterial: {fileID: 2100000, guid: 4576ef9caedbc434cb1adad036bb941f, type: 2}
   white: 0
+  local: 0
 --- !u!114 &1066943350
 MonoBehaviour:
   m_ObjectHideFlags: 0

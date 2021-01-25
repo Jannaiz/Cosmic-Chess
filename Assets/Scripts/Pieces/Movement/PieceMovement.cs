@@ -21,6 +21,8 @@ public class PieceMovement : MonoBehaviour
 
     [SerializeField] public bool white = false;
 
+    [SerializeField] private bool local = false;
+
     private void Start()
     {
         network = FindObjectOfType<TCPJoin>();
@@ -40,7 +42,7 @@ public class PieceMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<Piece>())
                 {
-                    if (whiteTurn == white)
+                    if (local || whiteTurn == white)
                     {
                         if (hit.transform.gameObject.GetComponent<Piece>().white == whiteTurn)
                         {
@@ -91,7 +93,10 @@ public class PieceMovement : MonoBehaviour
 
                         if (move(startMathPos, endMathPos))
                         {
-                            network.SendMove(startMathPos, endMathPos);
+                            if (!local)
+                            {
+                                network.SendMove(startMathPos, endMathPos);
+                            }
                             Deselect();
                             whiteTurn = !whiteTurn;
                         }
