@@ -95,3 +95,18 @@ public class CreateLobby
     public int packetType;
     public string lobbyCode;
 }
+
+[Serializable]
+public class ServerMessage
+{
+    public int packetType;
+    public string message;
+}
+
+[Serializable]
+public class PlayerMessage
+{
+    public int packetType;
+    public string username;
+    public string message;
+}

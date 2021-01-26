@@ -7,6 +7,11 @@ public class LocalUI : MonoBehaviour
 {
     public void Leave()
     {
-        SceneManager.LoadScene(0);
+        if (FindObjectOfType<PlayerInformation>().name.Equals("")) {
+            SceneManager.LoadScene(0);
+        } else
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

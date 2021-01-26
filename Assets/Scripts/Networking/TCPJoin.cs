@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using WebSocketSharp;
 
 public class TCPJoin : MonoBehaviour
@@ -17,21 +12,28 @@ public class TCPJoin : MonoBehaviour
 
     [SerializeField] private GameObject readyButton;
 
+    [SerializeField] private ServerMessages messages;
+
+    [SerializeField] private Text lobbyCodeText;
+
     //private TcpClient socket;
     //private Thread tcpThread;
 
     private WebSocket ws;
     private PieceMovement movement;
+    private PlayerInformation info;
+    private PresetChatMessages playerMessages;
 
     private List<Action> actionsToRun = new List<Action>();
-
-    private PlayerInformation info;
 
     private void Start()
     {
         info = FindObjectOfType<PlayerInformation>();
 
+        lobbyCodeText.text = "Code: " + info.currentGame;
+
         movement = FindObjectOfType<PieceMovement>();
+        playerMessages = FindObjectOfType<PresetChatMessages>();
 
         ws = FindObjectOfType<Network>().GetWebSocket();
 
@@ -62,15 +64,19 @@ public class TCPJoin : MonoBehaviour
         {
             case (int)GameServerPackets.ServerInfo:
                 ServerData serverData = JsonUtility.FromJson<ServerData>(e.Data);
-                OnConnect(serverData);
+                actionsToRun.Add(() => OnConnect(serverData));
                 break;
             case (int)GameServerPackets.StartGame:
                 StartGame startData = JsonUtility.FromJson<StartGame>(e.Data);
-                StartGame(startData);
+                actionsToRun.Add(() => StartGame(startData));
                 break;
             case (int)GameServerPackets.Movement:
                 Location loc = JsonUtility.FromJson<Location>(e.Data);
                 Move(loc);
+                break;
+            case (int)GameServerPackets.ServerMessage:
+                ServerMessage message = JsonUtility.FromJson<ServerMessage>(e.Data);
+                actionsToRun.Add(() => messages.ReceiveMessage(message.message));
                 break;
         }
     }
@@ -85,6 +91,7 @@ public class TCPJoin : MonoBehaviour
 
     private void StartGame(StartGame data)
     {
+        playerMessages.UpdateMessages(1);
         if(data.color == 0)
         {
             movement.white = true;
@@ -98,11 +105,11 @@ public class TCPJoin : MonoBehaviour
     {
         if (data.succes == 1)
         {
-
+            messages.ReceiveMessage("You joined the game with code " + info.currentGame + "!");
         }
         else
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 
@@ -131,6 +138,18 @@ public class TCPJoin : MonoBehaviour
         request.lobbyCode = info.currentGame;
         string json = JsonUtility.ToJson(request);
         ws.Send(json);
+        messages.ReceiveMessage("You are ready!");
+    }
+
+    public void SendChat(string message)
+    {
+        PlayerMessage pMessage = new PlayerMessage();
+        pMessage.packetType = (int)GameClientPackets.PlayerMessage;
+        pMessage.username = info.username;
+        pMessage.message = message;
+        string json = JsonUtility.ToJson(pMessage);
+        ws.Send(json);
+        messages.ReceiveMessage(info.username + ": " + message);
     }
 
     public void Disconnect()

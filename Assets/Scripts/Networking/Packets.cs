@@ -6,7 +6,8 @@
     ServerInfo = 3,
     StartGame = 4,
     Movement = 5,
-    GetLobbyCode = 6
+    GetLobbyCode = 6,
+    ServerMessage = 7
 }
 
 public enum GameClientPackets
@@ -16,5 +17,6 @@ public enum GameClientPackets
     JoinRequest = 3,
     ReadyUp = 4,
     Movement = 5,
-    CreateLobby = 6
+    CreateLobby = 6,
+    PlayerMessage = 7
 }

@@ -50,8 +50,6 @@ public class LobbyManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Lobby man " + packet.packetType);
-
         if(packet.packetType == (int)GameServerPackets.ReceivePublicLobbys)
         {
             LobbyAnswer lobbys = JsonUtility.FromJson<LobbyAnswer>(e.Data);
@@ -85,7 +83,6 @@ public class LobbyManager : MonoBehaviour
 
     public void Join(string code)
     {
-        Debug.Log(code);
         info.currentGame = code;
         SceneManager.LoadScene(joinScene);
     }
