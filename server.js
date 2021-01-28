@@ -171,8 +171,8 @@ wss.on('connection', function connection(ws, request) {
           }
         });*/
 
-        var pos1 = "[" data.startPos.x + "," + data.startPos.y + "]";
-        var pos2 = "[" data.endPos.x + "," + data.endPos.y + "]";
+        var pos1 = "[" + data.startPos.x + "," + data.startPos.y + "]";
+        var pos2 = "[" + data.endPos.x + "," + data.endPos.y + "]";
 
         sendMessage(users.getData(username).lobbyCode, username + " moved from " + pos1 + " to " + pos2 + "!");
 
