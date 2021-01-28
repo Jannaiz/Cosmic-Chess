@@ -262,7 +262,7 @@ wss.on('connection', function connection(ws, request) {
       if (userObject.ws === ws) {
         sendMessageExceptOne(userObject, userObject.username + " has left the game!", userObject.ws);
       }
-    }
+    });
     console.log(new Date()+ ' | Colosing connection for a client.');
   });
 
