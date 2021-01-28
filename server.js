@@ -119,6 +119,8 @@ wss.on('connection', function connection(ws, request) {
         users.getData(username).readyState = true;
         lobbys.getData(users.getData(username).lobbyCode).setReady(username,true);
 
+        sendMessageExceptOne(users.getData(username).lobbyCode, username + " is now ready!", ws);
+
         if(lobbys.getData(users.getData(username).lobbyCode).checkAllReady()){
 
           console.log("All users are ready for the game of "+users.getData(username).lobbyCode);
@@ -134,9 +136,9 @@ wss.on('connection', function connection(ws, request) {
             lobbyUsers[i][0][1].ws.send(JSON.stringify(pakket));
 
           }
-        }
 
-        sendMessageExceptOne(users.getData(username).lobbyCode, username + " is now ready!", ws);
+          sendMessage(users.getData(username).lobbyCode, "The game has begun!");
+        }
 
         var pakket = null;
 
@@ -169,8 +171,10 @@ wss.on('connection', function connection(ws, request) {
           }
         });*/
 
-            // !!! Add move message !!!
-            //    sendMessageExceptOne(users.getData(username).lobbyCode, username + " moved from ... to ...!");
+        var pos1 = "[" data.startPos.x + "," + data.startPos.y + "]";
+        var pos2 = "[" data.endPos.x + "," + data.endPos.y + "]";
+
+        sendMessage(users.getData(username).lobbyCode, username + " moved from " + pos1 + " to " + pos2 + "!");
 
         break;
 
@@ -252,7 +256,13 @@ wss.on('connection', function connection(ws, request) {
   });
 
   ws.on('close', function(connection){
-      console.log(new Date()+ ' | Colosing connection for a client.');
+    users.getAllData().forEach(function each(user) {
+      var userObject = user[0][1];
+
+      if (userObject.ws === ws) {
+        sendMessageExceptOne(userObject, userObject.username + " has left the game!", userObject.ws);
+      }
+    console.log(new Date()+ ' | Colosing connection for a client.');
   });
 
 
