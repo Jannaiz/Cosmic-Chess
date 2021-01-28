@@ -106,7 +106,7 @@ wss.on('connection', function connection(ws, request) {
         //users.getData(username).ws.send("hello");
 
 
-
+        sendMessageExceptOne(lobbyCode, username + " joined the game!", ws);
 
         break;
       case 4:
@@ -135,6 +135,9 @@ wss.on('connection', function connection(ws, request) {
 
           }
         }
+
+        sendMessageExceptOne(users.getData(username).lobbyCode, username + " is now ready!", ws);
+
         var pakket = null;
 
 
@@ -166,7 +169,8 @@ wss.on('connection', function connection(ws, request) {
           }
         });*/
 
-
+            // !!! Add move message !!!
+            //    sendMessageExceptOne(users.getData(username).lobbyCode, username + " moved from ... to ...!");
 
         break;
 
@@ -285,4 +289,32 @@ function makePacket(pakketType) {
   return pakket = {
     packetType:pakketType
   };
+}
+
+function sendMessage(lobbyCode, message) {
+  var pakket = makePacket(7);
+
+  var clients = lobbys.getData(lobbyCode).getAllUsers();
+
+  pakket.message = message;
+  for (var i = 0; i < clients.length; i++) {
+      var clientWs = clients[i][0][1].ws;
+      if (clientWs.readyState === WebSocket.OPEN) {
+        clientWs.send(JSON.stringify(pakket));
+      }
+  }
+}
+
+function sendMessageExceptOne(lobbyCode, message, except) {
+  var pakket = makePacket(7);
+
+  var clients = lobbys.getData(lobbyCode).getAllUsers();
+
+  pakket.message = message;
+  for (var i = 0; i < clients.length; i++) {
+      var clientWs = clients[i][0][1].ws;
+      if (clientWs !== except && clientWs.readyState === WebSocket.OPEN) {
+        clientWs.send(JSON.stringify(pakket));
+      }
+  }
 }
