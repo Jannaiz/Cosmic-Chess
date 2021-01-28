@@ -99,7 +99,7 @@ wss.on('connection', function connection(ws, request) {
 
         lobbys.getData(lobbyCode).addUser(username,users.getData(username));
         users.getData(username).lobbyCode = lobbyCode;
-        
+
         pakket.succes = 1;
 
         //console.log(users.getData(username));
@@ -146,20 +146,20 @@ wss.on('connection', function connection(ws, request) {
         var pakket = null;
         var username = data.username;
         console.log("user:"+username+"object: "+users.getData(username));
-        
+
         console.log("lobbyCode: " + users.getData(username).lobbyCode);
         console.log("lobby " + lobbys.getData(users.getData(username).lobbyCode));
         var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
-        
-        
-        
+
+
+
         for (var i = 0; i < clients.length; i++) {
             var clientWs = clients[i][0][1].ws;
             if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
               clientWs.send(dataString);
             }
         }
-        
+
         /*clients.forEach(function each(client) {
           if (client.ws !== ws && client.ws.readyState === WebSocket.OPEN) {
             client.ws.send(data);
@@ -186,6 +186,27 @@ wss.on('connection', function connection(ws, request) {
 
           pakket.lobbyCode = code;
           users.getData(username).lobbyCode = code;
+          break;
+
+        case 7:
+
+          var pakket = makePacket(7);
+
+          var username = data.username;
+          var message = data.message;
+
+          var forwardMessage = username + ": " + message;
+          var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
+
+          pakket.message = forwardMessage;
+          for (var i = 0; i < clients.length; i++) {
+              var clientWs = clients[i][0][1].ws;
+              if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
+                clientWs.send(JSON.stringify(pakket));
+              }
+          }
+
+          pakket = null;
           break;
 
       default:
