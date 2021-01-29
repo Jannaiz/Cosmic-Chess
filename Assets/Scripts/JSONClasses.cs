@@ -42,6 +42,9 @@ public class LobbyRequest
     public int packetType;
     public string username;
     public int isPublic;
+    public int map;
+    public int playerAmount;
+    public int dimensionAmount;
 }
 
 [Serializable]
