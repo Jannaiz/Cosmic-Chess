@@ -99,14 +99,14 @@ wss.on('connection', function connection(ws, request) {
 
         lobbys.getData(lobbyCode).addUser(username,users.getData(username));
         users.getData(username).lobbyCode = lobbyCode;
-        
+
         pakket.succes = 1;
 
         //console.log(users.getData(username));
         //users.getData(username).ws.send("hello");
 
 
-
+        sendMessageExceptOne(lobbyCode, username + " joined the game!", ws);
 
         break;
       case 4:
@@ -118,6 +118,8 @@ wss.on('connection', function connection(ws, request) {
         var username = data.username;
         users.getData(username).readyState = true;
         lobbys.getData(users.getData(username).lobbyCode).setReady(username,true);
+
+        sendMessageExceptOne(users.getData(username).lobbyCode, username + " is now ready!", ws);
 
         if(lobbys.getData(users.getData(username).lobbyCode).checkAllReady()){
 
@@ -134,7 +136,10 @@ wss.on('connection', function connection(ws, request) {
             lobbyUsers[i][0][1].ws.send(JSON.stringify(pakket));
 
           }
+
+          sendMessage(users.getData(username).lobbyCode, "The game has begun!");
         }
+
         var pakket = null;
 
 
@@ -146,27 +151,30 @@ wss.on('connection', function connection(ws, request) {
         var pakket = null;
         var username = data.username;
         console.log("user:"+username+"object: "+users.getData(username));
-        
+
         console.log("lobbyCode: " + users.getData(username).lobbyCode);
         console.log("lobby " + lobbys.getData(users.getData(username).lobbyCode));
         var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
-        
-        
-        
+
+
+
         for (var i = 0; i < clients.length; i++) {
             var clientWs = clients[i][0][1].ws;
             if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
               clientWs.send(dataString);
             }
         }
-        
+
         /*clients.forEach(function each(client) {
           if (client.ws !== ws && client.ws.readyState === WebSocket.OPEN) {
             client.ws.send(data);
           }
         });*/
 
+        var pos1 = "(" + data.startPos.x + "," + data.startPos.y + ")";
+        var pos2 = "(" + data.endPos.x + "," + data.endPos.y + ")";
 
+        sendMessage(users.getData(username).lobbyCode, username + " moved from " + pos1 + " to " + pos2 + "!");
 
         break;
 
@@ -186,6 +194,27 @@ wss.on('connection', function connection(ws, request) {
 
           pakket.lobbyCode = code;
           users.getData(username).lobbyCode = code;
+          break;
+
+        case 7:
+
+          var pakket = makePacket(7);
+
+          var username = data.username;
+          var message = data.message;
+
+          var forwardMessage = username + ": " + message;
+          var clients = lobbys.getData(users.getData(username).lobbyCode).getAllUsers();
+
+          pakket.message = forwardMessage;
+          for (var i = 0; i < clients.length; i++) {
+              var clientWs = clients[i][0][1].ws;
+              if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
+                clientWs.send(JSON.stringify(pakket));
+              }
+          }
+
+          pakket = null;
           break;
 
       default:
@@ -227,7 +256,14 @@ wss.on('connection', function connection(ws, request) {
   });
 
   ws.on('close', function(connection){
-      console.log(new Date()+ ' | Colosing connection for a client.');
+    users.getAllData().forEach(function each(user) {
+      var userObject = user[0][1];
+
+      if (userObject.ws === ws) {
+        sendMessageExceptOne(userObject.lobbyCode, userObject.username + " has left the game!", userObject.ws);
+      }
+    });
+    console.log(new Date()+ ' | Colosing connection for a client.');
   });
 
 
@@ -264,4 +300,32 @@ function makePacket(pakketType) {
   return pakket = {
     packetType:pakketType
   };
+}
+
+function sendMessage(lobbyCode, message) {
+  var pakket = makePacket(7);
+
+  var clients = lobbys.getData(lobbyCode).getAllUsers();
+
+  pakket.message = message;
+  for (var i = 0; i < clients.length; i++) {
+      var clientWs = clients[i][0][1].ws;
+      if (clientWs.readyState === WebSocket.OPEN) {
+        clientWs.send(JSON.stringify(pakket));
+      }
+  }
+}
+
+function sendMessageExceptOne(lobbyCode, message, except) {
+  var pakket = makePacket(7);
+
+  var clients = lobbys.getData(lobbyCode).getAllUsers();
+
+  pakket.message = message;
+  for (var i = 0; i < clients.length; i++) {
+      var clientWs = clients[i][0][1].ws;
+      if (clientWs !== except && clientWs.readyState === WebSocket.OPEN) {
+        clientWs.send(JSON.stringify(pakket));
+      }
+  }
 }
