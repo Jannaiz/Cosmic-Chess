@@ -34,7 +34,6 @@ public class Network : MonoBehaviour
         ws = new WebSocket("ws://" + serverIp);
         Debug.Log("Connecting to server - " + serverIp);
         ws.Connect();
-        Debug.Log("Connected to server - " + serverIp);
 
         ws.OnMessage += (sender, e) => Receive(sender, e);
         ws.OnClose += (sender, e) => OnDisconnect(sender, e);
@@ -59,7 +58,6 @@ public class Network : MonoBehaviour
         {
             return;
         }
-        Debug.Log("main network : " + packet.packetType);
 
         if (packet.packetType == (int)GameServerPackets.Handshake)
         {
