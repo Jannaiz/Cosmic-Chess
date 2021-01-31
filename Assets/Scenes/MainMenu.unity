@@ -6837,6 +6837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serverIp: cosmic-chess.herokuapp.com
+  stayAliveTimer: 45
   joinScene: 2
 --- !u!1 &2097715071
 GameObject:
