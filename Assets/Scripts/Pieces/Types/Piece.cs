@@ -8,6 +8,8 @@ public class Piece : MonoBehaviour
     [SerializeField]  public Board.PieceType pieceType;
     public int[] mathPos = { -1, -1};
 
+    [SerializeField]  public bool isGhost = false;
+    
 
     protected void setPos()
     {
@@ -15,6 +17,12 @@ public class Piece : MonoBehaviour
         mathPos[0] = (int)(Mathf.Floor(transform.localPosition.x));
         mathPos[1] = (int)(Mathf.Floor(transform.localPosition.z));
         //Debug.Log(mathPos[0] + " " + mathPos[1]);
+    }
+
+
+    public void updatePos()
+    {
+        setPos();
     }
 
 

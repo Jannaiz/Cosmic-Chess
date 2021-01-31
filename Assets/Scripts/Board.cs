@@ -6,13 +6,13 @@ public class Board : MonoBehaviour
 {
     public enum PieceType
     {
-        Empty,
-        Pawn,
-        Rook,
-        Knight,
-        Bishop,
-        Queen,
-        King
+        Empty = 0,
+        Pawn = 1,
+        Rook = 2,
+        Knight = 3,
+        Bishop = 4,
+        Queen = 5,
+        King = 6
     }
 
     public static int dimentions = 3;
@@ -21,7 +21,17 @@ public class Board : MonoBehaviour
     public Plane[,,] planes = new Plane[1, 1, 2];
     private Piece[,,] MathBoard = new Piece[size[0], size[1], size[2]];
 
+    private List<GameObject> ghosts = new List<GameObject>();
+
     [SerializeField] public Vector3 unityPiecePosOffset = new Vector3(0, 0, 0);
+
+
+    [SerializeField] public GameObject ghostRook;
+    [SerializeField] public GameObject ghostPawn;
+    [SerializeField] public GameObject ghostQween;
+    [SerializeField] public GameObject ghostKing;
+    [SerializeField] public GameObject ghostKinght;
+    [SerializeField] public GameObject ghostBishop;
 
 
     // Start is called before the first frame update
@@ -56,7 +66,7 @@ public class Board : MonoBehaviour
             Debug.Log(piece.mathPos[0]+ " "+ piece.mathPos[1]);*/
             //MathBoard[(int)(Mathf.Floor(piece.transform.position.x)), (int)(Mathf.Floor(piece.transform.position.z)), 0] = piece;
 
-            setPieceOnBoard(getPieceMathPos(piece), piece);
+            setPieceOnBoard(HighMath.getPieceMathPos(piece), piece);
             n++;
         }
         /* Debug.Log(mathBoard[0, 0]);
@@ -143,7 +153,100 @@ public class Board : MonoBehaviour
         return true;
     }
 
+    public void placeGhostPiece(Piece piece)
+    {
+    
+        switch ((int)piece.pieceType)
+        {
+            case 1:
 
+                for (int i=-1; i <= 1; i++)
+                {
+                    int[] newMathPos = HighMath.getPieceMathPos(piece);
+
+                    if (piece.white)
+                    {
+                        newMathPos[1] += i;
+                        newMathPos[0] += 1;
+                    }
+                    else
+                    {
+                        newMathPos[1] -= i;
+                        newMathPos[0] -= 1;
+                    }
+
+
+                    Debug.Log(newMathPos[0] + " " + newMathPos[1]);
+                    GameObject ghost = Instantiate(ghostPawn, mathPosToUnityPos(newMathPos), Quaternion.identity, piece.getPlane().gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+                }
+
+                
+                break;
+            case 2:
+                
+                break;
+            default:
+                
+                break;
+        }
+    }
+
+    public void deleteGhosts()
+    {
+        //Debug.LogError("Deleting");
+
+        foreach(GameObject ghost in ghosts)
+        {
+            Destroy(ghost);
+        }
+
+        ghosts.Clear();
+
+    }
+
+
+    public Piece getPieceFromBoard(int[] mathPos)
+    {
+        //Debug.Log(mathPos[0] + " "+ mathPos[1] + " " + mathPos[2]);
+        return MathBoard[mathPos[0], mathPos[1], mathPos[2]];
+    }
+    public void setPieceOnBoard(int[] mathPos, Piece piece)
+    {
+        MathBoard[mathPos[0], mathPos[1], mathPos[2]] = piece;
+    }
+
+    public Plane getPlaneFromBoard(int[] mathPos)
+    {
+        return planes[0, 0, mathPos[2]];
+    }
+
+
+    public void setPlaneFromBoard(int[] mathPos, Plane plane)
+    {
+        planes[0, 0, mathPos[2]] = plane;
+    }
+
+    public Vector3 mathPosToUnityPos(int[] mathPos)
+    {
+        Plane plane = getPlaneFromBoard(mathPos);
+        Vector3 pos = plane.transform.position + new Vector3(mathPos[0], 0, mathPos[1]) + unityPiecePosOffset;
+
+        return pos;
+    }
+
+
+
+    /*
+
+    public int[] getPieceMathPos(Piece piece)
+    {
+        int[] mathPos = CombineDimention(piece.mathPos, removeLowerDimention(piece.getPlane().originMathPos));
+        return mathPos;
+
+
+    }
 
     /// <summary>
     /// Combine the lower 2D part and higher dimention part of Posistions
@@ -170,40 +273,7 @@ public class Board : MonoBehaviour
         return HighMathPos;
     }
 
-
-    public Piece getPieceFromBoard(int[] mathPos)
-    {
-        //Debug.Log(mathPos[0] + " "+ mathPos[1] + " " + mathPos[2]);
-        return MathBoard[mathPos[0], mathPos[1], mathPos[2]];
-    }
-    public void setPieceOnBoard(int[] mathPos, Piece piece)
-    {
-        MathBoard[mathPos[0], mathPos[1], mathPos[2]] = piece;
-    }
-
-    public Plane getPlaneFromBoard(int[] mathPos)
-    {
-        return planes[0, 0, mathPos[2]];
-    }
-    public void setPlaneFromBoard(int[] mathPos, Plane plane)
-    {
-        planes[0, 0, mathPos[2]] = plane;
-    }
-
-    public int[] getPieceMathPos(Piece piece)
-    {
-        int[] mathPos = CombineDimention(piece.mathPos, removeLowerDimention(piece.getPlane().originMathPos));
-        return mathPos;
-
-
-    }
-
-    public Vector3 mathPosToUnityPos(int[] mathPos)
-    {
-        Plane plane = getPlaneFromBoard(mathPos);
-        Vector3 pos = plane.transform.position + new Vector3(mathPos[0], 0, mathPos[1]) + unityPiecePosOffset;
-
-        return pos;
-    }
+    */
+    
 
 }

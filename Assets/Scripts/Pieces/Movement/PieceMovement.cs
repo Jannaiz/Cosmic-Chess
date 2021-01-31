@@ -42,14 +42,16 @@ public class PieceMovement : MonoBehaviour
             {
                 if (hit.transform.gameObject.GetComponent<Piece>())
                 {
-                    if (local || whiteTurn == white)
+                    if ((local || whiteTurn == white) )
                     {
-                        if (hit.transform.gameObject.GetComponent<Piece>().white == whiteTurn)
+                        if (hit.transform.gameObject.GetComponent<Piece>().white == whiteTurn && !hit.transform.gameObject.GetComponent<Piece>().isGhost)
                         {
                             Deselect();
                             currentPiece = hit.transform.gameObject.GetComponent<Piece>();
                             currentMaterial = currentPiece.GetComponentInChildren<MeshRenderer>().material;
                             currentPiece.GetComponentInChildren<MeshRenderer>().material = selectedMaterial;
+                            Board.deleteGhosts();
+                            Board.placeGhostPiece(currentPiece);
 
                         }
                     }
@@ -86,20 +88,51 @@ public class PieceMovement : MonoBehaviour
                             }
                         }*/
 
+                        int[] startMathPos = HighMath.getPieceMathPos(currentPiece);
+                        int[] endMathPos = new int[3];
 
-                        int[] startMathPos = Board.getPieceMathPos(currentPiece);
-                           
-                        int[] endMathPos = { (int)(Mathf.Floor(hit.transform.localPosition.x)), (int)(Mathf.Floor(hit.transform.localPosition.z)),0 };
-
-                        if (move(startMathPos, endMathPos))
+                        if (hit.transform.gameObject.GetComponent<Piece>())
                         {
-                            if (!local)
+                            if (hit.transform.gameObject.GetComponent<Piece>().isGhost)
                             {
-                                network.SendMove(startMathPos, endMathPos);
+
+
+                                //endMathPos[0] = hit.transform.gameObject.GetComponent<Piece>().mathPos[0];
+                                //endMathPos[1] = hit.transform.gameObject.GetComponent<Piece>().mathPos[1];
+                                //endMathPos[2] = 0;
+
+                                endMathPos = HighMath.getPieceMathPos(hit.transform.gameObject.GetComponent<Piece>());
+
+                                if (move(startMathPos, endMathPos))
+                                {
+                                    if (!local)
+                                    {
+                                        network.SendMove(startMathPos, endMathPos);
+                                    }
+                                    Deselect();
+                                    whiteTurn = !whiteTurn;
+                                    Board.deleteGhosts();
+                                }
                             }
-                            Deselect();
-                            whiteTurn = !whiteTurn;
+                            else
+                            {
+                                /*endMathPos[0] = (int)(Mathf.Floor(hit.transform.localPosition.x));
+                                endMathPos[1] = (int)(Mathf.Floor(hit.transform.localPosition.z));
+                                endMathPos[2] = 0;*/
+                            }
                         }
+                        else
+                        {
+                            /*endMathPos[0] = (int)(Mathf.Floor(hit.transform.localPosition.x));
+                            endMathPos[1] = (int)(Mathf.Floor(hit.transform.localPosition.z));
+                            endMathPos[2] = 0;*/
+                        }
+
+
+                        //Board.deleteGhosts();
+
+
+                        
                         
 
                     }
@@ -147,6 +180,7 @@ public class PieceMovement : MonoBehaviour
         {
             currentPiece.GetComponentInChildren<MeshRenderer>().material = currentMaterial;
             currentPiece = null;
+            
         }
     }
 }
