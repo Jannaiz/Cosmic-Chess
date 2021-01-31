@@ -99,7 +99,7 @@ public class Network : MonoBehaviour
         return ws;
     }
 
-    public void HostGame(bool isPublic)
+    public void HostGame(bool isPublic, int map, int playerAmount, int dimensionAmount)
     {
         LobbyRequest request = new LobbyRequest();
         request.packetType = (int)GameClientPackets.CreateLobby;
@@ -111,6 +111,9 @@ public class Network : MonoBehaviour
         {
             request.isPublic = 0;
         }
+        request.map = map;
+        request.playerAmount = playerAmount;
+        request.dimensionAmount = dimensionAmount;
         string json = JsonUtility.ToJson(request);
         ws.Send(json);
     }
