@@ -217,6 +217,12 @@ wss.on('connection', function connection(ws, request) {
           pakket = null;
           break;
 
+        case 8:
+
+          var pakket = makePacket(8);
+
+          break;
+
       default:
 
         var pakket = makePacket("-1");
