@@ -9,6 +9,8 @@ public class Network : MonoBehaviour
 {
     [SerializeField] private string serverIp;
 
+    [SerializeField] private int stayAliveTimer;
+
     private WebSocket ws;
 
     private PlayerInformation info;
@@ -43,6 +45,8 @@ public class Network : MonoBehaviour
         handshake.username = info.username;
         string json = JsonUtility.ToJson(handshake);
         ws.Send(json);
+
+        StartCoroutine(StayAlive());
     }
 
     private void Receive(object sender, MessageEventArgs e)
@@ -59,19 +63,21 @@ public class Network : MonoBehaviour
             return;
         }
 
-        if (packet.packetType == (int)GameServerPackets.Handshake)
+        switch(packet.packetType)
         {
-            ServerHandshake shake = JsonUtility.FromJson<ServerHandshake>(e.Data);
-            Debug.Log(shake.welcomeMessage);
-        } else if(packet.packetType == (int)GameServerPackets.GetLobbyCode)
-        {
-            CreateLobby lobby = JsonUtility.FromJson<CreateLobby>(e.Data);
-            info.currentGame = lobby.lobbyCode;
-            actionsToRun.Add(() => SceneManager.LoadScene(joinScene));
-        } else if(packet.packetType == (int)GameServerPackets.ErrorMessage)
-        {
-            Disconnect();
-            Application.Quit();
+            case (int)GameServerPackets.Handshake:
+                ServerHandshake shake = JsonUtility.FromJson<ServerHandshake>(e.Data);
+                Debug.Log(shake.welcomeMessage);
+                break;
+            case (int)GameServerPackets.GetLobbyCode:
+                CreateLobby lobby = JsonUtility.FromJson<CreateLobby>(e.Data);
+                info.currentGame = lobby.lobbyCode;
+                actionsToRun.Add(() => SceneManager.LoadScene(joinScene));
+                break;
+            case (int)GameServerPackets.ErrorMessage:
+                Disconnect();
+                Application.Quit();
+                break;
         }
     }
 
@@ -121,5 +127,15 @@ public class Network : MonoBehaviour
     private void OnApplicationQuit()
     {
         Disconnect();
+    }
+
+    private IEnumerator StayAlive()
+    {
+        yield return new WaitForSeconds(stayAliveTimer);
+        StayAlive message = new StayAlive();
+        message.packetType = (int)GameClientPackets.StayAlive;
+        string json = JsonUtility.ToJson(message);
+        ws.Send(json);
+        StartCoroutine(StayAlive());
     }
 }

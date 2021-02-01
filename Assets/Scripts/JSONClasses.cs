@@ -113,3 +113,9 @@ public class PlayerMessage
     public string username;
     public string message;
 }
+
+[Serializable] 
+public class StayAlive
+{
+    public int packetType;
+}
