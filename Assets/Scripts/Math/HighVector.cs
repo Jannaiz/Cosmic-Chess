@@ -14,10 +14,20 @@ public class HighVector
 
     }
 
+
+
     public HighVector(int size)
     {
        endPoint = new int[size];
 
+    }
+
+    public void setEndPoint(int[] point)
+    {
+        for (int i = 0; i < endPoint.Length; i++)
+        {
+            endPoint[i] = point[i];
+        }
     }
 
 

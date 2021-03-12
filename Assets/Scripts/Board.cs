@@ -16,9 +16,9 @@ public class Board : MonoBehaviour
     }
 
     public static int dimentions = 3;
-    public static int[] size = { 8, 8, 2 };
+    public static int[] size = { 8, 8, 3 };
 
-    public Plane[,,] planes = new Plane[1, 1, 2];
+    public Plane[,,] planes = new Plane[1, 1, size[2]];
     private Piece[,,] MathBoard = new Piece[size[0], size[1], size[2]];
 
     private List<GameObject> ghosts = new List<GameObject>();
@@ -112,6 +112,8 @@ public class Board : MonoBehaviour
         {
             if (targetPiece.white == movingPiece.white)
             {
+
+                // If the target piece is of it's own color, do noting 
                 return false;
             }
             // Destroy That piece
@@ -155,37 +157,48 @@ public class Board : MonoBehaviour
 
     public void placeGhostPiece(Piece piece)
     {
-    
+        List<int[]> mathGhostPos;
+
+
         switch ((int)piece.pieceType)
         {
             case 1:
-
-                for (int i=-1; i <= 1; i++)
+                Debug.Log("Gettin gosth of pawn");
+                mathGhostPos = getPawnGhostPiecePos(piece.getPos(), (piece.white)?0:1);
+                
+                foreach (int[] ghostPos in mathGhostPos)
                 {
-                    int[] newMathPos = HighMath.getPieceMathPos(piece);
+                    Debug.Log(" -----");
+                    Debug.Log(ghostPos[0]);
+                    Debug.Log(ghostPos[1]);
+                    Debug.Log(ghostPos[2]);
 
-                    if (piece.white)
-                    {
-                        newMathPos[1] += i;
-                        newMathPos[0] += 1;
-                    }
-                    else
-                    {
-                        newMathPos[1] -= i;
-                        newMathPos[0] -= 1;
-                    }
-
-
-                    Debug.Log(newMathPos[0] + " " + newMathPos[1]);
-                    GameObject ghost = Instantiate(ghostPawn, mathPosToUnityPos(newMathPos), Quaternion.identity, piece.getPlane().gameObject.transform);
+                    GameObject ghost = Instantiate(ghostPawn, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
                     ghosts.Add(ghost);
                     ghost.GetComponent<Piece>().updatePos();
+
                 }
 
-                
                 break;
             case 2:
                 
+            case 3:
+                
+                Debug.Log("Gettin gosth of Knight");
+                mathGhostPos = getKnightGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    Debug.Log(" -----");
+                    Debug.Log(ghostPos[0]);
+                    Debug.Log(ghostPos[1]);
+                    Debug.Log(ghostPos[2]);
+
+                    GameObject ghost = Instantiate(ghostKinght, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
                 break;
             default:
                 
@@ -238,6 +251,169 @@ public class Board : MonoBehaviour
 
 
 
+    private List<int[]> getPawnGhostPiecePos(int[] mathPos, int color)
+    {
+
+        // white = 0
+        // black = 1
+        Debug.Log("getting gosth of"+ mathPos[0]+""+ mathPos[1]);
+
+        
+
+
+        List<int[]> mathGhostPos = new List<int[]>();
+
+
+
+        // Look for none-attaking positions
+
+        for(int n = 2; n <= dimentions; n++) {
+            if( n % 2 == 0)
+            {
+                int [] tempPos =  (int[])mathPos.Clone();
+                tempPos[n - 1] += (color == 1)? 1:-1 ;
+                Debug.Log(" gosth of" + tempPos[1]);
+                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
+                {
+                    mathGhostPos.Add((int[])tempPos.Clone());
+                }
+            }
+            else
+            {
+                int[] tempPos = (int[])mathPos.Clone();
+                tempPos[n - 1] += 1;
+                Debug.Log(" gosth of" + tempPos[1]);
+                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
+                {
+                    mathGhostPos.Add((int[])tempPos.Clone());
+                }
+                tempPos[n - 1] -= 2;
+                Debug.Log(" gosth of" + tempPos[1]);
+                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
+                {
+                    mathGhostPos.Add((int[])tempPos.Clone());
+                }
+            }
+        }
+
+        // Look for attaking positions
+
+
+
+        return mathGhostPos;
+
+    }
+
+    private List<int[]> getKnightGhostPiecePos(int[] mathPos, int color)
+    {
+
+        // white = 0
+        // black = 1
+        Debug.Log("getting gosth of" + mathPos[0] + "" + mathPos[1]);
+
+
+
+
+        List<int[]> mathGhostPos = new List<int[]>();
+
+
+
+        for(int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            for (int dimention2 = 1; dimention2 <= dimentions; dimention2++)
+            {
+                if (dimention1 == dimention2) continue;
+
+                for (int offset1 = -1; offset1 <= 1; offset1 += 2)
+                {
+                    for (int offset2 = -2; offset2 <= 2; offset2 += 4)
+                    {
+
+                        int[] tempPos = (int[])mathPos.Clone();
+                        tempPos[dimention1 - 1] += offset1;
+                        tempPos[dimention2 - 1] += offset2;
+
+                        if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+                        {
+                            mathGhostPos.Add((int[])tempPos.Clone());
+                        }
+
+
+
+
+                    }
+                }
+
+            }
+        }
+
+       
+
+
+
+        return mathGhostPos;
+
+    }
+
+
+
+
+    public bool isPosOccupied(int[] mathPos, int color)
+    {
+        // all = -1
+        // white = 0
+        // black = 1
+
+        // Gat what is on the board
+        Piece piece = getPieceFromBoard(mathPos);
+
+        if (piece == null)
+        {
+            // There is noting so return false
+            return false;
+        }
+
+        if( color != -1)
+        {
+            // There is a color specified
+            // Is the piece color the same as asked?
+            if (((piece.white) ? 0 : 1) != color)
+            {
+                // There color that was asked is not there so return false
+                return false;
+            }
+
+        }
+        
+        return true;
+    }
+
+    public bool isMathPosOnBoard(int[] mathPos)
+    {
+
+        if (mathPos.Length > dimentions)
+        {
+            return false;
+        }
+        for (int i = 0; i < mathPos.Length; i++)
+        {
+            if (mathPos[i] < 0)
+            {
+                // If the cordinate is negative it's not on the board.
+                return false;
+            }
+
+            if (mathPos[i] >= size[i])
+            {
+                // If the cordinate is lager that the size of that dimention it's not on the board.
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
     /*
 
     public int[] getPieceMathPos(Piece piece)
@@ -274,6 +450,6 @@ public class Board : MonoBehaviour
     }
 
     */
-    
+
 
 }
