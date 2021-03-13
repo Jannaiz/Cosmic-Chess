@@ -15,11 +15,11 @@ public class Board : MonoBehaviour
         King = 6
     }
 
-    public static int dimentions = 3;
-    public static int[] size = { 8, 8, 3 };
+    public static int dimentions = 4;
+    public static int[] size = { 8, 8, 4 ,4};
 
-    public Plane[,,] planes = new Plane[1, 1, size[2]];
-    private Piece[,,] MathBoard = new Piece[size[0], size[1], size[2]];
+    public Plane[,,,] planes = new Plane[1, 1, size[2], size[3]];
+    private Piece[,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3]];
 
     private List<GameObject> ghosts = new List<GameObject>();
 
@@ -181,6 +181,23 @@ public class Board : MonoBehaviour
 
                 break;
             case 2:
+                Debug.Log("Gettin gosth of Rook");
+                mathGhostPos = getRookGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    Debug.Log(" -----");
+                    Debug.Log(ghostPos[0]);
+                    Debug.Log(ghostPos[1]);
+                    Debug.Log(ghostPos[2]);
+
+                    GameObject ghost = Instantiate(ghostRook, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+                break;
+
                 
             case 3:
                 
@@ -200,6 +217,70 @@ public class Board : MonoBehaviour
 
                 }
                 break;
+            case 4:
+
+                
+
+                Debug.Log("Gettin gosth of Bishop");
+                mathGhostPos = getBishopGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    Debug.Log(" -----");
+                    Debug.Log(ghostPos[0]);
+                    Debug.Log(ghostPos[1]);
+                    Debug.Log(ghostPos[2]);
+
+                    GameObject ghost = Instantiate(ghostBishop, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+                break;
+
+
+            case 5:
+
+                Debug.Log("Gettin gosth of Queen");
+                mathGhostPos = getQueenGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    Debug.Log(" -----");
+                    Debug.Log(ghostPos[0]);
+                    Debug.Log(ghostPos[1]);
+                    Debug.Log(ghostPos[2]);
+
+                    GameObject ghost = Instantiate(ghostQween, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+
+                
+                break;
+            case 6:
+
+                Debug.Log("Gettin gosth of King");
+                mathGhostPos = getKingGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    Debug.Log(" -----");
+                    Debug.Log(ghostPos[0]);
+                    Debug.Log(ghostPos[1]);
+                    Debug.Log(ghostPos[2]);
+
+                    GameObject ghost = Instantiate(ghostKing, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+
+
+                break;
+
+
             default:
                 
                 break;
@@ -223,22 +304,22 @@ public class Board : MonoBehaviour
     public Piece getPieceFromBoard(int[] mathPos)
     {
         //Debug.Log(mathPos[0] + " "+ mathPos[1] + " " + mathPos[2]);
-        return MathBoard[mathPos[0], mathPos[1], mathPos[2]];
+        return MathBoard[mathPos[0], mathPos[1], mathPos[2], mathPos[3]];
     }
     public void setPieceOnBoard(int[] mathPos, Piece piece)
     {
-        MathBoard[mathPos[0], mathPos[1], mathPos[2]] = piece;
+        MathBoard[mathPos[0], mathPos[1], mathPos[2], mathPos[3]] = piece;
     }
 
     public Plane getPlaneFromBoard(int[] mathPos)
     {
-        return planes[0, 0, mathPos[2]];
+        return planes[0, 0, mathPos[2], mathPos[3]];
     }
 
 
     public void setPlaneFromBoard(int[] mathPos, Plane plane)
     {
-        planes[0, 0, mathPos[2]] = plane;
+        planes[0, 0, mathPos[2], mathPos[3]] = plane;
     }
 
     public Vector3 mathPosToUnityPos(int[] mathPos)
@@ -355,6 +436,259 @@ public class Board : MonoBehaviour
 
     }
 
+
+
+    private List<int[]> getRookGhostPiecePos(int[] mathPos, int color)
+    {
+
+        // white = 0
+        // black = 1
+        Debug.Log("getting gosth of" + mathPos[0] + "" + mathPos[1]);
+
+
+
+
+        List<int[]> mathGhostPos = new List<int[]>();
+
+
+
+        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            int[] tempPos = (int[])mathPos.Clone();
+            tempPos[dimention1 - 1] += 1;
+
+            while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+            {
+                mathGhostPos.Add((int[])tempPos.Clone());
+                tempPos[dimention1 - 1] += 1;
+            }
+
+
+            tempPos = (int[])mathPos.Clone();
+            tempPos[dimention1 - 1] -= 1;
+            while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+            {
+                mathGhostPos.Add((int[])tempPos.Clone());
+                tempPos[dimention1 - 1] -= 1;
+            }
+
+
+        }
+
+
+
+
+
+        return mathGhostPos;
+
+    }
+
+    private List<int[]> getBishopGhostPiecePos(int[] mathPos, int color)
+    {
+
+        // white = 0
+        // black = 1
+        Debug.Log("getting gosth of" + mathPos[0] + "" + mathPos[1]);
+
+
+
+
+        List<int[]> mathGhostPos = new List<int[]>();
+
+
+
+        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            for (int dimention2 = dimention1+1; dimention2 <= dimentions; dimention2++)
+            {
+                if (dimention1 == dimention2) continue;
+
+                for (int offset1 = -1; offset1 <= 1; offset1 += 2)
+                {
+                    for (int offset2 = -1; offset2 <= 1; offset2 += 2)
+                    {
+
+                        int[] tempPos = (int[])mathPos.Clone();
+                        tempPos[dimention1 - 1] += offset1;
+                        tempPos[dimention2 - 1] += offset2;
+
+
+                        while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+                        {
+                            mathGhostPos.Add((int[])tempPos.Clone());
+                            tempPos[dimention1 - 1] += offset1;
+                            tempPos[dimention2 - 1] += offset2;
+                        }
+                        
+
+                    }
+                }
+
+            }
+        }
+
+
+        
+
+
+
+
+
+        return mathGhostPos;
+
+    }
+
+
+    private List<int[]> getQueenGhostPiecePos(int[] mathPos, int color)
+    {
+
+        // white = 0
+        // black = 1
+        Debug.Log("getting gosth of" + mathPos[0] + "" + mathPos[1]);
+
+
+
+
+        List<int[]> mathGhostPos = new List<int[]>();
+
+
+
+        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            for (int dimention2 = dimention1 + 1; dimention2 <= dimentions; dimention2++)
+            {
+                if (dimention1 == dimention2) continue;
+
+                for (int offset1 = -1; offset1 <= 1; offset1 += 2)
+                {
+                    for (int offset2 = -1; offset2 <= 1; offset2 += 2)
+                    {
+
+                        int[] tempPos = (int[])mathPos.Clone();
+                        tempPos[dimention1 - 1] += offset1;
+                        tempPos[dimention2 - 1] += offset2;
+
+
+                        while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+                        {
+                            mathGhostPos.Add((int[])tempPos.Clone());
+                            tempPos[dimention1 - 1] += offset1;
+                            tempPos[dimention2 - 1] += offset2;
+                        }
+
+
+                    }
+                }
+
+            }
+        }
+
+
+        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            int[] tempPos = (int[])mathPos.Clone();
+            tempPos[dimention1 - 1] += 1;
+
+            while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+            {
+                mathGhostPos.Add((int[])tempPos.Clone());
+                tempPos[dimention1 - 1] += 1;
+            }
+
+
+            tempPos = (int[])mathPos.Clone();
+            tempPos[dimention1 - 1] -= 1;
+            while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+            {
+                mathGhostPos.Add((int[])tempPos.Clone());
+                tempPos[dimention1 - 1] -= 1;
+            }
+
+
+        }
+
+
+
+
+
+        return mathGhostPos;
+
+    }
+
+
+    private List<int[]> getKingGhostPiecePos(int[] mathPos, int color)
+    {
+
+        // white = 0
+        // black = 1
+        Debug.Log("getting gosth of" + mathPos[0] + "" + mathPos[1]);
+
+
+
+
+        List<int[]> mathGhostPos = new List<int[]>();
+
+
+
+        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            for (int dimention2 = dimention1 + 1; dimention2 <= dimentions; dimention2++)
+            {
+                if (dimention1 == dimention2) continue;
+
+                for (int offset1 = -1; offset1 <= 1; offset1 += 2)
+                {
+                    for (int offset2 = -1; offset2 <= 1; offset2 += 2)
+                    {
+
+                        int[] tempPos = (int[])mathPos.Clone();
+                        tempPos[dimention1 - 1] += offset1;
+                        tempPos[dimention2 - 1] += offset2;
+
+
+                        if(isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+                        {
+                            mathGhostPos.Add((int[])tempPos.Clone());
+                            
+                        }
+
+
+                    }
+                }
+
+            }
+        }
+
+
+        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        {
+            int[] tempPos = (int[])mathPos.Clone();
+            tempPos[dimention1 - 1] += 1;
+
+            if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+            {
+                mathGhostPos.Add((int[])tempPos.Clone());
+
+            }
+
+            tempPos = (int[])mathPos.Clone();
+            tempPos[dimention1 - 1] -= 1;
+            if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
+            {
+                mathGhostPos.Add((int[])tempPos.Clone());
+
+            }
+
+
+        }
+
+
+
+
+
+        return mathGhostPos;
+
+    }
 
 
 

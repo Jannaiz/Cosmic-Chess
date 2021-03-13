@@ -19,20 +19,20 @@ public static class HighMath
     /// <returns>The combined Posistions</returns>
     public static int[] CombineDimention(int[] LowerMathPos, int[] HighMathPos)
     {
-        int[] FullMathPos = { LowerMathPos[0], LowerMathPos[1], HighMathPos[0] };
+        int[] FullMathPos = { LowerMathPos[0], LowerMathPos[1], HighMathPos[0], HighMathPos[1] };
         return FullMathPos;
     }
 
 
     public static int[] removeHigherDimention(int[] FullMathPos)
     {
-        int[] LowerMathPos = { FullMathPos[0], FullMathPos[0] };
+        int[] LowerMathPos = { FullMathPos[0], FullMathPos[1] };
         return LowerMathPos;
     }
 
     public static int[] removeLowerDimention(int[] FullMathPos)
     {
-        int[] HighMathPos = { FullMathPos[2] };
+        int[] HighMathPos = { FullMathPos[2], FullMathPos[3] };
         return HighMathPos;
     }
 
