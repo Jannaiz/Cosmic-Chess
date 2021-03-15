@@ -5,6 +5,7 @@ public static class HighMath
 
     public static int[] getPieceMathPos(Piece piece)
     {
+        //Not needed anly more?
         int[] mathPos = CombineDimention(piece.mathPos, removeLowerDimention(piece.getPlane().originMathPos));
         return mathPos;
 
@@ -19,7 +20,8 @@ public static class HighMath
     /// <returns>The combined Posistions</returns>
     public static int[] CombineDimention(int[] LowerMathPos, int[] HighMathPos)
     {
-        int[] FullMathPos = { LowerMathPos[0], LowerMathPos[1], HighMathPos[0], HighMathPos[1] };
+        int[] FullMathPos = { LowerMathPos[0], LowerMathPos[1], HighMathPos[0], HighMathPos[1], HighMathPos[2],HighMathPos[3], HighMathPos[4],
+                                                                 HighMathPos[5], HighMathPos[6], HighMathPos[7] };
         return FullMathPos;
     }
 
@@ -32,7 +34,7 @@ public static class HighMath
 
     public static int[] removeLowerDimention(int[] FullMathPos)
     {
-        int[] HighMathPos = { FullMathPos[2], FullMathPos[3] };
+        int[] HighMathPos = { FullMathPos[2], FullMathPos[3], FullMathPos[4], FullMathPos[5], FullMathPos[6], FullMathPos[7], FullMathPos[8], FullMathPos[9] };
         return HighMathPos;
     }
 
@@ -91,6 +93,17 @@ public static class HighMath
 
 
         return null;
+    }
+
+
+    public static string mathPosToString(int[] mathPos)
+    {
+        string mathPosAsString = "";
+        foreach(int pos in mathPos)
+        {
+            mathPosAsString += pos +", ";
+        }
+        return mathPosAsString;
     }
 
 

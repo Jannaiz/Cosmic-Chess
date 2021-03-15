@@ -52,6 +52,7 @@ public class PieceMovement : MonoBehaviour
                             currentPiece.GetComponentInChildren<MeshRenderer>().material = selectedMaterial;
                             Board.deleteGhosts();
                             Board.placeGhostPiece(currentPiece);
+                            Debug.Log("selected " + HighMath.mathPosToString(currentPiece.getPos()));
 
                         }
                     }

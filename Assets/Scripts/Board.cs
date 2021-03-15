@@ -15,11 +15,21 @@ public class Board : MonoBehaviour
         King = 6
     }
 
-    public static int dimentions = 4;
-    public static int[] size = { 8, 8, 4 ,4};
+    /*public static int dimentions = 5;
+    public static int[] size = { 8, 8, 2 ,2,2};
 
-    public Plane[,,,] planes = new Plane[1, 1, size[2], size[3]];
-    private Piece[,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3]];
+    public Plane[,,,,] planes = new Plane[1, 1, size[2], size[3], size[4]];
+    private Piece[,,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4]];*/
+    public static int dimentions = 10;
+    public static int[] size = { 8, 8, 6, 6,  /*e5:*/ 1,
+                                              /*e6:*/ 1,
+                                              /*e7:*/ 1,
+                                              /*e8:*/ 1,
+                                              /*e9:*/ 1,
+                                              /*e10:*/ 1 };
+
+    public Plane[,,,,,,,,,] planes = new Plane[1, 1, size[2], size[3], size[4], size[5], size[6], size[7], size[8], size[9]];
+    private Piece[,,,,,,,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4], size[5], size[6], size[7], size[8], size[9]];
 
     private List<GameObject> ghosts = new List<GameObject>();
 
@@ -33,23 +43,119 @@ public class Board : MonoBehaviour
     [SerializeField] public GameObject ghostKinght;
     [SerializeField] public GameObject ghostBishop;
 
+    [SerializeField] public GameObject defDecourPref;
+    [SerializeField] public GameObject planePrefSetUp;
+    [SerializeField] public GameObject planePref;
+
+    [SerializeField] public GameObject Decour;
+
+
+    [SerializeField] public GameObject Rook;
+    [SerializeField] public GameObject Pawn;
+    [SerializeField] public GameObject Qween;
+    [SerializeField] public GameObject King;
+    [SerializeField] public GameObject Kinght;
+    [SerializeField] public GameObject Bishop;
+
+
+    //private List<int[], GameObject> places = new List< int[], GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
+        insializeBoard();
+
         makeBoard();
     }
+    public void insializeBoard()
+    {
+        int planeAmount = size[2] * size[3] * size[4] * size[5] * size[6] * size[7] * size[8] * size[9];
 
+        for(int n3 = 0; n3 < size[2]; n3++)
+        {
+            for (int n4 = 0; n4 < size[3]; n4++)
+            {
+                for (int n5 = 0; n5 < size[4]; n5++)
+                {
+                    for (int n6 = 0; n6 < size[5]; n6++)
+                    {
+                        
+
+                        for (int n7 = 0; n7 < size[6]; n7++)
+                        {
+
+                            for (int n8 = 0; n8 < size[7]; n8++)
+                            {
+
+                                for (int n9 = 0; n9 < size[8]; n9++)
+                                {
+
+                                    for (int n10 = 0; n10 < size[9]; n10++)
+                                    {
+                                        Vector3 pos = new Vector3(n3 * 10
+                                                                   + ((n5 == 0) ? 0 : 1) *n5* size[2] * 10 + n5 * 1.5f
+                                                                   + ((n7 == 0) ? 0 : 1) *n7* size[2] * size[4] * 10 + n7 * 10
+                                                                   + ((n9 == 0) ? 0 : 1) *n9* size[2] * size[4] * size[6] * 10 + n9 * 20
+                                            , 0,
+                                                                   n4 * 10
+                                                                   + ((n6 == 0) ? 0 : 1)*n6 * size[3] * 10 + n6 * 1.5f
+                                                                   + ((n8 == 0) ? 0 : 1) *n8* size[3]  * size[5] * 10 + n8 * 10
+                                                                   + ((n10 == 0) ? 0 : 1) *n10* size[3] * size[5]  * size[7] * 10 + n10 * 20
+                                                                   );
+                                        GameObject plane = Instantiate(planePrefSetUp, pos, Quaternion.identity, this.transform);
+                                        int[] originMathPos = { 0, 0, n3, n4, n5, n6, n7, n8, n9, n10 };
+                                        plane.GetComponent<Plane>().originMathPos = originMathPos;
+
+                                        GameObject decourOfPlane = Instantiate(defDecourPref, pos, Quaternion.identity, Decour.transform);
+
+
+                                        decourOfPlane.transform.GetChild(0).GetComponent<TextMesh>().text = HighMath.mathPosToString(originMathPos );
+
+
+                                       GameObject Piece = Instantiate(Kinght, pos + new Vector3(1+0.5f, 0.5f, 2+0.5f), Quaternion.identity, plane.transform);
+                                        //GameObject Piece2 = Instantiate(Pawn, pos+ new Vector3(0.5f,0.5f,0.5f)*2, Quaternion.identity, plane.transform);
+                                        //Instantiate(Kinght, pos + new Vector3(1.5f, 0.5f, 1.5f) * 2, Quaternion.identity, plane.transform);
+
+
+
+
+
+                                    }
+                                }
+                            }
+                        }
+                        
+
+                    }
+                }
+            }
+        }
+
+
+
+        /*
+          Vector3 pos = new Vector3(n3 * 10 + ((n5==0)?0:1)*size[2]*10+ n5* 1.5f, 0, n4 * 10 + ((n6 == 0) ? 0 : 1) * size[3] * 10 + n6 * 1.5f);
+                        GameObject plane = Instantiate(planePref, pos, Quaternion.identity, this.transform);
+                        int[] originMathPos = { 0, 0, n3, n4, n5, n6, 0, 0, 0, 0 };
+                        plane.GetComponent<Plane>().originMathPos = originMathPos;
+
+                        GameObject decourOfPlane = Instantiate(defDecourPref, pos, Quaternion.identity, Decour.transform);
+                        
+         * */
+
+    }
     public void makeBoard()
     {
 
 
         foreach (Plane plane in FindObjectsOfType<Plane>())
         {
-
+            //Debug.Log("Plane co:");
+            //Debug.Log(HighMath.mathPosToString(plane.originMathPos));
             setPlaneFromBoard(plane.originMathPos, plane);
 
         }
+       // Debug.Log("------");
 
 
         //Debug.Log(mathBoard[0, 0]);
@@ -66,7 +172,7 @@ public class Board : MonoBehaviour
             Debug.Log(piece.mathPos[0]+ " "+ piece.mathPos[1]);*/
             //MathBoard[(int)(Mathf.Floor(piece.transform.position.x)), (int)(Mathf.Floor(piece.transform.position.z)), 0] = piece;
 
-            setPieceOnBoard(HighMath.getPieceMathPos(piece), piece);
+            setPieceOnBoard(piece.getPos(), piece);
             n++;
         }
         /* Debug.Log(mathBoard[0, 0]);
@@ -100,7 +206,7 @@ public class Board : MonoBehaviour
 
         if (movingPiece == null)
         {
-            Debug.LogError("Moving piece on  " + startPos + " failed. There is no piece there.");
+           // Debug.LogError("Moving piece on  " + startPos + " failed. There is no piece there.");
             return false;
         }
 
@@ -151,7 +257,7 @@ public class Board : MonoBehaviour
     }*/
 
 
-
+        
         return true;
     }
 
@@ -163,7 +269,7 @@ public class Board : MonoBehaviour
         switch ((int)piece.pieceType)
         {
             case 1:
-                Debug.Log("Gettin gosth of pawn");
+                //Debug.Log("Gettin gosth of pawn");
                 mathGhostPos = getPawnGhostPiecePos(piece.getPos(), (piece.white)?0:1);
                 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -181,7 +287,7 @@ public class Board : MonoBehaviour
 
                 break;
             case 2:
-                Debug.Log("Gettin gosth of Rook");
+                //Debug.Log("Gettin gosth of Rook");
                 mathGhostPos = getRookGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -201,7 +307,7 @@ public class Board : MonoBehaviour
                 
             case 3:
                 
-                Debug.Log("Gettin gosth of Knight");
+                //Debug.Log("Gettin gosth of Knight");
                 mathGhostPos = getKnightGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -221,7 +327,7 @@ public class Board : MonoBehaviour
 
                 
 
-                Debug.Log("Gettin gosth of Bishop");
+                //Debug.Log("Gettin gosth of Bishop");
                 mathGhostPos = getBishopGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -241,7 +347,7 @@ public class Board : MonoBehaviour
 
             case 5:
 
-                Debug.Log("Gettin gosth of Queen");
+                //Debug.Log("Gettin gosth of Queen");
                 mathGhostPos = getQueenGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -261,7 +367,7 @@ public class Board : MonoBehaviour
                 break;
             case 6:
 
-                Debug.Log("Gettin gosth of King");
+                //Debug.Log("Gettin gosth of King");
                 mathGhostPos = getKingGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -284,6 +390,8 @@ public class Board : MonoBehaviour
             default:
                 
                 break;
+
+            
         }
     }
 
@@ -304,27 +412,29 @@ public class Board : MonoBehaviour
     public Piece getPieceFromBoard(int[] mathPos)
     {
         //Debug.Log(mathPos[0] + " "+ mathPos[1] + " " + mathPos[2]);
-        return MathBoard[mathPos[0], mathPos[1], mathPos[2], mathPos[3]];
+        return MathBoard[mathPos[0], mathPos[1], mathPos[2], mathPos[3], mathPos[4], mathPos[5], mathPos[6], mathPos[7], mathPos[8], mathPos[9]];
     }
     public void setPieceOnBoard(int[] mathPos, Piece piece)
     {
-        MathBoard[mathPos[0], mathPos[1], mathPos[2], mathPos[3]] = piece;
+
+        MathBoard[mathPos[0], mathPos[1], mathPos[2], mathPos[3], mathPos[4], mathPos[5], mathPos[6], mathPos[7], mathPos[8], mathPos[9]] = piece;
     }
 
     public Plane getPlaneFromBoard(int[] mathPos)
     {
-        return planes[0, 0, mathPos[2], mathPos[3]];
+        return planes[0, 0, mathPos[2], mathPos[3], mathPos[4], mathPos[5], mathPos[6], mathPos[7], mathPos[8], mathPos[9]];
     }
 
 
     public void setPlaneFromBoard(int[] mathPos, Plane plane)
     {
-        planes[0, 0, mathPos[2], mathPos[3]] = plane;
+        planes[0, 0, mathPos[2], mathPos[3], mathPos[4], mathPos[5], mathPos[6], mathPos[7], mathPos[8], mathPos[9]] = plane;
     }
 
     public Vector3 mathPosToUnityPos(int[] mathPos)
     {
         Plane plane = getPlaneFromBoard(mathPos);
+        //Debug.Log(HighMath.mathPosToString(mathPos)+"   :"+plane);
         Vector3 pos = plane.transform.position + new Vector3(mathPos[0], 0, mathPos[1]) + unityPiecePosOffset;
 
         return pos;
@@ -337,7 +447,8 @@ public class Board : MonoBehaviour
 
         // white = 0
         // black = 1
-        Debug.Log("getting gosth of"+ mathPos[0]+""+ mathPos[1]);
+       // Debug.Log("--------------------");
+        //Debug.Log("getting gosth of "+ HighMath.mathPosToString(mathPos));
 
         
 
@@ -349,37 +460,96 @@ public class Board : MonoBehaviour
         // Look for none-attaking positions
 
         for(int n = 2; n <= dimentions; n++) {
+            //Debug.Log("Looking at the " + n + " 'th dimention");
             if( n % 2 == 0)
             {
+
                 int [] tempPos =  (int[])mathPos.Clone();
-                tempPos[n - 1] += (color == 1)? 1:-1 ;
-                Debug.Log(" gosth of" + tempPos[1]);
+                tempPos[n - 1] += (color == 1)? -1:1 ;
+                //Debug.Log("cheking " + HighMath.mathPosToString(tempPos));
+                //Debug.Log("on Board? " + isMathPosOnBoard(tempPos));
                 if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
                 {
+                    //Debug.Log("occupied? " +  "No");
+                    //Debug.Log("adding "+HighMath.mathPosToString(tempPos));
                     mathGhostPos.Add((int[])tempPos.Clone());
+                }
+                else
+                {
+                    //Debug.Log("occupied? " + (isMathPosOnBoard(tempPos)?"Yes":"No"));
                 }
             }
             else
             {
                 int[] tempPos = (int[])mathPos.Clone();
                 tempPos[n - 1] += 1;
-                Debug.Log(" gosth of" + tempPos[1]);
-                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
+
+               // Debug.Log("cheking " + HighMath.mathPosToString(tempPos));
+                //Debug.Log("on Board? " + isMathPosOnBoard(tempPos));
+                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, -1))
                 {
+                    //Debug.Log("occupied? " + "No");
+                    //Debug.Log("adding " + HighMath.mathPosToString(tempPos));
                     mathGhostPos.Add((int[])tempPos.Clone());
                 }
-                tempPos[n - 1] -= 2;
-                Debug.Log(" gosth of" + tempPos[1]);
-                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
+                else
                 {
+                    //Debug.Log("occupied? " + (isMathPosOnBoard(tempPos) ? "Yes" : "No"));
+                }
+                tempPos[n - 1] -= 2;
+
+                //Debug.Log("cheking " + HighMath.mathPosToString(tempPos));
+                //Debug.Log("on Board? " + isMathPosOnBoard(tempPos));
+                if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, -1))
+                {
+                    //Debug.Log("occupied? " + "No");
+                    //Debug.Log("adding " + HighMath.mathPosToString(tempPos));
                     mathGhostPos.Add((int[])tempPos.Clone());
+                }
+                else
+                {
+                    //Debug.Log("occupied? " + (isMathPosOnBoard(tempPos) ? "Yes" : "No"));
                 }
             }
         }
 
         // Look for attaking positions
 
+        for(int n1 = 1; n1 <= dimentions; n1++)
+        {
+            for (int n2 = 1; n2 <= dimentions; n2++)
+            {
+                if (n1 % 2 != 0 && n2 % 2 != 0) continue;
+                if (n1 == n2 ) continue;
 
+                for (int offset1 = (n1%2==0)?-1:1; offset1 <= 1; offset1+=2)
+                {
+
+                    for (int offset2 = (n1 % 2 == 0) ? -1 : 1; offset2 <= 1; offset2 += 2)
+                    {
+
+                        int[] tempPos = (int[])mathPos.Clone();
+                        tempPos[n1 - 1] += offset1;
+                        tempPos[n2 - 1] += offset2;
+
+                        // Debug.Log("cheking " + HighMath.mathPosToString(tempPos));
+                        //Debug.Log("on Board? " + isMathPosOnBoard(tempPos));
+                        if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color) && isPosOccupied(tempPos, -1))
+                        {
+                            //Debug.Log("occupied? " + "No");
+                            //Debug.Log("adding " + HighMath.mathPosToString(tempPos));
+                            mathGhostPos.Add((int[])tempPos.Clone());
+                        }
+
+                    }
+
+                }
+
+
+            }
+
+
+        }
 
         return mathGhostPos;
 
@@ -459,9 +629,17 @@ public class Board : MonoBehaviour
 
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
+
                 mathGhostPos.Add((int[])tempPos.Clone());
+                if(isPosOccupied(tempPos, -1))
+                {
+                    //Is there an piece, (the enemy) stop while loop
+                    break;
+                }
                 tempPos[dimention1 - 1] += 1;
             }
+
+            
 
 
             tempPos = (int[])mathPos.Clone();
@@ -469,6 +647,11 @@ public class Board : MonoBehaviour
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
                 mathGhostPos.Add((int[])tempPos.Clone());
+                if (isPosOccupied(tempPos, -1))
+                {
+                    
+                    break;
+                }
                 tempPos[dimention1 - 1] -= 1;
             }
 
@@ -516,6 +699,11 @@ public class Board : MonoBehaviour
                         while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
                         {
                             mathGhostPos.Add((int[])tempPos.Clone());
+                            if (isPosOccupied(tempPos, -1))
+                            {
+                                //Is there an piece, (the enemy) stop while loop
+                                break;
+                            }
                             tempPos[dimention1 - 1] += offset1;
                             tempPos[dimention2 - 1] += offset2;
                         }
@@ -572,6 +760,11 @@ public class Board : MonoBehaviour
                         while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
                         {
                             mathGhostPos.Add((int[])tempPos.Clone());
+                            if (isPosOccupied(tempPos, -1))
+                            {
+                                //Is there an piece, (the enemy) stop while loop
+                                break;
+                            }
                             tempPos[dimention1 - 1] += offset1;
                             tempPos[dimention2 - 1] += offset2;
                         }
@@ -601,6 +794,11 @@ public class Board : MonoBehaviour
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
                 mathGhostPos.Add((int[])tempPos.Clone());
+                if (isPosOccupied(tempPos, -1))
+                {
+                    //Is there an piece, (the enemy) stop while loop
+                    break;
+                }
                 tempPos[dimention1 - 1] -= 1;
             }
 
