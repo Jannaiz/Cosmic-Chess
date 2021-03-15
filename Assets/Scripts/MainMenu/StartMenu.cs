@@ -39,4 +39,9 @@ public class StartMenu : MonoBehaviour
             return true;
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
