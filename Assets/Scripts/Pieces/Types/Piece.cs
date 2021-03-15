@@ -8,7 +8,11 @@ public class Piece : MonoBehaviour
     [SerializeField]  public Board.PieceType pieceType;
     public int[] mathPos = { -1, -1};
 
+    [SerializeField]  public bool isGhost = false;
+    
+    public bool hasMoved = false;
 
+    
     protected void setPos()
     {
         
@@ -18,9 +22,15 @@ public class Piece : MonoBehaviour
     }
 
 
+    public void updatePos()
+    {
+        setPos();
+    }
+
+
     public void move(Vector3 pos)
     {
-        
+        hasMoved = true;
         transform.position = new Vector3(pos.x, pos.y, pos.z);
         /*mathPos[0] = movingMathPos[0];
         mathPos[1] = movingMathPos[1];*/
@@ -31,4 +41,12 @@ public class Piece : MonoBehaviour
     {
         return gameObject.transform.parent.GetComponent<Plane>();
     }
+
+
+    public int[] getPos()
+    {
+        return HighMath.CombineDimention(mathPos, HighMath.removeLowerDimention(getPlane().originMathPos));
+
+    }
+
 }

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4170230820888668821}
-  - component: {fileID: 4491526625846431096}
   - component: {fileID: 7913322979580283523}
+  - component: {fileID: 4491526625846431096}
   m_Layer: 0
-  m_Name: Pawn
+  m_Name: GhostPawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7913322979580283523
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3644663869659689007}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 5, z: 3}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &4491526625846431096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,19 +61,7 @@ MonoBehaviour:
   white: 1
   pieceType: 0
   mathPos: 0000000000000000
---- !u!65 &7913322979580283523
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3644663869659689007}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 5, z: 3}
-  m_Center: {x: 0, y: 2.5, z: 0}
+  isGhost: 1
 --- !u!1 &5699790878334732534
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +120,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f3fac794f134da340862d4290b97bb36, type: 2}
+  - {fileID: 2100000, guid: 9874b28edb4534aa895d9be1a03d8b85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
