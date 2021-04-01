@@ -9,9 +9,37 @@ var DataObj = class DataHasMap{
     this.Data = [];
   }
 
+  getAllDataAsList(){
+var data = [];
+    for (var place of this.Data) {
+      if(place == null)continue;
 
+      for (var obj of place) {
+        data.push( [obj[0], obj[1]]);  //meak  new parameter in the fileToParse Obj
+      }
+
+    }
+return data;
+  }
+  getAllValuesAsList(){
+var data = [];
+    for (var place of this.Data) {
+      if(place == null)continue;
+
+      for (var obj of place) {
+        data.push( obj[1]);  //meak  new parameter in the fileToParse Obj
+      }
+
+    }
+return data;
+  }
 
   getAllData(){
+
+
+
+
+
     var data = [];
 
     for (var i = 0; i < this.Data.length; i++) {
