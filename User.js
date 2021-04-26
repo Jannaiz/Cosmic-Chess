@@ -1,6 +1,6 @@
 
 
-exports.meakUser = function maekUser(username, color, lobbyCode, sessionId, ws){
+exports.makeUser = function makeUser(username, color, lobbyCode, sessionId, ws){
 
   return user={
       username:username,
