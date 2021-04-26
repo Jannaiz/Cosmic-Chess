@@ -360,7 +360,7 @@ public class Board : MonoBehaviour
                     Debug.Log(ghostPos[1]);
                     Debug.Log(ghostPos[2]);
 
-                    GameObject ghost = Instantiate(ghostQween, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    GameObject ghost = Instantiate(ghostQueen, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
                     ghosts.Add(ghost);
                     ghost.GetComponent<Piece>().updatePos();
 
