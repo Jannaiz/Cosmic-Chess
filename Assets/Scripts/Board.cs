@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
+
+
     public enum PieceType
     {
         Empty = 0,
@@ -15,12 +17,13 @@ public class Board : MonoBehaviour
         King = 6
     }
 
-    /*public static int dimentions = 5;
+    /*public static int dimensions = 5;
     public static int[] size = { 8, 8, 2 ,2,2};
 
     public Plane[,,,,] planes = new Plane[1, 1, size[2], size[3], size[4]];
     private Piece[,,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4]];*/
-    public static int dimentions = 10;
+    // The amount of dimensions being used
+    public static int dimensions = 10;
     public static int[] size = { 8, 8, 6, 6,  /*e5:*/ 1,
                                               /*e6:*/ 1,
                                               /*e7:*/ 1,
@@ -38,23 +41,23 @@ public class Board : MonoBehaviour
 
     [SerializeField] public GameObject ghostRook;
     [SerializeField] public GameObject ghostPawn;
-    [SerializeField] public GameObject ghostQween;
+    [SerializeField] public GameObject ghostQueen;
     [SerializeField] public GameObject ghostKing;
-    [SerializeField] public GameObject ghostKinght;
+    [SerializeField] public GameObject ghostKnight;
     [SerializeField] public GameObject ghostBishop;
 
-    [SerializeField] public GameObject defDecourPref;
+    [SerializeField] public GameObject defDecorPref;
     [SerializeField] public GameObject planePrefSetUp;
     [SerializeField] public GameObject planePref;
 
-    [SerializeField] public GameObject Decour;
+    [SerializeField] public GameObject Decor;
 
 
     [SerializeField] public GameObject Rook;
     [SerializeField] public GameObject Pawn;
-    [SerializeField] public GameObject Qween;
+    [SerializeField] public GameObject Queen;
     [SerializeField] public GameObject King;
-    [SerializeField] public GameObject Kinght;
+    [SerializeField] public GameObject Knight;
     [SerializeField] public GameObject Bishop;
 
 
@@ -63,11 +66,11 @@ public class Board : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        insializeBoard();
+        initializeBoard();
 
         makeBoard();
     }
-    public void insializeBoard()
+    public void initializeBoard()
     {
         int planeAmount = size[2] * size[3] * size[4] * size[5] * size[6] * size[7] * size[8] * size[9];
 
@@ -79,7 +82,7 @@ public class Board : MonoBehaviour
                 {
                     for (int n6 = 0; n6 < size[5]; n6++)
                     {
-                        
+
 
                         for (int n7 = 0; n7 < size[6]; n7++)
                         {
@@ -106,15 +109,15 @@ public class Board : MonoBehaviour
                                         int[] originMathPos = { 0, 0, n3, n4, n5, n6, n7, n8, n9, n10 };
                                         plane.GetComponent<Plane>().originMathPos = originMathPos;
 
-                                        GameObject decourOfPlane = Instantiate(defDecourPref, pos, Quaternion.identity, Decour.transform);
+                                        GameObject decorOfPlane = Instantiate(defDecorPref, pos, Quaternion.identity, Decor.transform);
 
 
-                                        decourOfPlane.transform.GetChild(0).GetComponent<TextMesh>().text = HighMath.mathPosToString(originMathPos );
+                                        decorOfPlane.transform.GetChild(0).GetComponent<TextMesh>().text = HighMath.mathPosToString(originMathPos );
 
 
-                                       GameObject Piece = Instantiate(Kinght, pos + new Vector3(1+0.5f, 0.5f, 2+0.5f), Quaternion.identity, plane.transform);
+                                       GameObject Piece = Instantiate(Knight, pos + new Vector3(1+0.5f, 0.5f, 2+0.5f), Quaternion.identity, plane.transform);
                                         //GameObject Piece2 = Instantiate(Pawn, pos+ new Vector3(0.5f,0.5f,0.5f)*2, Quaternion.identity, plane.transform);
-                                        //Instantiate(Kinght, pos + new Vector3(1.5f, 0.5f, 1.5f) * 2, Quaternion.identity, plane.transform);
+                                        //Instantiate(Knight, pos + new Vector3(1.5f, 0.5f, 1.5f) * 2, Quaternion.identity, plane.transform);
 
 
 
@@ -124,7 +127,7 @@ public class Board : MonoBehaviour
                                 }
                             }
                         }
-                        
+
 
                     }
                 }
@@ -139,8 +142,8 @@ public class Board : MonoBehaviour
                         int[] originMathPos = { 0, 0, n3, n4, n5, n6, 0, 0, 0, 0 };
                         plane.GetComponent<Plane>().originMathPos = originMathPos;
 
-                        GameObject decourOfPlane = Instantiate(defDecourPref, pos, Quaternion.identity, Decour.transform);
-                        
+                        GameObject decorOfPlane = Instantiate(defDecorPref, pos, Quaternion.identity, Decor.transform);
+
          * */
 
     }
@@ -210,7 +213,7 @@ public class Board : MonoBehaviour
             return false;
         }
 
-        // Get the piece on the end pos if there is one 
+        // Get the piece on the end pos if there is one
         Piece targetPiece = getPieceFromBoard(endPos);
 
 
@@ -219,12 +222,12 @@ public class Board : MonoBehaviour
             if (targetPiece.white == movingPiece.white)
             {
 
-                // If the target piece is of it's own color, do noting 
+                // If the target piece is of it's own color, do noting
                 return false;
             }
             // Destroy That piece
             Destroy(targetPiece.gameObject);
-            setPieceOnBoard(endPos, null);  // Meaby unesesery
+            setPieceOnBoard(endPos, null);  // Maybe unnecessary
         }
 
 
@@ -242,7 +245,7 @@ public class Board : MonoBehaviour
 
     int[] mathPos = piece.mathPos;
 
-    MathBoard[mathPos[0], mathPos[1]] = null; 
+    MathBoard[mathPos[0], mathPos[1]] = null;
     piece.move(pos);
     mathPos[0] = (int)(Mathf.Floor(pos.x));
     mathPos[1] = (int)(Mathf.Floor(pos.z));
@@ -257,7 +260,7 @@ public class Board : MonoBehaviour
     }*/
 
 
-        
+
         return true;
     }
 
@@ -269,9 +272,9 @@ public class Board : MonoBehaviour
         switch ((int)piece.pieceType)
         {
             case 1:
-                //Debug.Log("Gettin gosth of pawn");
+                //Debug.Log("Gettin ghost of pawn");
                 mathGhostPos = getPawnGhostPiecePos(piece.getPos(), (piece.white)?0:1);
-                
+
                 foreach (int[] ghostPos in mathGhostPos)
                 {
                     Debug.Log(" -----");
@@ -287,7 +290,7 @@ public class Board : MonoBehaviour
 
                 break;
             case 2:
-                //Debug.Log("Gettin gosth of Rook");
+                //Debug.Log("Gettin ghost of Rook");
                 mathGhostPos = getRookGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -304,10 +307,10 @@ public class Board : MonoBehaviour
                 }
                 break;
 
-                
+
             case 3:
-                
-                //Debug.Log("Gettin gosth of Knight");
+
+                //Debug.Log("Gettin ghost of Knight");
                 mathGhostPos = getKnightGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -317,7 +320,7 @@ public class Board : MonoBehaviour
                     Debug.Log(ghostPos[1]);
                     Debug.Log(ghostPos[2]);
 
-                    GameObject ghost = Instantiate(ghostKinght, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    GameObject ghost = Instantiate(ghostKnight, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
                     ghosts.Add(ghost);
                     ghost.GetComponent<Piece>().updatePos();
 
@@ -325,7 +328,7 @@ public class Board : MonoBehaviour
                 break;
             case 4:
 
-                
+
 
                 //Debug.Log("Gettin gosth of Bishop");
                 mathGhostPos = getBishopGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
@@ -347,7 +350,7 @@ public class Board : MonoBehaviour
 
             case 5:
 
-                //Debug.Log("Gettin gosth of Queen");
+                //Debug.Log("Gettin ghost of Queen");
                 mathGhostPos = getQueenGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -363,11 +366,11 @@ public class Board : MonoBehaviour
 
                 }
 
-                
+
                 break;
             case 6:
 
-                //Debug.Log("Gettin gosth of King");
+                //Debug.Log("Gettin ghost of King");
                 mathGhostPos = getKingGhostPiecePos(piece.getPos(), (piece.white) ? 0 : 1);
 
                 foreach (int[] ghostPos in mathGhostPos)
@@ -388,10 +391,10 @@ public class Board : MonoBehaviour
 
 
             default:
-                
+
                 break;
 
-            
+
         }
     }
 
@@ -450,23 +453,23 @@ public class Board : MonoBehaviour
        // Debug.Log("--------------------");
         //Debug.Log("getting gosth of "+ HighMath.mathPosToString(mathPos));
 
-        
+
 
 
         List<int[]> mathGhostPos = new List<int[]>();
 
 
 
-        // Look for none-attaking positions
+        // Look for none-attacking positions
 
-        for(int n = 2; n <= dimentions; n++) {
-            //Debug.Log("Looking at the " + n + " 'th dimention");
+        for(int n = 2; n <= dimensions; n++) {
+            //Debug.Log("Looking at the " + n + " 'th dimension");
             if( n % 2 == 0)
             {
 
                 int [] tempPos =  (int[])mathPos.Clone();
                 tempPos[n - 1] += (color == 1)? -1:1 ;
-                //Debug.Log("cheking " + HighMath.mathPosToString(tempPos));
+                //Debug.Log("attacking " + HighMath.mathPosToString(tempPos));
                 //Debug.Log("on Board? " + isMathPosOnBoard(tempPos));
                 if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos,-1))
                 {
@@ -515,9 +518,9 @@ public class Board : MonoBehaviour
 
         // Look for attaking positions
 
-        for(int n1 = 1; n1 <= dimentions; n1++)
+        for(int n1 = 1; n1 <= dimensions; n1++)
         {
-            for (int n2 = 1; n2 <= dimentions; n2++)
+            for (int n2 = 1; n2 <= dimensions; n2++)
             {
                 if (n1 % 2 != 0 && n2 % 2 != 0) continue;
                 if (n1 == n2 ) continue;
@@ -569,11 +572,11 @@ public class Board : MonoBehaviour
 
 
 
-        for(int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for(int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
-            for (int dimention2 = 1; dimention2 <= dimentions; dimention2++)
+            for (int dimension2 = 1; dimension2 <= dimensions; dimension2++)
             {
-                if (dimention1 == dimention2) continue;
+                if (dimension1 == dimension2) continue;
 
                 for (int offset1 = -1; offset1 <= 1; offset1 += 2)
                 {
@@ -581,8 +584,8 @@ public class Board : MonoBehaviour
                     {
 
                         int[] tempPos = (int[])mathPos.Clone();
-                        tempPos[dimention1 - 1] += offset1;
-                        tempPos[dimention2 - 1] += offset2;
+                        tempPos[dimension1 - 1] += offset1;
+                        tempPos[dimension2 - 1] += offset2;
 
                         if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
                         {
@@ -598,7 +601,7 @@ public class Board : MonoBehaviour
             }
         }
 
-       
+
 
 
 
@@ -622,10 +625,10 @@ public class Board : MonoBehaviour
 
 
 
-        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for (int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
             int[] tempPos = (int[])mathPos.Clone();
-            tempPos[dimention1 - 1] += 1;
+            tempPos[dimension1 - 1] += 1;
 
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
@@ -636,23 +639,23 @@ public class Board : MonoBehaviour
                     //Is there an piece, (the enemy) stop while loop
                     break;
                 }
-                tempPos[dimention1 - 1] += 1;
+                tempPos[dimension1 - 1] += 1;
             }
 
-            
+
 
 
             tempPos = (int[])mathPos.Clone();
-            tempPos[dimention1 - 1] -= 1;
+            tempPos[dimension1 - 1] -= 1;
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
                 mathGhostPos.Add((int[])tempPos.Clone());
                 if (isPosOccupied(tempPos, -1))
                 {
-                    
+
                     break;
                 }
-                tempPos[dimention1 - 1] -= 1;
+                tempPos[dimension1 - 1] -= 1;
             }
 
 
@@ -680,11 +683,11 @@ public class Board : MonoBehaviour
 
 
 
-        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for (int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
-            for (int dimention2 = dimention1+1; dimention2 <= dimentions; dimention2++)
+            for (int dimension2 = dimension1+1; dimension2 <= dimensions; dimension2++)
             {
-                if (dimention1 == dimention2) continue;
+                if (dimension1 == dimension2) continue;
 
                 for (int offset1 = -1; offset1 <= 1; offset1 += 2)
                 {
@@ -692,8 +695,8 @@ public class Board : MonoBehaviour
                     {
 
                         int[] tempPos = (int[])mathPos.Clone();
-                        tempPos[dimention1 - 1] += offset1;
-                        tempPos[dimention2 - 1] += offset2;
+                        tempPos[dimension1 - 1] += offset1;
+                        tempPos[dimension2 - 1] += offset2;
 
 
                         while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
@@ -704,10 +707,10 @@ public class Board : MonoBehaviour
                                 //Is there an piece, (the enemy) stop while loop
                                 break;
                             }
-                            tempPos[dimention1 - 1] += offset1;
-                            tempPos[dimention2 - 1] += offset2;
+                            tempPos[dimension1 - 1] += offset1;
+                            tempPos[dimension2 - 1] += offset2;
                         }
-                        
+
 
                     }
                 }
@@ -716,7 +719,7 @@ public class Board : MonoBehaviour
         }
 
 
-        
+
 
 
 
@@ -741,11 +744,11 @@ public class Board : MonoBehaviour
 
 
 
-        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for (int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
-            for (int dimention2 = dimention1 + 1; dimention2 <= dimentions; dimention2++)
+            for (int dimension2 = dimension1 + 1; dimension2 <= dimensions; dimension2++)
             {
-                if (dimention1 == dimention2) continue;
+                if (dimension1 == dimension2) continue;
 
                 for (int offset1 = -1; offset1 <= 1; offset1 += 2)
                 {
@@ -753,8 +756,8 @@ public class Board : MonoBehaviour
                     {
 
                         int[] tempPos = (int[])mathPos.Clone();
-                        tempPos[dimention1 - 1] += offset1;
-                        tempPos[dimention2 - 1] += offset2;
+                        tempPos[dimension1 - 1] += offset1;
+                        tempPos[dimension2 - 1] += offset2;
 
 
                         while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
@@ -765,8 +768,8 @@ public class Board : MonoBehaviour
                                 //Is there an piece, (the enemy) stop while loop
                                 break;
                             }
-                            tempPos[dimention1 - 1] += offset1;
-                            tempPos[dimention2 - 1] += offset2;
+                            tempPos[dimension1 - 1] += offset1;
+                            tempPos[dimension2 - 1] += offset2;
                         }
 
 
@@ -777,20 +780,20 @@ public class Board : MonoBehaviour
         }
 
 
-        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for (int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
             int[] tempPos = (int[])mathPos.Clone();
-            tempPos[dimention1 - 1] += 1;
+            tempPos[dimension1 - 1] += 1;
 
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
                 mathGhostPos.Add((int[])tempPos.Clone());
-                tempPos[dimention1 - 1] += 1;
+                tempPos[dimension1 - 1] += 1;
             }
 
 
             tempPos = (int[])mathPos.Clone();
-            tempPos[dimention1 - 1] -= 1;
+            tempPos[dimension1 - 1] -= 1;
             while (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
                 mathGhostPos.Add((int[])tempPos.Clone());
@@ -799,7 +802,7 @@ public class Board : MonoBehaviour
                     //Is there an piece, (the enemy) stop while loop
                     break;
                 }
-                tempPos[dimention1 - 1] -= 1;
+                tempPos[dimension1 - 1] -= 1;
             }
 
 
@@ -828,11 +831,11 @@ public class Board : MonoBehaviour
 
 
 
-        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for (int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
-            for (int dimention2 = dimention1 + 1; dimention2 <= dimentions; dimention2++)
+            for (int dimension2 = dimension1 + 1; dimension2 <= dimensions; dimension2++)
             {
-                if (dimention1 == dimention2) continue;
+                if (dimension1 == dimension2) continue;
 
                 for (int offset1 = -1; offset1 <= 1; offset1 += 2)
                 {
@@ -840,14 +843,14 @@ public class Board : MonoBehaviour
                     {
 
                         int[] tempPos = (int[])mathPos.Clone();
-                        tempPos[dimention1 - 1] += offset1;
-                        tempPos[dimention2 - 1] += offset2;
+                        tempPos[dimension1 - 1] += offset1;
+                        tempPos[dimension2 - 1] += offset2;
 
 
                         if(isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
                         {
                             mathGhostPos.Add((int[])tempPos.Clone());
-                            
+
                         }
 
 
@@ -858,10 +861,10 @@ public class Board : MonoBehaviour
         }
 
 
-        for (int dimention1 = 1; dimention1 <= dimentions; dimention1++)
+        for (int dimension1 = 1; dimension1 <= dimensions; dimension1++)
         {
             int[] tempPos = (int[])mathPos.Clone();
-            tempPos[dimention1 - 1] += 1;
+            tempPos[dimension1 - 1] += 1;
 
             if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
@@ -870,7 +873,7 @@ public class Board : MonoBehaviour
             }
 
             tempPos = (int[])mathPos.Clone();
-            tempPos[dimention1 - 1] -= 1;
+            tempPos[dimension1 - 1] -= 1;
             if (isMathPosOnBoard(tempPos) && !isPosOccupied(tempPos, color))
             {
                 mathGhostPos.Add((int[])tempPos.Clone());
@@ -916,14 +919,14 @@ public class Board : MonoBehaviour
             }
 
         }
-        
+
         return true;
     }
 
     public bool isMathPosOnBoard(int[] mathPos)
     {
 
-        if (mathPos.Length > dimentions)
+        if (mathPos.Length > dimensions)
         {
             return false;
         }
@@ -937,7 +940,7 @@ public class Board : MonoBehaviour
 
             if (mathPos[i] >= size[i])
             {
-                // If the cordinate is lager that the size of that dimention it's not on the board.
+                // If the cordinate is lager that the size of that dimension it's not on the board.
                 return false;
             }
         }
@@ -950,32 +953,32 @@ public class Board : MonoBehaviour
 
     public int[] getPieceMathPos(Piece piece)
     {
-        int[] mathPos = CombineDimention(piece.mathPos, removeLowerDimention(piece.getPlane().originMathPos));
+        int[] mathPos = Combinedimension(piece.mathPos, removeLowerDimension(piece.getPlane().originMathPos));
         return mathPos;
 
 
     }
 
     /// <summary>
-    /// Combine the lower 2D part and higher dimention part of Posistions
+    /// Combine the lower 2D part and higher dimenstion part of Posistions
     /// </summary>
     /// <param name="LowerMathPos"> list of 2D Posistions</param>
     /// <param name="HighMathPos"><list of Posistions above 2D</param>
     /// <returns>The combined Posistions</returns>
-    public int[] CombineDimention(int[] LowerMathPos, int[] HighMathPos)
+    public int[] CombineDimenstion(int[] LowerMathPos, int[] HighMathPos)
     {
         int[] FullMathPos = { LowerMathPos[0], LowerMathPos[1], HighMathPos[0] };
         return FullMathPos;
     }
 
 
-    public int[] removeHigherDimention(int[] FullMathPos)
+    public int[] removeHigherDimenstion(int[] FullMathPos)
     {
         int[] LowerMathPos = { FullMathPos[0], FullMathPos[0] };
         return LowerMathPos;
     }
 
-    public int[] removeLowerDimention(int[] FullMathPos)
+    public int[] removeLowerDimenstion(int[] FullMathPos)
     {
         int[] HighMathPos = { FullMathPos[2] };
         return HighMathPos;
