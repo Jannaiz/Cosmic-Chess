@@ -21,7 +21,7 @@ public class Board : MonoBehaviour
     public Plane[,,,,] planes = new Plane[1, 1, size[2], size[3], size[4]];
     private Piece[,,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4]];*/
     public static int dimentions = 10;
-    public static int[] size = { 8, 8, 3, 3,  /*e5:*/ 1,
+    public static int[] size = { 8, 8, 6, 6,  /*e5:*/ 1,
                                               /*e6:*/ 1,
                                               /*e7:*/ 1,
                                               /*e8:*/ 1,
