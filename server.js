@@ -27,6 +27,10 @@ let users = new DataHasMap();
 let lobbies = new DataHasMap();
 let food = new DataHasMap();
 
+
+
+
+//// DEBUG:  testing the new listing
 food.addData("apple", 1);
 food.addData("apple2", 2);
 food.addData("peer", 37);
@@ -41,27 +45,21 @@ console.log(food.getAllData());
 console.log(food.getJSON());
 console.log(food.getAllValuesAsList());
 
+//// DEBUG: END
 
-
-
-// Setup the ws server
-wss.on('connection', function connection(ws, request) {
+// Setup the ws server (wss)
+wss.on('connection', function connection(ws, request) {                         // A make new web socket (ws)
   console.log(new Date() + ' | A new client connected.');
 
 
-  // When data is beining asked or given
-
-
-
+  // When data is requested asked or given
   ws.on('message', function(dataString) {
     try {
-
-
       // Read the data
       try {
         var data = JSON.parse(dataString);
       } catch (e) {
-        // If not a json
+        // If's not a JSON or an error when reading it
 
         console.log(errorMessage(makeError(400, 701, "Failed to parse data.", false)));
         console.log("Data was not in a JSON format, failed to parse.");
@@ -69,17 +67,14 @@ wss.on('connection', function connection(ws, request) {
         return;
       }
 
-      // The the code of the packet to know the request
 
+      // Packet handling: get request info
+      // header processing
 
-
-      // Procces the header
-
-      //TEM not fully implemented object
-
+      // TEMP:
       try {
 
-        // Get the nessesary input
+        // Get the necessary input and check it
         try {
           var header = data.header;
         } catch (e) {
@@ -87,19 +82,19 @@ wss.on('connection', function connection(ws, request) {
         }
 
         try {
-          // Get paketType from header
+          // Get packetType from header
           var packetType = Number(header.packetType);
         } catch (e) {
           try {
-            // Loof if the type was misplaced
+            // Look if the type was misplaced
             var packetType = Number(data.packetType);
           } catch (e) {
-            // Pakect Type not found, throw an error
+            // Packet Type not found, throw an error
             throw makeError(400, 702, "", true);
           }
         }
 
-        // If this isn't the Handshake; indentify the user
+        // Identify the (maybe new) user
         try {
 
           var username = header.username;
@@ -112,6 +107,7 @@ wss.on('connection', function connection(ws, request) {
         if (packetType != 1) {
 
           try {
+            //  isn't the handShake: sessing id for later
             var sessionId = header.sessionId;
             if (!sessionId) {
               throw "";
@@ -120,35 +116,32 @@ wss.on('connection', function connection(ws, request) {
             throw makeError(400, 705, "", true);
           }
 
-
           try {
+            // Check if session ID is valid
             if (!(users.getData(username).sessionId == sessionId)) {
               throw makeError(400, 705, "", true);
             }
           } catch (e) {
             throw makeError(400, 705, "", true);
           }
-
-          // Check the session Id, so we know for sure
-
-
         }
-        console.log("header loaded succesfully");
+
+        console.log("Header loaded successfully --"+username);
       } catch (e) {
         //if (e == "no header")
-        console.log("header not loaded succesfully");
+        console.log("header not loaded successfully for --"+username);
         // If there is a problem with the username throw an error
         if (e.errorCode == 705) {
           throw e;
         }
         throw e;
         //If fully implemented add return
+        //// TEMP:
         //return
       }
 
 
-
-
+      // Packet handling: handele request
       switch (packetType) {
 
         // Handshake
@@ -158,27 +151,30 @@ wss.on('connection', function connection(ws, request) {
           process.stdout.write("Received: 1 @");
 
           // Check the input for the username
-
           process.stdout.write(username);
-
-
 
           var packet = makePacket(1);
           var uuidPlayer = uuidv4();
-          users.addData(username, makeUser(username, null, null, uuidPlayer, ws));
+          try {
+            if(!users.addData(username, makeUser(username, null, null, uuidPlayer, ws),true)){
+              throw makeError("400", "712", "invalid username ", true);
+            }
+          } catch (e) {
+              throw makeError("400", "712", "invalid username ", true);
+          }
+
 
           packet.sessionId = uuidPlayer;
-          packet.welcomeMessage = "Welcome " + username + ", your accont has been reristerd to play a game";
+          packet.welcomeMessage = "Welcome " + username + ", your account has been registered to play a game";
           process.stdout.write(" is welcome.\n");
 
           break;
+
+        // Give list of current lobbies active
         case 2:
           // receive: GetPublicLobbies	2:	username
           // send: 2 sessionId("id"), welcomeMessage
           process.stdout.write("@" + username + " #2");
-
-
-
 
           var packet = makePacket(2);
 
@@ -188,15 +184,15 @@ wss.on('connection', function connection(ws, request) {
 
           for (var i = 0; i < existingLobbies.length; i++) {
 
-            // If it's a public lobbby add it
+            // If it's a public lobby add it
             if (existingLobbies[i].isPublic == 1) {
-
               publicLobbyCodes.push(existingLobbies[i].getLobbyCode());
             }
           }
           packet.lobbyCodes = publicLobbyCodes;
           break;
 
+        // Join a lobby
         case 3:
           // receive: joinRequest	3:	username, lobbyCode
           // send: 3 succes (0 of 1)
@@ -216,13 +212,15 @@ wss.on('connection', function connection(ws, request) {
 
           try {
 
-            // Add the usere to the lobby
+            if(lobbies.getData(lobbyCode).isActive()) throw "";
+
+            // Add the user to the lobby
             lobbies.getData(lobbyCode).addUser(username, users.getData(username));
             users.getData(username).lobbyCode = lobbyCode;
 
             packet.succes = 1;
 
-            // Message othere players that player joined
+            // Message other players that player joined
             sendMessageExceptOne(lobbyCode, username + " joined the game!", ws);
           } catch (e) {
 
@@ -230,13 +228,15 @@ wss.on('connection', function connection(ws, request) {
           }
 
           break;
+
+        // Let server and lobby know you're ready for a game
         case 4:
           // receive: ReadyUp	4:	lobbyCode,username
           // send: 1 color
           process.stdout.write("@" + username + " #4");
 
 
-          // Set useres as ready
+          // Set user as ready
           users.getData(username).readyState = true;
           lobbies.getData(users.getData(username).lobbyCode).setReady(username, true);
 
@@ -266,58 +266,52 @@ wss.on('connection', function connection(ws, request) {
           }
           // The packed is already been send, no need to send a new
           var packet = null;
-
-
           break;
+
+        // Move a piece
         case 5:
-          // receive: Movment	5:	startPos, endPos
+          // receive: Movement	5:	startPos, endPos
           // send: 5 startPos, endPos
           process.stdout.write("@" + username + " #5 ");
 
           // No data needs to be send back
           var packet = null;
 
-          //console.log("user:" + username + "object: " + users.getData(username));
-
-          //console.log("lobbyCode: " + users.getData(username).lobbyCode);
+         // Get lobby where movement happens
           var currentLobby = lobbies.getData(users.getData(username).lobbyCode);
 
-          // Is the game active
+          // Check if the game is active
           if (!currentLobby.isActive) {
             throw makeError("400", "700", " Lobby is not active", true);
           }
 
-          //console.log("lobby " + currentLobby);
+          // Get users to notify
           var clients = currentLobby.getAllUsers();
 
-          // Send to new move to all other players
+          // Send new move to all other players
           for (var i = 0; i < clients.length; i++) {
             var clientWs = clients[i].ws;
+
+            // Check to not sent to your self
             if (clientWs !== ws && clientWs.readyState === WebSocket.OPEN) {
               clientWs.send(dataString);
             }
           }
 
-          /*clients.forEach(function each(client) {
-            if (client.ws !== ws && client.ws.readyState === WebSocket.OPEN) {
-              client.ws.send(data);
-            }
-          });*/
-          // Save them to log
+          // Save them to log later
           var pos1 = "(" + data.startPos.x + "," + data.startPos.y + ")";
           var pos2 = "(" + data.endPos.x + "," + data.endPos.y + ")";
 
-          // Send this as a message
+          // Send this log as a message
           sendMessage(users.getData(username).lobbyCode, username + " moved from " + pos1 + " to " + pos2 + "!");
 
           break;
 
+        // Make a new lobby
         case 6:
           // receive: createLobby	6:	username, isPublic
           // send: 6 lobbyCode
           process.stdout.write("@" + username + " #6");
-
-
           process.stdout.write(username);
 
           // Check all the data to make a lobby
@@ -327,6 +321,7 @@ wss.on('connection', function connection(ws, request) {
             var playerAmount = Number(data.playerAmount);
             var dimensionAmount = Number(data.dimensionAmount);
 
+            // Check values
             if (isPublic == null || isPublic == undefined || map == null || map == undefined ||
               playerAmount == null || playerAmount == undefined || dimensionAmount == null || dimensionAmount == undefined) {
               throw makeError(400, 700, "", true);
@@ -342,18 +337,19 @@ wss.on('connection', function connection(ws, request) {
           var newLobby = new Lobby(isPublic, map, playerAmount, dimensionAmount);
           newLobby.addUser(username, users.getData(username));
 
-          // get the code of it
+          // Get the code of new lobby
           var code = newLobby.getLobbyCode();
           lobbies.addData(code, newLobby);
 
+          // Add user to the lobby
           packet.lobbyCode = code;
           users.getData(username).lobbyCode = code;
           break;
 
+        // Messaging system
         case 7:
           process.stdout.write("@" + username + " #7");
           var packet = makePacket(7);
-
 
           var message = data.message;
 
@@ -371,10 +367,10 @@ wss.on('connection', function connection(ws, request) {
           packet = null;
           break;
 
+        // Still alive Packet, so the connection does not close
         case 8:
           process.stdout.write("@" + username + " #8");
           var packet = makePacket(8);
-
           break;
 
         default:
@@ -385,32 +381,6 @@ wss.on('connection', function connection(ws, request) {
       if (packet) {
         ws.send(JSON.stringify(packet));
       }
-
-
-
-      /*if( Number(code) == 0){
-        var startPos = data.startPos;
-        var endPos = data.endPos;
-        console.log("start pos:"+startPos.x+" "+startPos.y);
-        console.log("end pos:"+endPos.x+" "+endPos.y);
-      }*/
-
-
-
-
-      //ws.send(msgString);
-      //const buf = Buffer.from(data.data);
-      //console.log(buf.readInt32BE(0));
-      //console.log(buf.readInt32BE(4));
-      /*
-
-      wss.clients.forEach(function each(client) {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(dataString);
-        }
-      });
-
-      */
 
     } catch (e) {
       if (e.errorCode) {
@@ -423,26 +393,23 @@ wss.on('connection', function connection(ws, request) {
     }
   });
 
-
-
+  // Close the connection an leave the lobby
   ws.on('close', function(connection) {
     users.getAllValuesAsList().forEach(function each(user) {
 
       if (userObject.ws === ws) {
+        // Let other players know
         sendMessageExceptOne(user.lobbyCode, user.username + " has left the game!", user.ws);
       }
     });
-    console.log(new Date() + ' | Colosing connection for a client.');
+    console.log(new Date() + ' | Closing connection for a client.');
   });
-
-
-
-
 });
 
 
 server.on('upgrade', function upgrade(request, socket, head) {
   console.log(new Date() + ' | Upgrading http connection to wss: url = ' + request.url);
+
   // Parsing url from the request.
   var parsedUrl = url.parse(request.url, true, true);
   const pathname = parsedUrl.pathname
@@ -463,19 +430,22 @@ server.listen(port, function() {
   // Server is running.
 });
 
-
-
+// Make a packet for ws communication
 function makePacket(packetType) {
   return packet = {
     packetType: packetType
   };
 }
 
+// Sending a messages for the chat to all players in a lobby
 function sendMessage(lobbyCode, message) {
+  // Message packet
   var packet = makePacket(7);
 
+  // Get players to sent the packet
   var clients = lobbies.getData(lobbyCode).getAllUsers();
 
+  // Send the message to all in the lobby
   packet.message = message;
   for (var i = 0; i < clients.length; i++) {
     var clientWs = clients[i].ws;
@@ -552,8 +522,6 @@ function makeError(statusCode, errorCode, customMessage, makeMessage) {
   return e;
 }
 
-
-
 function errorMessage(e) {
 
   message = "Status ";
@@ -622,7 +590,6 @@ function errorMessage(e) {
     default:
 
   }
-
 
   return "\n" + message + "\n" + e.customMessage + "\n";
 }
