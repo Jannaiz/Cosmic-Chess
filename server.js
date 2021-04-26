@@ -31,19 +31,7 @@ let food = new DataHasMap();
 
 
 //// DEBUG:  testing the new listing
-food.addData("apple", 1);
-food.addData("apple2", 2);
-food.addData("peer", 37);
-food.addData("tomaat", 22);
-food.addData("tomaate", 1);
-food.addData("tomaate", 1);
-food.addData("tomaatee", 1);
-food.addData("tomaate", 1);
-food.addData("tomaate", 1);
 
-console.log(food.getAllData());
-console.log(food.getJSON());
-console.log(food.getAllValuesAsList());
 
 //// DEBUG: END
 
@@ -157,10 +145,12 @@ wss.on('connection', function connection(ws, request) {                         
           var uuidPlayer = uuidv4();
           try {
             if(!users.addData(username, makeUser(username, null, null, uuidPlayer, ws),true)){
-              throw makeError("400", "712", "invalid username ", true);
+
+              throw makeError(400, 712, "invalid username ", true);
             }
           } catch (e) {
-              throw makeError("400", "712", "invalid username ", true);
+
+              throw makeError(400, 712, "invalid username ", true);
           }
 
 
@@ -281,8 +271,10 @@ wss.on('connection', function connection(ws, request) {                         
           var currentLobby = lobbies.getData(users.getData(username).lobbyCode);
 
           // Check if the game is active
-          if (!currentLobby.isActive) {
-            throw makeError("400", "700", " Lobby is not active", true);
+          console.log(currentLobby.isActive());
+          if (!currentLobby.isActive()) {
+            console.log("Lobby is not active");
+            throw makeError(400, 700, " Lobby is not active", true);
           }
 
           // Get users to notify
@@ -523,7 +515,6 @@ function makeError(statusCode, errorCode, customMessage, makeMessage) {
 }
 
 function errorMessage(e) {
-
   message = "Status ";
   switch (e.statusCode) {
     case 400:

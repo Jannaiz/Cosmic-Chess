@@ -67,7 +67,7 @@ var DataObj = class DataHasMap {
           this.Data[place][placeToPutValueInPlace][1] = value;
 
         } else {
-          console.log(key + " already existes, but \"notOverwriting\" is true so didn't change to " + value);
+          console.log(" "+key + " already existes, but \"notOverwriting\" is true so didn't change to " + value);
           return false;
         }
 

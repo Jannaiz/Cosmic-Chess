@@ -57,13 +57,10 @@ var LobbyObj = class Lobby{
   addUser(username, user){
 
     //if(usersAsArray.length > this.playerAmount) return;
-    try {
-      if(!this.users.addData(username, user, true)){
-        throw "";
-      }
-    } catch (e) {
 
-    }
+      if(!this.users.addData(username, user, true)){
+        throw "username alrady used";}
+
 
 
     console.log(username+" is now in lobby "+this.lobbyCode );
