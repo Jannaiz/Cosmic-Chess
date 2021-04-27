@@ -141,7 +141,7 @@ wss.on('connection', function connection(ws, request) {                         
           // Check the input for the username
           process.stdout.write(username);
 
-          var packet = makePacket(1,sessionId);
+
           var uuidPlayer = uuidv4();
           try {
             if(!users.addData(username, makeUser(username, null, null, uuidPlayer, ws),true)){
@@ -154,7 +154,8 @@ wss.on('connection', function connection(ws, request) {                         
           }
 
 
-          packet.sessionId = uuidPlayer;
+          //packet.hearder.sessionId = uuidPlayer;
+          var packet = makePacket(1,uuidPlayer);
           packet.welcomeMessage = "Welcome " + username + ", your account has been registered to play a game";
           process.stdout.write(" is welcome.\n");
 
