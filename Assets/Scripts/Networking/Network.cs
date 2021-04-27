@@ -65,7 +65,19 @@ public class Network : MonoBehaviour
             return;
         }
 
-        switch(packet.header.packetType)
+        //int checkType = packet.header.packetType;
+        //if(checkType == 0)
+        //{
+        //    PacketChecker doubleCheck = JsonUtility.FromJson<PacketChecker>(e.Data);
+        //    checkType = doubleCheck;
+        //    Debug.Log(checkType);
+        //    if(checkType == 0)
+        //    {
+        //        return;
+        //    }
+        //}
+
+        switch (packet.header.packetType)
         {
             case (int)GameServerPackets.Handshake:
                 ServerHandshake shake = JsonUtility.FromJson<ServerHandshake>(e.Data);

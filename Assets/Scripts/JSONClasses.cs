@@ -36,6 +36,12 @@ public class HeaderChecker
     public Header header;
 }
 
+//[Serializable]
+//public class PacketChecker
+//{
+//    public int packetType;
+//}
+
 [Serializable]
 public class GetPublicLobbys
 {
