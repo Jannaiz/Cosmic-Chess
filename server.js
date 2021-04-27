@@ -423,7 +423,7 @@ server.listen(port, function() {
 });
 
 // Make a packet for ws communication
-function  (packetType, sessionId) {
+function  makePacket (packetType, sessionId) {
   return packet = {
 
     header :{
