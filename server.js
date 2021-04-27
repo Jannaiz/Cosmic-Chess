@@ -389,7 +389,7 @@ wss.on('connection', function connection(ws, request) {                         
   ws.on('close', function(connection) {
     users.getAllValuesAsList().forEach(function each(user) {
 
-      if (userObject.ws === ws) {
+      if (user.ws != ws) {
         // Let other players know
         sendMessageExceptOne(user.lobbyCode, user.username + " has left the game!", user.ws);
       }
