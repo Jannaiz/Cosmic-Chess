@@ -34,6 +34,7 @@ public class LobbyManager : MonoBehaviour
         header.packetType = (int)GameClientPackets.GetPublicLobbys;
         header.username = info.username;
         header.sessionId = info.sessionId;
+        request.header = header;
         string json = JsonUtility.ToJson(request);
         ws.Send(json);
     }
