@@ -1,10 +1,24 @@
 ﻿using System;
 
 [Serializable]
-public class Location
+public class HandshakeHeader
 {
     public int packetType;
     public string username;
+}
+
+[Serializable] 
+public class Header
+{
+    public int packetType;
+    public string username;
+    public string sessionId;
+}
+
+[Serializable]
+public class Location
+{
+    public Header header;
     public Position startPos;
     public Position endPos;
 }
@@ -17,30 +31,28 @@ public class Position
 }
 
 [Serializable]
-public class PacketChecker
+public class HeaderChecker
 {
-    public int packetType;
+    public Header header;
 }
 
 [Serializable]
 public class GetPublicLobbys
 {
-    public int packetType;
-    public string username;
+    public Header header;
 }
 
 [Serializable]
 public class LobbyAnswer
 {
-    public int packetType;
+    public Header header;
     public string[] lobbyCodes;
 }
 
 [Serializable]
 public class LobbyRequest
 {
-    public int packetType;
-    public string username;
+    public Header header;
     public int isPublic;
     public int map;
     public int playerAmount;
@@ -50,72 +62,67 @@ public class LobbyRequest
 [Serializable]
 public class JoinRequest
 {
-    public int packetType;
-    public string username;
+    public Header header;
     public string lobbyCode;
 }
 
 [Serializable]
 public class ClientHandshake
 {
-    public int packetType;
-    public string username;
+    public HandshakeHeader header;
 }
 
 [Serializable]
 public class ServerHandshake
 {
-    public int packetType;
-    public int sessionId;
+    public Header header;
     public string welcomeMessage;
 }
 
 [Serializable]
 public class ReadyUp
 {
-    public int packetType;
-    public string username;
+    public Header header;
     public string lobbyCode;
 }
 
 [Serializable]
 public class StartGame
 {
-    public int packetType;
+    public Header header;
     public int color;
 }
 
 [Serializable]
 public class ServerData
 {
-    public int packetType;
+    public Header header;
     public int succes;
 }
 
 [Serializable]
 public class CreateLobby
 {
-    public int packetType;
+    public Header header;
     public string lobbyCode;
 }
 
 [Serializable]
 public class ServerMessage
 {
-    public int packetType;
+    public Header header;
     public string message;
 }
 
 [Serializable]
 public class PlayerMessage
 {
-    public int packetType;
-    public string username;
+    public Header header;
     public string message;
 }
 
 [Serializable] 
 public class StayAlive
 {
-    public int packetType;
+    public Header header;
 }

@@ -6,6 +6,7 @@ public class PlayerInformation : MonoBehaviour
 {
     public string username;
     public string currentGame;
+    public string sessionId;
 
     private void Awake()
     {
