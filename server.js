@@ -141,7 +141,7 @@ wss.on('connection', function connection(ws, request) {                         
           // Check the input for the username
           process.stdout.write(username);
 
-          var packet = makePacket(1);
+          var packet = makePacket(1,sessionId);
           var uuidPlayer = uuidv4();
           try {
             if(!users.addData(username, makeUser(username, null, null, uuidPlayer, ws),true)){
@@ -166,7 +166,7 @@ wss.on('connection', function connection(ws, request) {                         
           // send: 2 sessionId("id"), welcomeMessage
           process.stdout.write("@" + username + " #2");
 
-          var packet = makePacket(2);
+          var packet = makePacket(2,sessionId);
 
           //Get all the lobbies as objects
           var existingLobbies = lobbies.getAllValuesAsList();
@@ -188,7 +188,7 @@ wss.on('connection', function connection(ws, request) {                         
           // send: 3 succes (0 of 1)
           process.stdout.write("@" + username + " #3");
 
-          var packet = makePacket(3);
+          var packet = makePacket(3,sessionId);
 
           // Try reading the lobby input
           try {
@@ -240,7 +240,7 @@ wss.on('connection', function connection(ws, request) {                         
             console.log("All users are ready for the game of " + users.getData(username).lobbyCode);
 
             // Make packet
-            var packet = makePacket(4);
+            var packet = makePacket(4,sessionId);
             var lobbyUsers = lobbies.getData(users.getData(username).lobbyCode).getAllUsers();
 
             console.log(lobbyUsers);
@@ -323,7 +323,7 @@ wss.on('connection', function connection(ws, request) {                         
             throw makeError(400, 700, "", true);
           }
 
-          var packet = makePacket(6);
+          var packet = makePacket(6,sessionId);
 
           // Make the lobby
           var newLobby = new Lobby(isPublic, map, playerAmount, dimensionAmount);
@@ -341,7 +341,7 @@ wss.on('connection', function connection(ws, request) {                         
         // Messaging system
         case 7:
           process.stdout.write("@" + username + " #7");
-          var packet = makePacket(7);
+          var packet = makePacket(7,sessionId);
 
           var message = data.message;
 
@@ -362,12 +362,12 @@ wss.on('connection', function connection(ws, request) {                         
         // Still alive Packet, so the connection does not close
         case 8:
           process.stdout.write("@" + username + " #8");
-          var packet = makePacket(8);
+          var packet = makePacket(8,sessionId);
           break;
 
         default:
 
-          var packet = makePacket("-1");
+          var packet = makePacket("-1",sessionId);
 
       }
       if (packet) {
@@ -423,16 +423,21 @@ server.listen(port, function() {
 });
 
 // Make a packet for ws communication
-function makePacket(packetType) {
+function  (packetType, sessionId) {
   return packet = {
-    packetType: packetType
+
+    header :{
+      packetType: packetType,
+      sessionId:sessionId
+    }
+
   };
 }
 
 // Sending a messages for the chat to all players in a lobby
 function sendMessage(lobbyCode, message) {
   // Message packet
-  var packet = makePacket(7);
+  var packet = makePacket(7,"");
 
   // Get players to sent the packet
   var clients = lobbies.getData(lobbyCode).getAllUsers();
