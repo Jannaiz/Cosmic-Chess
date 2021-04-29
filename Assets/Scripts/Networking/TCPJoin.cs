@@ -39,13 +39,17 @@ public class TCPJoin : MonoBehaviour
 
         ws.OnMessage += (sender, e) => Receive(sender, e);
 
-        JoinRequest request = new JoinRequest();
-        Header header = new Header();
-        header.packetType = (int)GameClientPackets.JoinRequest;
-        header.username = info.username;
-        header.sessionId = info.sessionId;
-        request.lobbyCode = info.currentGame;
-        Send(request);
+        if (!info.connected)
+        {
+            JoinRequest request = new JoinRequest();
+            Header header = new Header();
+            header.packetType = (int)GameClientPackets.JoinRequest;
+            header.username = info.username;
+            header.sessionId = info.sessionId;
+            request.header = header;
+            request.lobbyCode = info.currentGame;
+            Send(request);
+        }
     }
 
     private void Receive(object sender, MessageEventArgs e)

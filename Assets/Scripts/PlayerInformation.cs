@@ -7,6 +7,7 @@ public class PlayerInformation : MonoBehaviour
     public string username;
     public string currentGame;
     public string sessionId;
+    public bool connected = false;
 
     private void Awake()
     {

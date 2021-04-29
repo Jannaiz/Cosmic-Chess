@@ -87,6 +87,7 @@ public class Network : MonoBehaviour
             case (int)GameServerPackets.GetLobbyCode:
                 CreateLobby lobby = JsonUtility.FromJson<CreateLobby>(e.Data);
                 info.currentGame = lobby.lobbyCode;
+                info.connected = true;
                 actionsToRun.Add(() => SceneManager.LoadScene(joinScene));
                 break;
             case (int)GameServerPackets.ErrorMessage:
