@@ -136,10 +136,10 @@ wss.on('connection', function connection(ws, request) {                         
         case 1:
           // receive: Handshake	1:	username
           // send: 1 sessionId("id"), welcomeMessage
-          process.stdout.write("Received: 1 @");
+          console.log("Received: 1 @"+ username+" is welcome.\n");
 
           // Check the input for the username
-          process.stdout.write(username);
+
 
 
           var uuidPlayer = uuidv4();
@@ -157,7 +157,6 @@ wss.on('connection', function connection(ws, request) {                         
           //packet.hearder.sessionId = uuidPlayer;
           var packet = makePacket(1,uuidPlayer);
           packet.welcomeMessage = "Welcome " + username + ", your account has been registered to play a game";
-          process.stdout.write(" is welcome.\n");
 
           break;
 
@@ -181,6 +180,7 @@ wss.on('connection', function connection(ws, request) {                         
             }
           }
           packet.lobbyCodes = publicLobbyCodes;
+          process.stdout.write("\n");
           break;
 
         // Join a lobby
@@ -224,7 +224,7 @@ wss.on('connection', function connection(ws, request) {                         
         case 4:
           // receive: ReadyUp	4:	lobbyCode,username
           // send: 1 color
-          process.stdout.write("@" + username + " #4");
+          console.log("@" + username + " #4 ");
 
 
           // Set user as ready
@@ -263,7 +263,7 @@ wss.on('connection', function connection(ws, request) {                         
         case 5:
           // receive: Movement	5:	startPos, endPos
           // send: 5 startPos, endPos
-          process.stdout.write("@" + username + " #5 ");
+          console.log("@" + username + " #5 ");
 
           // No data needs to be send back
           var packet = null;
@@ -304,8 +304,8 @@ wss.on('connection', function connection(ws, request) {                         
         case 6:
           // receive: createLobby	6:	username, isPublic
           // send: 6 lobbyCode
-          process.stdout.write("@" + username + " #6");
-          process.stdout.write(username);
+          console.log( username );
+          console.log("@" + username + " #6 ");
 
           // Check all the data to make a lobby
           try {
@@ -341,7 +341,7 @@ wss.on('connection', function connection(ws, request) {                         
 
         // Messaging system
         case 7:
-          process.stdout.write("@" + username + " #7");
+          console.log("@" + username + " #7 ");
           var packet = makePacket(7,sessionId);
 
           var message = data.message;
@@ -362,7 +362,7 @@ wss.on('connection', function connection(ws, request) {                         
 
         // Still alive Packet, so the connection does not close
         case 8:
-          process.stdout.write("@" + username + " #8");
+          console.log("@" + username + " #8 ");
           var packet = makePacket(8,sessionId);
           break;
 
