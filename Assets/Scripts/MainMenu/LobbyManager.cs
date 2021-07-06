@@ -30,27 +30,30 @@ public class LobbyManager : MonoBehaviour
         ws.OnMessage += (sender, e) => Receive(sender, e);
 
         GetPublicLobbys request = new GetPublicLobbys();
-        request.packetType = (int)GameClientPackets.GetPublicLobbys;
-        request.username = info.username;
+        Header header = new Header();
+        header.packetType = (int)GameClientPackets.GetPublicLobbys;
+        header.username = info.username;
+        header.sessionId = info.sessionId;
+        request.header = header;
         string json = JsonUtility.ToJson(request);
         ws.Send(json);
     }
 
     private void Receive(object sender, MessageEventArgs e)
     {
-        PacketChecker packet = JsonUtility.FromJson<PacketChecker>(e.Data);
+        HeaderChecker packet = JsonUtility.FromJson<HeaderChecker>(e.Data);
 
         if (packet == null)
         {
             return;
         }
 
-        if (packet.packetType == null)
+        if (packet.header.packetType == null)
         {
             return;
         }
 
-        if(packet.packetType == (int)GameServerPackets.ReceivePublicLobbys)
+        if(packet.header.packetType == (int)GameServerPackets.ReceivePublicLobbys)
         {
             LobbyAnswer lobbys = JsonUtility.FromJson<LobbyAnswer>(e.Data);
             foreach(string code in lobbys.lobbyCodes)

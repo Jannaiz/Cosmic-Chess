@@ -41,8 +41,10 @@ public class Network : MonoBehaviour
         ws.OnClose += (sender, e) => OnDisconnect(sender, e);
 
         ClientHandshake handshake = new ClientHandshake();
-        handshake.packetType = (int)GameClientPackets.Handshake;
-        handshake.username = info.username;
+        HandshakeHeader header = new HandshakeHeader();
+        header.packetType = (int)GameClientPackets.Handshake;
+        header.username = info.username;
+        handshake.header = header;
         string json = JsonUtility.ToJson(handshake);
         ws.Send(json);
 
@@ -51,27 +53,41 @@ public class Network : MonoBehaviour
 
     private void Receive(object sender, MessageEventArgs e)
     {
-        PacketChecker packet = JsonUtility.FromJson<PacketChecker>(e.Data);
+        HeaderChecker packet = JsonUtility.FromJson<HeaderChecker>(e.Data);
 
         if (packet == null)
         {
             return;
         }
 
-        if (packet.packetType == null)
+        if (packet.header.packetType == null)
         {
             return;
         }
 
-        switch(packet.packetType)
+        //int checkType = packet.header.packetType;
+        //if(checkType == 0)
+        //{
+        //    PacketChecker doubleCheck = JsonUtility.FromJson<PacketChecker>(e.Data);
+        //    checkType = doubleCheck;
+        //    Debug.Log(checkType);
+        //    if(checkType == 0)
+        //    {
+        //        return;
+        //    }
+        //}
+
+        switch (packet.header.packetType)
         {
             case (int)GameServerPackets.Handshake:
                 ServerHandshake shake = JsonUtility.FromJson<ServerHandshake>(e.Data);
+                info.sessionId = shake.header.sessionId;
                 Debug.Log(shake.welcomeMessage);
                 break;
             case (int)GameServerPackets.GetLobbyCode:
                 CreateLobby lobby = JsonUtility.FromJson<CreateLobby>(e.Data);
                 info.currentGame = lobby.lobbyCode;
+                info.connected = true;
                 actionsToRun.Add(() => SceneManager.LoadScene(joinScene));
                 break;
             case (int)GameServerPackets.ErrorMessage:
@@ -108,8 +124,11 @@ public class Network : MonoBehaviour
     public void HostGame(bool isPublic, int map, int playerAmount, int dimensionAmount)
     {
         LobbyRequest request = new LobbyRequest();
-        request.packetType = (int)GameClientPackets.CreateLobby;
-        request.username = info.username;
+        Header header = new Header();
+        header.packetType = (int)GameClientPackets.CreateLobby;
+        header.username = info.username;
+        header.sessionId = info.sessionId;
+        request.header = header;
         if (isPublic)
         {
             request.isPublic = 1;
@@ -133,7 +152,11 @@ public class Network : MonoBehaviour
     {
         yield return new WaitForSeconds(stayAliveTimer);
         StayAlive message = new StayAlive();
-        message.packetType = (int)GameClientPackets.StayAlive;
+        Header header = new Header();
+        header.packetType = (int)GameClientPackets.StayAlive;
+        header.username = info.username;
+        header.sessionId = info.sessionId;
+        message.header = header;
         string json = JsonUtility.ToJson(message);
         ws.Send(json);
         StartCoroutine(StayAlive());
