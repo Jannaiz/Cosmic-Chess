@@ -23,6 +23,9 @@ public class PieceMovement : MonoBehaviour
 
     [SerializeField] private bool local = false;
 
+    [SerializeField] private bool Debuging = true;
+
+
     private void Start()
     {
         network = FindObjectOfType<TCPJoin>();
@@ -147,6 +150,26 @@ public class PieceMovement : MonoBehaviour
                 }
             }
         }
+
+
+        if (Input.GetKeyUp(KeyCode.S) && Debuging)
+        {
+            System.DateTime theTime = System.DateTime.Now;
+            string date = theTime.Year + "-" + theTime.Month + "-" + theTime.Day;
+            string time = date + "T" + theTime.Hour + ":" + theTime.Minute + ":" + theTime.Second;
+            if (Board.safeBoard("Assets/Resources/sevedBoard" + date + time + ".txt"))
+            {
+                Debug.Log("sucees fully saved  Assets/Resources/sevedBoard" + time + ".txt");
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.U) && Debuging)
+        {
+
+            Board.makePecesOnBoard();
+            
+        }
+
+
     }
 
 

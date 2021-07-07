@@ -1338,6 +1338,8 @@ MonoBehaviour:
   King: {fileID: 55011451288172994, guid: 069b93bb211717b47ad835d0dd70b780, type: 3}
   Knight: {fileID: 5534142052785811369, guid: a69fb3cd0283861458fe2baba9a8172d, type: 3}
   Bishop: {fileID: 5785520463763805753, guid: 876ac88c7141aa64cb976075fc55c080, type: 3}
+  blackMaterial: {fileID: 2100000, guid: 80415d5a161f685469b51c42305e21b7, type: 2}
+  emptyBoard: 0
 --- !u!4 &1969638597
 Transform:
   m_ObjectHideFlags: 0
