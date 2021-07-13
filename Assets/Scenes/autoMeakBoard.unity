@@ -1331,6 +1331,14 @@ MonoBehaviour:
     type: 3}
   defDecorPref: {fileID: 6786790411420860949, guid: 8c767dce3f0044fffa149b2b465a7618,
     type: 3}
+  decor4by4Black: {fileID: 2549596640088166747, guid: bc527673e3096420f9eb5129b04f84a9,
+    type: 3}
+  decor4by4White: {fileID: 5072800855515873329, guid: be0e2c8fdf48f4f1a8b4e3d61528b6b8,
+    type: 3}
+  decor8by8White: {fileID: 3268061509427545588, guid: 11cbc8f80326443d38d3be74afc2e0f9,
+    type: 3}
+  decor8by8Black: {fileID: 6786790411420860949, guid: 8c767dce3f0044fffa149b2b465a7618,
+    type: 3}
   planePrefSetUp: {fileID: 8600224355456535471, guid: 33ec6fe31f97647eea4cce90ff58e1d7,
     type: 3}
   planePref: {fileID: 2971011768035338376, guid: fe16bc0c3a0f34ec4ba2589000acd83c,
