@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
     private Piece[,,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4]];*/
     // The amount of dimensions being used
     public static int dimensions = 10;
-    public static int[] size = { 8, 8, 4, 4,  /*e5:*/ 1,
+    public static int[] size = { 4, 4, 4, 4,  /*e5:*/ 1,
                                               /*e6:*/ 1,
                                               /*e7:*/ 1,
                                               /*e8:*/ 1,
@@ -49,6 +49,14 @@ public class Board : MonoBehaviour
     [SerializeField] public GameObject ghostBishop;
 
     [SerializeField] public GameObject defDecorPref;
+    [SerializeField] public GameObject decor4by4Black;
+    [SerializeField] public GameObject decor4by4White;
+
+    [SerializeField] public GameObject decor8by8White;
+    [SerializeField] public GameObject decor8by8Black;
+
+
+
     [SerializeField] public GameObject planePrefSetUp;
     [SerializeField] public GameObject planePref;
 
@@ -134,21 +142,53 @@ public class Board : MonoBehaviour
 
                                     for (int n10 = 0; n10 < size[9]; n10++)
                                     {
-                                        Vector3 pos = new Vector3(n3 * 10
+                                        Vector3 pos = new Vector3(n3 * (size[0] +2)
                                                                    + ((n5 == 0) ? 0 : 1) *n5* size[2] * 10 + n5 * 1.5f
                                                                    + ((n7 == 0) ? 0 : 1) *n7* size[2] * size[4] * 10 + n7 * 10
                                                                    + ((n9 == 0) ? 0 : 1) *n9* size[2] * size[4] * size[6] * 10 + n9 * 20
                                             , 0,
-                                                                   n4 * 10
+                                                                   n4 * (size[1] + 2)
                                                                    + ((n6 == 0) ? 0 : 1)*n6 * size[3] * 10 + n6 * 1.5f
                                                                    + ((n8 == 0) ? 0 : 1) *n8* size[3]  * size[5] * 10 + n8 * 10
                                                                    + ((n10 == 0) ? 0 : 1) *n10* size[3] * size[5]  * size[7] * 10 + n10 * 20
                                                                    );
-                                        GameObject plane = Instantiate(planePrefSetUp, pos, Quaternion.identity, this.transform);
+                                        GameObject plane = Instantiate(planePref, pos, Quaternion.identity, this.transform);
+
+
+
                                         int[] originMathPos = { 0, 0, n3, n4, n5, n6, n7, n8, n9, n10 };
                                         plane.GetComponent<Plane>().originMathPos = originMathPos;
+                                        GameObject decorOfPlane = null;
+                                        //Debug.Log(n3 + n4 );
+                                        //Debug.Log((n3 + n4) %2);
+                                        if ((n3+n4+n5+n6+n6+n7+n8+n9+n10) % 2 == 0 )
+                                        {
+                                            //Black
+                                            if(size[0] == size[1] && size[1] == 4)
+                                            {
+                                                decorOfPlane = Instantiate(decor4by4Black, pos, Quaternion.identity, Decor.transform);
 
-                                        GameObject decorOfPlane = Instantiate(defDecorPref, pos, Quaternion.identity, Decor.transform);
+                                            }else if (size[0] == size[1] && size[1] == 8)
+                                            {
+                                                decorOfPlane = Instantiate(decor8by8Black, pos, Quaternion.identity, Decor.transform);
+
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            //White
+                                            if (size[0] == size[1] && size[1] == 4)
+                                            {
+                                                decorOfPlane = Instantiate(decor4by4White, pos, Quaternion.identity, Decor.transform);
+
+                                            }
+                                            else if (size[0] == size[1] && size[1] == 8)
+                                            {
+                                                decorOfPlane = Instantiate(decor8by8White, pos, Quaternion.identity, Decor.transform);
+
+                                            }
+                                        }
 
 
                                         decorOfPlane.transform.GetChild(0).GetComponent<TextMesh>().text = HighMath.mathPosToString(originMathPos );

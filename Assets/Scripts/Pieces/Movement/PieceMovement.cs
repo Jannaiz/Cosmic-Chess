@@ -222,7 +222,7 @@ public class PieceMovement : MonoBehaviour
 
                 if (Input.GetKey(KeyCode.A))
                 {
-                    Debug.Log("dfs");
+                    
                     piecType = Board.PieceType.Pawn;
 
                 }else if (Input.GetKey(KeyCode.Z))
