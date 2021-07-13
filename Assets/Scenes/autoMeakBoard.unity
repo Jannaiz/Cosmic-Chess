@@ -703,6 +703,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 4576ef9caedbc434cb1adad036bb941f, type: 2}
   white: 1
   local: 1
+  Debuging: 1
+  selectPlacePos: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &814820320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,6 +974,8 @@ MonoBehaviour:
   selectedMaterial: {fileID: 2100000, guid: 4576ef9caedbc434cb1adad036bb941f, type: 2}
   white: 1
   local: 1
+  Debuging: 1
+  selectPlacePos: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &1283628674
 GameObject:
   m_ObjectHideFlags: 0

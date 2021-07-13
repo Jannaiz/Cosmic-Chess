@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
     private Piece[,,,,] MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4]];*/
     // The amount of dimensions being used
     public static int dimensions = 10;
-    public static int[] size = { 8, 8, 1, 1,  /*e5:*/ 1,
+    public static int[] size = { 8, 8, 4, 4,  /*e5:*/ 1,
                                               /*e6:*/ 1,
                                               /*e7:*/ 1,
                                               /*e8:*/ 1,
@@ -78,16 +78,35 @@ public class Board : MonoBehaviour
 
         makeBoard();
 
-        if(!emptyBoard)
-            loadBoard();
+        
+           //loadBoard();
 
         makePecesOnBoard();
+
+        safeBoard("Assets/Resources/newtest.txt");
+
+        loadBoard();
 
         /*System.DateTime theTime = System.DateTime.Now;
         string date = theTime.Year + "-" + theTime.Month + "-" + theTime.Day;
         string time = date + "T" + theTime.Hour + "-" + theTime.Minute + "-" + theTime.Second;
         safeBoard("Assets/Resources/sevedBoard" + time + ".txt");*/
     }
+
+
+    public void clearBoardPieces()
+    {
+        Debug.Log("clearing");
+        MathBoard = new Piece[size[0], size[1], size[2], size[3], size[4], size[5], size[6], size[7], size[8], size[9]];
+        foreach (Piece piece in FindObjectsOfType<Piece>())
+        {
+            Destroy(piece.gameObject);
+        
+        }
+    }
+
+
+
     public void initializeBoard()
     {
 
@@ -125,7 +144,7 @@ public class Board : MonoBehaviour
                                                                    + ((n8 == 0) ? 0 : 1) *n8* size[3]  * size[5] * 10 + n8 * 10
                                                                    + ((n10 == 0) ? 0 : 1) *n10* size[3] * size[5]  * size[7] * 10 + n10 * 20
                                                                    );
-                                        GameObject plane = Instantiate(planePref, pos, Quaternion.identity, this.transform);
+                                        GameObject plane = Instantiate(planePrefSetUp, pos, Quaternion.identity, this.transform);
                                         int[] originMathPos = { 0, 0, n3, n4, n5, n6, n7, n8, n9, n10 };
                                         plane.GetComponent<Plane>().originMathPos = originMathPos;
 
@@ -137,7 +156,7 @@ public class Board : MonoBehaviour
 
                                        //GameObject Piece = Instantiate(Rook, pos + new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, plane.transform);
                                         //GameObject Piece2 = Instantiate(Pawn, pos+ new Vector3(0.5f,0.5f,0.5f)*2, Quaternion.identity, plane.transform);
-                                        //Instantiate(Knight, pos + new Vector3(1.5f, 0.5f, 1.5f) * 2, Quaternion.identity, plane.transform);
+                                        //Instantiate(Knight, pos + new Vector3(0.5f, 0.35f, 0.5f) * 2, Quaternion.identity, plane.transform);
 
 
 
@@ -219,6 +238,59 @@ public class Board : MonoBehaviour
             n++;
         }
     }
+
+
+    public void placePiece(int[] mathPos, PieceType type, bool isWhite)
+    {
+
+        Plane plane = getPlaneFromBoard(mathPos);
+        Vector3 pos = mathPosToUnityPos(mathPos);
+
+        GameObject Piece = null;
+
+        switch ((int)type)
+        {
+            case 1:
+                Piece = Instantiate(Pawn, pos, Quaternion.identity, plane.transform);
+
+
+                break;
+            case 2:
+                Piece = Instantiate(Rook, pos, Quaternion.identity, plane.transform);
+
+                break;
+            case 3:
+                Piece = Instantiate(Knight, pos, Quaternion.identity, plane.transform);
+
+                break;
+            case 4:
+                Piece = Instantiate(Bishop, pos, Quaternion.identity, plane.transform);
+
+                break;
+            case 5:
+                Piece = Instantiate(Queen, pos, Quaternion.identity, plane.transform);
+
+                break;
+            case 6:
+                Piece = Instantiate(King, pos, Quaternion.identity, plane.transform);
+
+                break;
+
+        }
+
+        if (Piece != null)
+        {
+            Piece.GetComponent<Piece>().white = isWhite;
+            if (!isWhite)
+            {
+                Debug.Log(Piece.GetComponentInChildren<Renderer>());
+                Piece.transform.GetChild(0).GetComponent<MeshRenderer>().material = blackMaterial;
+
+            }
+
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -975,7 +1047,7 @@ public class Board : MonoBehaviour
         return true;
     }
 
-    public bool safeBoard(String fileName)
+    public bool safeBoardold(String fileName)
     {
         //string fileName = "Assets/Resources/test1.txt";
         //byte[] byteArray = { (byte)size[0], (byte)size[1], (byte)size[2], (byte)size[3],000,000,000 };
@@ -1148,16 +1220,402 @@ public class Board : MonoBehaviour
 
     }
 
-    public bool loadBoard()
-    { 
 
+    public bool safeBoard(String fileName)
+    {
+
+        List<byte> bodyBytes = new List<byte>();
+        bodyBytes.Add((byte)size[0]);
+        bodyBytes.Add((byte)size[1]);
+        bodyBytes.Add((byte)size[2]);
+        bodyBytes.Add((byte)size[3]);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+
+
+        int planeAmount = size[2] * size[3] * size[4] * size[5] * size[6] * size[7] * size[8] * size[9];
+
+        for (int n3 = 0; n3 < size[2]; n3++)
+        {
+            for (int n4 = 0; n4 < size[3]; n4++)
+            {
+                for (int n5 = 0; n5 < size[4]; n5++)
+                {
+                    for (int n6 = 0; n6 < size[5]; n6++)
+                    {
+
+
+                        for (int n7 = 0; n7 < size[6]; n7++)
+                        {
+
+                            for (int n8 = 0; n8 < size[7]; n8++)
+                            {
+
+                                for (int n9 = 0; n9 < size[8]; n9++)
+                                {
+
+                                    for (int n10 = 0; n10 < size[9]; n10++)
+                                    {
+
+                                        byte preInfo = 1;
+                                        preInfo = (byte)(preInfo << 3);
+                                        preInfo = (byte)(preInfo | n3);
+                                        preInfo = (byte)(preInfo << 3);
+                                        preInfo = (byte)(preInfo | n4);
+
+
+
+                                        bodyBytes.Add(preInfo);
+
+                                        byte info = 0;
+                                        bodyBytes.Add(info);
+
+
+                                        int[] mathPos = { 0, 0, n3, n4, n5, n6, n7, n8, n9, n10 };
+
+
+                                        for (int x = 0; x < size[0]; x++)
+                                        {
+                                            for (int y = 0; y < size[1]; y++)
+                                            {
+                                                mathPos[0] = x;
+                                                mathPos[1] = y;
+
+                                                if (getPieceFromBoard(mathPos) == null)
+                                                {
+
+                                                    continue;
+                                                }
+
+
+                                                if ((int)getPieceFromBoard(mathPos).pieceType != 0)
+                                                {
+                                                    byte piece = (byte)((int)getPieceFromBoard(mathPos).pieceType - 1);
+                                                    if (getPieceFromBoard(mathPos).white)
+                                                    {
+                                                        preInfo = 2;
+                                                        
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        preInfo = 3;
+
+                                                        
+
+                                                    }
+
+                                                    preInfo = (byte)(preInfo << 3);
+                                                    preInfo = (byte)(preInfo | x);
+                                                    preInfo = (byte)(preInfo << 3);
+                                                    preInfo = (byte)(preInfo | y);
+                                                    bodyBytes.Add(preInfo);
+                                                    //Debug.Log(Convert.ToString(preInfo, toBase: 2));
+                                                    info = (byte)((getPieceFromBoard(mathPos).hasMoved)? 1: 0);
+                                                    info = (byte)(info << 3);
+                                                    info = (byte)(info | piece);
+                                                    bodyBytes.Add(info);
+                                                    //Debug.Log(Convert.ToString(info, toBase: 2));
+                                                    //Debug.Log(" ");
+
+                                                }
+
+
+
+
+                                            }
+                                        }
+
+                                        /*bodyBytes.Add(000);
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add((byte)n3);
+                                        bodyBytes.Add((byte)n4);
+
+                                        int[] mathPos = { 0, 0, n3, n4, n5, n6, n7, n8, n9, n10 };
+                                        byte[] white = new byte[size[0] * size[1] * 3];
+                                        byte[] black = new byte[size[0] * size[1] * 3];
+                                        int amountWhite = 0;
+                                        int amountBlack = 0;
+
+                                        for (int x = 0; x < size[0]; x++)
+                                        {
+                                            for (int y = 0; y < size[1]; y++)
+                                            {
+                                                mathPos[0] = x;
+                                                mathPos[1] = y;
+
+                                                if (getPieceFromBoard(mathPos) == null)
+                                                {
+
+                                                    continue;
+                                                }
+
+
+                                                if ((int)getPieceFromBoard(mathPos).pieceType != 0)
+                                                {
+                                                    byte piece = (byte)((int)getPieceFromBoard(mathPos).pieceType - 1);
+                                                    if (getPieceFromBoard(mathPos).white)
+                                                    {
+
+                                                        white[amountWhite * 3] = (byte)x;
+                                                        white[amountWhite * 3 + 1] = (byte)y;
+                                                        white[amountWhite * 3 + 2] = piece;
+                                                        amountWhite++;
+
+                                                    }
+                                                    else
+                                                    {
+
+
+                                                        black[amountBlack * 3] = (byte)x;
+                                                        black[amountBlack * 3 + 1] = (byte)y;
+                                                        black[amountBlack * 3 + 2] = piece;
+                                                        amountBlack++;
+
+                                                    }
+                                                }
+
+
+
+
+                                            }
+                                        }
+
+                                        // bytes indicating the next pieces are white
+
+
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add(110);
+                                        for (int place = 0; place < amountWhite; place++)
+                                        {
+                                            bodyBytes.Add(white[place * 3]);
+                                            bodyBytes.Add(white[place * 3 + 1]);
+                                            bodyBytes.Add(white[place * 3 + 2]);
+                                        }
+
+                                        // bytes indicating the next pieces are black
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add(000);
+                                        bodyBytes.Add(111);
+                                        for (int place = 0; place < amountBlack; place++)
+                                        {
+                                            bodyBytes.Add(black[place * 3]);
+                                            bodyBytes.Add(black[place * 3 + 1]);
+                                            bodyBytes.Add(black[place * 3 + 2]);
+                                        }
+
+                                        */
+
+                                    }
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }
+        }
+
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+        bodyBytes.Add(000);
+
+
+        byte[] byteArray = new byte[bodyBytes.Count];
+
+        int i = 0;
+        foreach (byte data in bodyBytes)
+        {
+            byteArray[i] = data;
+            i++;
+
+        }
+
+
+        try
+        {
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                fs.Write(byteArray, 0, byteArray.Length);
+
+
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+            return false;
+        }
+        return true;
+
+    }
+
+
+
+    public bool loadBoard()
+    {
+
+        
 
 
         Debug.Log("Now reading");
         bool nextPlane = false;
         try
         {
-            using (FileStream fs = File.OpenRead("Assets/Resources/sevedBoard2021-7-72021-7-7T20:27:18.txt"))
+            using (FileStream fs = File.OpenRead("Assets/Resources/newtest.txt"))
+            {
+                byte[] head = new byte[7];
+
+                fs.Read(head, 0, head.Length);
+
+                Debug.Log("The board size is:");
+                Debug.Log((int)head[0] + "x" + (int)head[1] + "x" + (int)head[2] + "x" + (int)head[3]);
+
+
+                byte[] b = new byte[2];
+                int e3 = 0;
+                int e4 = 0;
+                int x = 0;
+                int y = 0;
+                int[] mathPos = { x, y, e3, e4, 0, 0, 0, 0, 0, 0 };
+                bool isWhite = true;
+                bool hasMoved = false;
+                int pieceNumber = 0;
+                GameObject plane = null;
+                GameObject piece = null;
+
+                while (fs.Read(b, 0, b.Length) > 0)
+                {
+
+                    Debug.Log(Convert.ToString(b[0], toBase: 2)+" "+ Convert.ToString(b[1], toBase: 2));
+
+                    if(b[0] >> 6 == 1)
+                    {
+                        e3 = (int)((b[0]>>3) & 0b_0000_0111);
+                        e4 = (int)(b[0] & 0b_0000_0111);
+                        mathPos[2] = e3;
+                        mathPos[3] = e4;
+
+                        plane = getPlaneFromBoard(mathPos).gameObject;
+
+                        if (plane == null) Debug.Log("not Got plane");
+
+
+                        Debug.Log("On plane: "+e3+ ", " + e4);
+                        continue;
+
+
+                    }else if(b[0] >> 6 != 0)
+                    {
+                        isWhite = b[0] >> 6 == 2;
+                        x = (int)(b[0]>>3 & 0b_0000_0111);
+                        y = (int)(b[0] & 0b_0000_0111);
+                        mathPos[0] = x;
+                        mathPos[1] = y;
+                        Debug.Log((isWhite)?"white ":"black "+"piece at " + x + ", " + y);
+                    }
+                    else
+                    {
+                        //ERROR, file is (partly) corupted; this shoudn't be possible
+                        continue;
+                    }
+
+                    hasMoved = (b[1] >> 3 == 1)? true: false;
+                    pieceNumber = (int)(b[1] & 0b_0000_0111)+1;
+
+                    switch (pieceNumber)
+                    {
+                        case 1:
+                            piece = Instantiate(Pawn, mathPosToUnityPos(mathPos), Quaternion.identity, plane.transform);
+
+
+                            break;
+                        case 2:
+                            piece = Instantiate(Rook, mathPosToUnityPos(mathPos), Quaternion.identity, plane.transform);
+
+                            break;
+                        case 3:
+                            piece = Instantiate(Knight, mathPosToUnityPos(mathPos), Quaternion.identity, plane.transform);
+
+                            break;
+                        case 4:
+                            piece = Instantiate(Bishop, mathPosToUnityPos(mathPos), Quaternion.identity, plane.transform);
+
+                            break;
+                        case 5:
+                            piece = Instantiate(Queen, mathPosToUnityPos(mathPos), Quaternion.identity, plane.transform);
+
+                            break;
+                        case 6:
+                            piece = Instantiate(King, mathPosToUnityPos(mathPos), Quaternion.identity, plane.transform);
+
+                            break;
+
+                    }
+
+                    if (piece != null)
+                    {
+                        piece.GetComponent<Piece>().white = isWhite;
+                        if (!isWhite)
+                        {
+                            //Debug.Log(piece.GetComponentInChildren<Renderer>());
+                            piece.transform.GetChild(0).GetComponent<MeshRenderer>().material = blackMaterial;
+
+                        }
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+            return false;
+        }
+        Debug.Log("redy reading");
+        return true;
+    }
+
+
+
+    public bool loadBoardold()
+    {
+
+        byte[] intBytes = BitConverter.GetBytes(122222);
+        Array.Reverse(intBytes);
+        Debug.Log(intBytes[0]);
+        Debug.Log(intBytes[1]);
+        Debug.Log(intBytes[2]);
+
+
+        Debug.Log("Now reading");
+        bool nextPlane = false;
+        try
+        {
+            using (FileStream fs = File.OpenRead("Assets/Resources/sevedBoard2021-7-122021-7-12T10:24:21.txt"))
             {
                 byte[] head = new byte[7];
 
@@ -1289,6 +1747,9 @@ public class Board : MonoBehaviour
         Debug.Log("redy reading");
         return true;
     }
+
+
+
 
 
 
