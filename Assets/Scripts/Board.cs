@@ -87,13 +87,13 @@ public class Board : MonoBehaviour
         makeBoard();
 
         
-           //loadBoard();
+           loadBoard();
 
         makePecesOnBoard();
 
-        safeBoard("Assets/Resources/newtest.txt");
+        //safeBoard("Assets/Resources/newtest.txt");
 
-        loadBoard();
+        //loadBoard();
 
         /*System.DateTime theTime = System.DateTime.Now;
         string date = theTime.Year + "-" + theTime.Month + "-" + theTime.Day;
@@ -518,6 +518,168 @@ public class Board : MonoBehaviour
                     Debug.Log(ghostPos[0]);
                     Debug.Log(ghostPos[1]);
                     Debug.Log(ghostPos[2]);
+
+                    GameObject ghost = Instantiate(ghostKing, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+
+
+                break;
+
+
+            default:
+
+                break;
+
+
+        }
+    }
+
+    public void fillGhost(PieceType pieceType)
+    {
+        List<int[]> mathGhostPos = new List<int[]>();
+
+        for (int n3 = 0; n3 < size[2]; n3++)
+        {
+            for (int n4 = 0; n4 < size[3]; n4++)
+            {
+                for (int n5 = 0; n5 < size[4]; n5++)
+                {
+                    for (int n6 = 0; n6 < size[5]; n6++)
+                    {
+
+
+                        for (int n7 = 0; n7 < size[6]; n7++)
+                        {
+
+                            for (int n8 = 0; n8 < size[7]; n8++)
+                            {
+
+                                for (int n9 = 0; n9 < size[8]; n9++)
+                                {
+
+                                    for (int n10 = 0; n10 < size[9]; n10++)
+                                    {
+                                        
+
+                                        for (int x = 0; x < size[0]; x++)
+                                        {
+                                            for (int y = 0; y < size[1]; y++)
+                                            {
+                                                int[] pos = { x, y, n3, n4, n5, n6, n7, n8, n9, n10 };
+                                                mathGhostPos.Add(pos);
+
+
+                                            }
+                                        }
+                                     
+
+                                    }
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }
+        }
+
+
+        switch ((int)pieceType)
+        {
+            case 1:
+                //Debug.Log("Gettin ghost of pawn");
+               
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    
+
+                    GameObject ghost = Instantiate(ghostPawn, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+
+                break;
+            case 2:
+                //Debug.Log("Gettin ghost of Rook");
+                
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                   
+
+                    GameObject ghost = Instantiate(ghostRook, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+                break;
+
+
+            case 3:
+
+                //Debug.Log("Gettin ghost of Knight");
+                
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                   
+
+                    GameObject ghost = Instantiate(ghostKnight, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+                break;
+            case 4:
+
+
+
+                //Debug.Log("Gettin gosth of Bishop");
+                
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                    
+
+                    GameObject ghost = Instantiate(ghostBishop, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+                break;
+
+
+            case 5:
+
+                //Debug.Log("Gettin ghost of Queen");
+               
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                   
+
+                    GameObject ghost = Instantiate(ghostQueen, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
+                    ghosts.Add(ghost);
+                    ghost.GetComponent<Piece>().updatePos();
+
+                }
+
+
+                break;
+            case 6:
+
+                //Debug.Log("Gettin ghost of King");
+               
+
+                foreach (int[] ghostPos in mathGhostPos)
+                {
+                   
 
                     GameObject ghost = Instantiate(ghostKing, mathPosToUnityPos(ghostPos), Quaternion.identity, getPlaneFromBoard(ghostPos).gameObject.transform);
                     ghosts.Add(ghost);
@@ -1514,7 +1676,7 @@ public class Board : MonoBehaviour
         bool nextPlane = false;
         try
         {
-            using (FileStream fs = File.OpenRead("Assets/Resources/newtest.txt"))
+            using (FileStream fs = File.OpenRead("Assets/Resources/4by4by4by4SetUp.txt"))
             {
                 byte[] head = new byte[7];
 

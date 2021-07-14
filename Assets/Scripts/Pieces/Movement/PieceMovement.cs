@@ -24,7 +24,11 @@ public class PieceMovement : MonoBehaviour
     [SerializeField] private bool local = false;
 
     [SerializeField] private bool Debuging = true;
-    [SerializeField] public int[] selectPlacePos = { 0,0,1,0,0,0,0,0,0,0};
+    private int pieceToPlace = 1;
+    private bool whitePlace = true;
+
+
+    public int[] selectPlacePos = { 0,0,0,0,0,0,0,0,0,0};
     //[SerializeField] public GameObject selecter ;
 
 
@@ -95,10 +99,11 @@ public class PieceMovement : MonoBehaviour
                         }*/
 
                         int[] startMathPos = HighMath.getPieceMathPos(currentPiece);
-                        int[] endMathPos = new int[3];
+                        int[] endMathPos = new int[10]; // No decleration of value nedded ??
 
                         if (hit.transform.gameObject.GetComponent<Piece>())
                         {
+                            
                             if (hit.transform.gameObject.GetComponent<Piece>().isGhost)
                             {
 
@@ -108,17 +113,18 @@ public class PieceMovement : MonoBehaviour
                                 //endMathPos[2] = 0;
 
                                 endMathPos = HighMath.getPieceMathPos(hit.transform.gameObject.GetComponent<Piece>());
-
-                                if (move(startMathPos, endMathPos))
-                                {
-                                    if (!local)
+                               
+                                    if (move(startMathPos, endMathPos))
                                     {
-                                        network.SendMove(startMathPos, endMathPos);
+                                        if (!local)
+                                        {
+                                            network.SendMove(startMathPos, endMathPos);
+                                        }
+                                        Deselect();
+                                        whiteTurn = !whiteTurn;
+                                        Board.deleteGhosts();
                                     }
-                                    Deselect();
-                                    whiteTurn = !whiteTurn;
-                                    Board.deleteGhosts();
-                                }
+                                
                             }
                             else
                             {
@@ -150,6 +156,42 @@ public class PieceMovement : MonoBehaviour
                 {
                     canceling = false;
                 }
+            }
+
+            if (Input.GetKey(KeyCode.Tab))
+            {
+
+                RaycastHit hit;
+                Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out hit))
+                {
+                    // TODO: if hit is ghost piece or enemy within legal distance
+                    
+
+                    
+                    int[] endMathPos = null;
+
+                    if (hit.transform.gameObject.GetComponent<Piece>())
+                    {
+
+                        if (hit.transform.gameObject.GetComponent<Piece>().isGhost)
+                        {
+
+
+                            //endMathPos[0] = hit.transform.gameObject.GetComponent<Piece>().mathPos[0];
+                            //endMathPos[1] = hit.transform.gameObject.GetComponent<Piece>().mathPos[1];
+                            //endMathPos[2] = 0;
+
+                            endMathPos = HighMath.getPieceMathPos(hit.transform.gameObject.GetComponent<Piece>());
+                            Debug.Log((Board.PieceType)pieceToPlace);
+                            Board.placePiece(endMathPos, (Board.PieceType)pieceToPlace, whitePlace);
+                            Deselect();
+                            
+                        }
+                    }
+                }
+                            
             }
         }
 
@@ -268,7 +310,9 @@ public class PieceMovement : MonoBehaviour
             }
             else if(Input.GetKeyUp(KeyCode.S))
             {
-                
+                Board.deleteGhosts();
+                Deselect();
+                Board.makePecesOnBoard();
                 if (Board.safeBoard("Assets/Resources/newtest.txt"))
                 {
                     Debug.Log("sucees fully saved  Assets/Resources/newtest.txt");
@@ -296,11 +340,26 @@ public class PieceMovement : MonoBehaviour
                 Board.loadBoard();
             }
         }
-        
 
+        
 
     }
 
+    public void place(int i)
+    {
+        Deselect();
+        FindObjectOfType<Board>().fillGhost((Board.PieceType)1);
+        FindObjectOfType<PieceMovement>().pieceToPlace = i;
+        
+    }
+    public void TogelplaceColor()
+    {
+        FindObjectOfType<PieceMovement>().whitePlace = !FindObjectOfType<PieceMovement>().whitePlace;
+    }
+    public void clear()
+    {
+        FindObjectOfType<Board>().deleteGhosts();
+    }
 
 
 
